@@ -1,0 +1,6 @@
+framework module Pods_RecipeFlickerUITests {
+  umbrella header "Pods-RecipeFlickerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

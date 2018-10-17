@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (4.7.3)
+  - Koloda (4.5):
+    - pop (~> 1.0)
+  - pop (1.0.12)
+  - SwiftyJSON (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7)
+  - Koloda (~> 4.5)
+  - SwiftyJSON (~> 4.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Koloda
+    - pop
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Koloda: b1983d795f005f1436f9aaf1911bc287af82348f
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+
+PODFILE CHECKSUM: 4267241c1d4dbe3109aa8cbe7c685d1bed0d1165
+
+COCOAPODS: 1.5.3
