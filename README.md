@@ -34,7 +34,7 @@ API: EDAMAM Recipe Search API or Google Recipe API
 Database: Data persistence with Core Data
 
 ## Architecture
-We adopt simple MVC architecture so that keep the app simple. Additionally, MVC is easy to understand thanks to its simplicity.
+We adopt simple MVC architecture so that we can keep the app simple. Additionally, MVC is easy to understand thanks to its simplicity.
 
 ![architecture](https://user-images.githubusercontent.com/18434054/47101258-5e574780-d1ee-11e8-9ea9-5f6499c23f36.png)
 

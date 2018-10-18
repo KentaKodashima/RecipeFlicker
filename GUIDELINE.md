@@ -25,7 +25,7 @@ Follow the Swift naming conventions from  the API [Guiidelines](https://swift.or
 
 ## Code Organization
 ### Protocol Conformance
-Add a separate extension for the protocol methods when adding protocol confrmance.
+Add a separate extension for the protocol methods when adding protocol conformance.
 
 **Preferred:**
 ```
