@@ -8,66 +8,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="qED-x8-yZV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2eA-b0-6bC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="xUn-0t-zZP"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="K58-Hm-Bbd">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Tsc-Bm-WLg" kind="relationship" relationship="rootViewController" id="3Eo-oQ-ZaA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l5O-Hv-x0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1314" y="-229"/>
-        </scene>
         <!--Home-->
         <scene sceneID="G7a-zE-5u6">
             <objects>
                 <viewControllerPlaceholder storyboardName="Home" id="Tsc-Bm-WLg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="fLp-y2-MoR"/>
                     <navigationItem key="navigationItem" id="ri4-R7-8rH"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhG-UR-QYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2048" y="-230"/>
+            <point key="canvasLocation" x="1291" y="-101"/>
         </scene>
         <!--Favorite-->
         <scene sceneID="tzo-Ml-8bI">
             <objects>
                 <viewControllerPlaceholder storyboardName="Favorite" id="ujY-lO-dbC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="yFv-XR-2cZ"/>
                     <navigationItem key="navigationItem" id="pW8-fj-eYV"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InZ-gb-Ldu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2049" y="564"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="veS-Mw-h5O">
-            <objects>
-                <navigationController id="i8j-fo-OGw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="vvY-TI-az8"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cSW-T8-qUQ">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ujY-lO-dbC" kind="relationship" relationship="rootViewController" id="CwN-iw-asR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QMZ-MY-PLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1313" y="564"/>
+            <point key="canvasLocation" x="1302" y="421"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="g7m-cj-TzO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QcS-Pc-dOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iKG-7s-lBF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oCD-1W-fUq">
@@ -76,10 +41,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="2eA-b0-6bC" kind="relationship" relationship="viewControllers" id="Tx0-gS-0e6"/>
-                        <segue destination="i8j-fo-OGw" kind="relationship" relationship="viewControllers" id="6Yg-lL-3S0"/>
+                        <segue destination="Tsc-Bm-WLg" kind="relationship" relationship="viewControllers" id="xsz-uW-D3p"/>
+                        <segue destination="ujY-lO-dbC" kind="relationship" relationship="viewControllers" id="E1C-Rg-usr"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QcS-Pc-dOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="433" y="134"/>
         </scene>
