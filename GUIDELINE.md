@@ -48,7 +48,7 @@ Use **classes** for things that do have an identity or a specific life cycle suc
 You can refenrence [this article](https://medium.com/@KentaKodashima/swift-classes-and-structs-a52ed8d99441) when you are not sure about the differences between classes and structs.
 
 ## Use of Self
-Use `self` only when the compiler requirs it.
+Use `self` only when the compiler requires it.
 
 ## Computed Properties
 Use `get` clause only when the `set` clause is provided.
