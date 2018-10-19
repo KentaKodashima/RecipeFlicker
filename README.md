@@ -1,28 +1,31 @@
 # RecipeFlicker
 
 ## Overview
-This app is for people who cannot decide what to cook. It offers some random recipes from the
-internet, and users can swipe left or right to choose recipes.
+RecipeFlicker allows you to make your own favorite recipe lists. Even if you can't come up with anything you want to cook for the night, RecipeFlicker offers random recipes from all around the world.
 
 ## Concepts
-- Offer options for lazy people
-- Keep recipes for later
-- Make it more enjoyable to choose what to cook
+- Keep good recipes
+- Share good recipes with friends
 
 ## Target
-- People who are lazy or busy
+- People who cook
+- People who are in need of help to decide what to cook
 
 ## Implementation Phases
-### Phase 1 (Publishing the app)
+### Phase 1
+#### Objectiev
+Publishing the app without any trouble.
 #### Functionalities
-- Swipe to decide recipe
-- Favorite recipe list
-- Persist data locally (Core Data)
-- Search recipe from the API database?
+- Swipe to decide recipe(Tinder-like UI)
+- Favorite recipe list (two patterns of UI using TableView and CollectionView)
+- Use Firebase as database for the later use
 ### Phase 2
+#### Objective
+Implement full functionality.
 #### Functionalities
-- Make it be able to make a recipe
-- Share recipe online (Firebase)
+- Post URL with comment
+- Follow people
+- Like someone's post
 
 ## Implementation Style
 Follow the guideline GUIDELINE.md.
@@ -30,8 +33,8 @@ Follow the guideline GUIDELINE.md.
 ## Specifications
 Language: Swift 4.2
 Libraries: Alamofire, SwiftyJSON, KolodaView
-API: EDAMAM Recipe Search API or Google Recipe API
-Database: Data persistence with Core Data
+API: EDAMAM Recipe Search API
+Database: Farebase
 
 ## Architecture
 We adopt simple MVC architecture so that we can keep the app simple. Additionally, MVC is easy to understand thanks to its simplicity.
