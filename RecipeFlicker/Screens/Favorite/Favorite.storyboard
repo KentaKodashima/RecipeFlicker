@@ -16,10 +16,35 @@
                     <view key="view" contentMode="scaleToFill" id="CaV-qu-rGi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="FdH-tS-JDc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sti-9O-CDd">
+                                <rect key="frame" x="-10" y="120" width="395" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FdH-tS-JDc" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="1Wh-W0-CI2"/>
+                            <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
+                            <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
+                            <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="FdH-tS-JDc" secondAttribute="bottom" id="mOx-mg-prX"/>
+                            <constraint firstItem="FdH-tS-JDc" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="wIA-H4-3om"/>
+                            <constraint firstItem="FdH-tS-JDc" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="xYX-sd-kgA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="jN8-1c-cuW"/>
                     </view>
-                    <navigationItem key="navigationItem" id="URi-cW-U6Q"/>
+                    <navigationItem key="navigationItem" id="URi-cW-U6Q">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ejr-Xx-qLq">
+                            <color key="tintColor" red="0.97212284803390503" green="0.0090343104675412178" blue="0.99340003728866577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="ljj-uv-6fb" kind="show" id="vha-eT-D7w"/>
