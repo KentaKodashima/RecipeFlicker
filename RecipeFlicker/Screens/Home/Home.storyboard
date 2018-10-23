@@ -26,11 +26,13 @@
             </objects>
             <point key="canvasLocation" x="2954.4000000000001" y="133.5832083958021"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="tD1-Tu-XrP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2MW-pb-yG3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="dLv-mh-1kr"/>
+                    <tabBarItem key="tabBarItem" title="" image="home" id="dLv-mh-1kr">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OBf-ia-lnP">
@@ -47,4 +49,7 @@
             <point key="canvasLocation" x="2015.2" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="home" width="35" height="29"/>
+    </resources>
 </document>

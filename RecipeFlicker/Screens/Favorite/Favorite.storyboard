@@ -37,11 +37,13 @@
             </objects>
             <point key="canvasLocation" x="1760" y="89.955022488755631"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="z8g-gZ-jiH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p6M-zs-kLg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="D9B-OC-s52"/>
+                    <tabBarItem key="tabBarItem" title="" image="heart" id="D9B-OC-s52">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rGb-sM-1ta">
@@ -58,4 +60,7 @@
             <point key="canvasLocation" x="61.600000000000001" y="90.404797601199405"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="24" height="23"/>
+    </resources>
 </document>

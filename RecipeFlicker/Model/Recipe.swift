@@ -13,4 +13,14 @@ struct Recipe {
   public var originalRecipeUrl: String
   public var title: String
   public var image: String
+  public var isFavorite: Bool
+  public var whichCollectionToBelong: String?
+  
+  init(idFromAPI: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool) {
+    self.idFromAPI = idFromAPI
+    self.originalRecipeUrl = originalRecipeUrl
+    self.title = title
+    self.image = image
+    self.isFavorite = isFavorite
+  }
 }

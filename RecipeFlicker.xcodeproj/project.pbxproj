@@ -24,6 +24,9 @@
 		ED599CA321757B3D0007E929 /* RecipeFlickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CA221757B3D0007E929 /* RecipeFlickerTests.swift */; };
 		ED599CAE21757B3D0007E929 /* RecipeFlickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */; };
 		ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CD37217E43F8009300C8 /* Recipe.swift */; };
+		EDC8465D217FC4A600C3543A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465C217FC4A600C3543A /* Colors.swift */; };
+		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
+		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +78,9 @@
 		ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFlickerUITests.swift; sourceTree = "<group>"; };
 		ED599CAF21757B3D0007E929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED84CD37217E43F8009300C8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		EDC8465C217FC4A600C3543A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		EDCFB53921771A4A00EE7D1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,11 +183,12 @@
 			children = (
 				ED599C9921757B3D0007E929 /* Info.plist */,
 				ED599C8A21757B3C0007E929 /* AppDelegate.swift */,
-				ED599C9121757B3C0007E929 /* RecipeFlicker.xcdatamodeld */,
 				ED599CBF21757C370007E929 /* Data */,
+				EDC8465B217FC43F00C3543A /* Extensions */,
 				ED599CBE21757C2C0007E929 /* Model */,
 				ED599CBC21757B8B0007E929 /* Screens */,
 				ED599CBB21757B440007E929 /* Supporting Files */,
+				ED599C9121757B3C0007E929 /* RecipeFlicker.xcdatamodeld */,
 			);
 			path = RecipeFlicker;
 			sourceTree = "<group>";
@@ -247,6 +254,16 @@
 				EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		EDC8465B217FC43F00C3543A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EDC8465C217FC4A600C3543A /* Colors.swift */,
+				EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */,
+				EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -475,10 +492,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED0AFC1A2175C7A1009A2976 /* DetailVC.swift in Sources */,
+				EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */,
+				EDC8465D217FC4A600C3543A /* Colors.swift in Sources */,
 				ED0AFC112175C602009A2976 /* FavoriteVC.swift in Sources */,
 				ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */,
 				ED599C8D21757B3C0007E929 /* HomeVC.swift in Sources */,
 				ED599C8B21757B3C0007E929 /* AppDelegate.swift in Sources */,
+				EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */,
 				EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */,
 				ED599C9321757B3C0007E929 /* RecipeFlicker.xcdatamodeld in Sources */,
 			);

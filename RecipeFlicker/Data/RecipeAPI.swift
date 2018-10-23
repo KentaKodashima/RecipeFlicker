@@ -14,7 +14,7 @@ struct RecipeAPI {
   private let BASE_SEARCH_URL = "https://api.edamam.com/search"
   private let APP_ID = "&app_id=64e158b2"
   private let APP_KEY = "&app_key=7826daf17b47075ec9f3c74964f2ed8d"
-  var REQUEST_STRING: String {
+  private var REQUEST_STRING: String {
     return BASE_SEARCH_URL + APP_ID + APP_KEY
   }
   
@@ -36,7 +36,7 @@ struct RecipeAPI {
         let title = json["label"].stringValue
         let image = json["image"].stringValue
         
-        let recipe = Recipe(idFromAPI: idFromAPI, originalRecipeUrl: originalRecipeUrl, title: title, image: image)
+        var recipe = Recipe(idFromAPI: idFromAPI, originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: false)
         randomRecipes.append(recipe)
       }
     return randomRecipes

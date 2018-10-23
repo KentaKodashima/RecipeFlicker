@@ -16,7 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    // Define colors
+    let theme = AppColors.theme.value
+    let accent = AppColors.accent.value
+    
+    // Set UINavigationBar's general appearance
+    UINavigationBar.appearance().barTintColor = theme
+    UINavigationBar.appearance().tintColor = accent
+    // Remove the border at the bottom
+    UINavigationBar.appearance().shadowImage = UIImage()
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Futura-Bold", size: 22)!]
+    
+    // Set UITabBar's general appearance
+    UITabBar.appearance().barTintColor = theme
+    UITabBar.appearance().tintColor = accent
+    UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     return true
   }
 
