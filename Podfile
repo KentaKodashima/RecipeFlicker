@@ -6,6 +6,8 @@ target 'RecipeFlicker' do
   use_frameworks!
 
   # Pods for RecipeFlicker
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.2'
   pod 'Koloda', '~> 4.5'
