@@ -9,24 +9,24 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-// https://api.edamam.com/search?&app_id=64e158b2&app_key=7826daf17b47075ec9f3c74964f2ed8d&from=0&to=3
+
 struct RecipeAPI {
   private let BASE_SEARCH_URL = "https://api.edamam.com/search?"
   private let APP_ID = "&app_id=64e158b2"
   private let APP_KEY = "&app_key=7826daf17b47075ec9f3c74964f2ed8d"
-  private let DEFAULT_QUERY_PARAM = "q=beef"
+  private let DEFAULT_QUERY_PARAM = "q=food"
   private var REQUEST_STRING: String {
     return BASE_SEARCH_URL + DEFAULT_QUERY_PARAM + APP_ID + APP_KEY
   }
   
   func getRandomRecipes(completionHandler: @escaping ([Recipe]?, Error?) -> ()) {
     var randomRecipes = [Recipe]()
-    let randomNum = arc4random_uniform(200000) + 15
-    let toParam = "&to=15"
-    let fromParam = "&from=0"
+    let randomNum = arc4random_uniform(500) + 15
+//    let toParam = "&to=15"
+//    let fromParam = "&from=0"
 //    let toParam = "&to=\(randomNum)"
 //    let fromParam = "&from=\(randomNum - 15)"
-    let requestString = REQUEST_STRING + fromParam + toParam
+    let requestString = REQUEST_STRING// + fromParam + toParam
     
     Alamofire.request(requestString)
       .validate()
@@ -43,7 +43,6 @@ struct RecipeAPI {
             var recipeObj = Recipe(idFromAPI: idFromAPI, originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: false)
             randomRecipes.append(recipeObj)
           }
-          print(randomRecipes.count)
           completionHandler(randomRecipes, nil)
         case .failure(let error):
           completionHandler(nil, error)

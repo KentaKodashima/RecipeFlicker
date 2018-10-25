@@ -28,16 +28,15 @@ class CardView: UIView {
   
   // Load xib and add it to the view
   fileprivate func commonInit() {
-//    Bundle.main.loadNibNamed("CardView", owner: self, options: nil)
     let bundle = Bundle(for: type(of: self))
     let nib = UINib(nibName: "CardView", bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
     addSubview(view)
     
-    view.translatesAutoresizingMaskIntoConstraints = false
-    let bindings = ["view": view]
-    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
-    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+//    view.translatesAutoresizingMaskIntoConstraints = false
+//    let bindings = ["view": view]
+//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
   }
   
 }

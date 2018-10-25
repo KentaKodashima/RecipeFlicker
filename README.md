@@ -32,8 +32,11 @@ Follow the guideline GUIDELINE.md.
 
 ## Specifications
 Language: Swift 4.2
+
 Libraries: Alamofire, SwiftyJSON, KolodaView
+
 API: EDAMAM Recipe Search API
+
 Database: Farebase
 
 ## Architecture
