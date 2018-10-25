@@ -10,6 +10,7 @@
 		05109EB018E3CA8ABC23AEE4 /* Pods_RecipeFlickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC40101523712B61344ACC6 /* Pods_RecipeFlickerUITests.framework */; };
 		0DFBA13775B5EC4844EB2167 /* Pods_RecipeFlickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F95F027927D986A11750C /* Pods_RecipeFlickerTests.framework */; };
 		880328B6F0FE0820D5FC3D0C /* Pods_RecipeFlicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2435FB2D5AB1F93D0917DA4 /* Pods_RecipeFlicker.framework */; };
+		ED00508A21802CDD00038FBA /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED00508921802CDD00038FBA /* CardView.xib */; };
 		ED0AFC112175C602009A2976 /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0AFC102175C602009A2976 /* FavoriteVC.swift */; };
 		ED0AFC132175C618009A2976 /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC122175C618009A2976 /* Favorite.storyboard */; };
 		ED0AFC152175C739009A2976 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC142175C739009A2976 /* Home.storyboard */; };
@@ -27,6 +28,7 @@
 		EDC8465D217FC4A600C3543A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465C217FC4A600C3543A /* Colors.swift */; };
 		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
 		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
+		EDC84667217FFD3600C3543A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC84666217FFD3600C3543A /* CardView.swift */; };
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,7 @@
 		93690584F11FF7DC24DDD273 /* Pods-RecipeFlickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlickerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlickerTests/Pods-RecipeFlickerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A2435FB2D5AB1F93D0917DA4 /* Pods_RecipeFlicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2503D6BDFAF864703A47433 /* Pods-RecipeFlickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlickerUITests/Pods-RecipeFlickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		ED00508921802CDD00038FBA /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		ED0AFC102175C602009A2976 /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
 		ED0AFC122175C618009A2976 /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
 		ED0AFC142175C739009A2976 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		EDC8465C217FC4A600C3543A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
+		EDC84666217FFD3600C3543A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EDCFB53921771A4A00EE7D1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				ED599C8E21757B3C0007E929 /* Main.storyboard */,
+				EDC84662217FFB9600C3543A /* Common */,
 				ED599CBD21757B920007E929 /* Home */,
 				ED0AFC0F2175C5E7009A2976 /* Favorite */,
 				ED0AFC162175C776009A2976 /* Detail */,
@@ -264,6 +269,23 @@
 				EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EDC84662217FFB9600C3543A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EDC84663217FFBA400C3543A /* Cell */,
+				EDC84666217FFD3600C3543A /* CardView.swift */,
+				ED00508921802CDD00038FBA /* CardView.xib */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EDC84663217FFBA400C3543A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +399,7 @@
 				ED599C9821757B3D0007E929 /* LaunchScreen.storyboard in Resources */,
 				ED0AFC152175C739009A2976 /* Home.storyboard in Resources */,
 				ED599C9521757B3D0007E929 /* Assets.xcassets in Resources */,
+				ED00508A21802CDD00038FBA /* CardView.xib in Resources */,
 				ED0AFC132175C618009A2976 /* Favorite.storyboard in Resources */,
 				ED599C9021757B3C0007E929 /* Main.storyboard in Resources */,
 				ED0AFC182175C791009A2976 /* Detail.storyboard in Resources */,
@@ -500,6 +523,7 @@
 				ED599C8B21757B3C0007E929 /* AppDelegate.swift in Sources */,
 				EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */,
 				EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */,
+				EDC84667217FFD3600C3543A /* CardView.swift in Sources */,
 				ED599C9321757B3C0007E929 /* RecipeFlicker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
