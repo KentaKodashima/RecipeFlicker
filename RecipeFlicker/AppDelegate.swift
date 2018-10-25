@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().tintColor = accent
     // Remove the border at the bottom
     UINavigationBar.appearance().shadowImage = UIImage()
-    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Futura-Bold", size: 22)!]
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ChalkboardSE-Bold", size: 22)!]
     
     // Set UITabBar's general appearance
     UITabBar.appearance().barTintColor = theme
