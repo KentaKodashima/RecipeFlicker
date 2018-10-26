@@ -16,7 +16,32 @@
                     <view key="view" contentMode="scaleToFill" id="R8V-KL-Fof">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="4SD-Ze-U8u">
+                                <rect key="frame" x="39.5" y="479" width="296" height="123"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyI-cC-rBF">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
+                                        <state key="normal" image="dislikeBtn"/>
+                                        <connections>
+                                            <action selector="dislikeButtonTapped:" destination="hFd-zN-FYK" eventType="touchUpInside" id="WdS-bx-X3z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8y-40-czr">
+                                        <rect key="frame" x="173" y="0.0" width="123" height="123"/>
+                                        <state key="normal" image="likeBtn"/>
+                                        <connections>
+                                            <action selector="likeButtonTapped:" destination="hFd-zN-FYK" eventType="touchUpInside" id="SPj-VL-YRz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4SD-Ze-U8u" firstAttribute="centerX" secondItem="R8V-KL-Fof" secondAttribute="centerX" id="72p-F8-ecC"/>
+                            <constraint firstItem="vGo-da-2xD" firstAttribute="bottom" secondItem="4SD-Ze-U8u" secondAttribute="bottom" constant="16" id="k4v-nY-9MC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="vGo-da-2xD"/>
                     </view>
                     <navigationItem key="navigationItem" id="H5H-M3-d9p"/>
@@ -50,6 +75,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dislikeBtn" width="123" height="123"/>
         <image name="home" width="24" height="24"/>
+        <image name="likeBtn" width="123" height="123"/>
     </resources>
 </document>
