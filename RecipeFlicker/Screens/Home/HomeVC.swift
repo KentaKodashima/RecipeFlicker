@@ -30,16 +30,12 @@ class HomeVC: UIViewController {
     kolodaView.dataSource = self
     setKolodaView()
     
-    // Create new user in both Core Data and Firebase, if there is none
-    if users.count == 0 {
-      Auth.auth().signInAnonymously() { (authResult, error) in
-        let user = authResult?.user
-        let uid = user?.uid
-        let newUser = CDUser(context: self.context)
-        newUser.userId = uid
-        self.appDelegate.saveContext()
-        self.users.append(newUser)
+    // Fetch data from API and bind to KolodaView
+    recipeAPI.getRandomRecipes { recipeArray, error in
+      for recipe in recipeArray! {
+        self.recipes.append(recipe)
       }
+      self.kolodaView.reloadData()
     }
   }
   
@@ -52,16 +48,20 @@ class HomeVC: UIViewController {
       print("Could not fetch. \(error), \(error._userInfo)")
     }
     
-    // Create new user in Firebase
-    userRef = Database.database().reference()
-    userRef.child("user").child("userId").setValue(users[0].userId)
-    
-    // Fetch data from API and bind to KolodaView
-    recipeAPI.getRandomRecipes { recipeArray, error in
-      for recipe in recipeArray! {
-        self.recipes.append(recipe)
+    // Create new user in both Core Data and Firebase, if there is none
+    if users.count == 0 {
+      Auth.auth().signInAnonymously() { (authResult, error) in
+        let user = authResult?.user
+        let uid = user?.uid
+        let newUser = CDUser(context: self.context)
+        newUser.userId = uid
+        self.appDelegate.saveContext()
+        self.users.append(newUser)
+        
+        // Create new user in Firebase
+        self.userRef = Database.database().reference()
+        self.userRef.child("user").child("userId").setValue(self.users[0].userId)
       }
-      self.kolodaView.reloadData()
     }
   }
   
