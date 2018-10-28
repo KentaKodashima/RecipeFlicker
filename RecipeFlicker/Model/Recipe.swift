@@ -40,3 +40,9 @@ struct Recipe: Codable {
     favoriteRecipeRef.setValue(dict)
   }
 }
+
+extension Recipe: Equatable {
+  public static func ==(lhs: Recipe, rhs: Recipe) -> Bool {
+    return lhs.idFromAPI == rhs.idFromAPI
+  }
+}

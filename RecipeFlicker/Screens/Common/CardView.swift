@@ -33,10 +33,10 @@ class CardView: UIView {
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
     addSubview(view)
     
-//    view.translatesAutoresizingMaskIntoConstraints = false
-//    let bindings = ["view": view]
-//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
-//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+    view.translatesAutoresizingMaskIntoConstraints = false
+    let bindings = ["view": view]
+    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
   }
   
 }
