@@ -25,9 +25,10 @@ struct Recipe: Codable {
     self.isFavorite = isFavorite
   }
   
-  mutating func saveToFirebase() {
+  mutating func saveToFirebase(userId: String) {
     self.isFavorite = true
-    let usersRef = Database.database().reference(withPath: "user").child("favorites")
+    var refPath = "users/" + userId
+    let usersRef = Database.database().reference(withPath: refPath).child("favorites")
     let dict = [
       "idFromAPI": self.idFromAPI,
       "originalRecipeUrl": self.originalRecipeUrl,
