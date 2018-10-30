@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Firebase
 
-struct Recipe {
+struct Recipe: Codable {
   public var idFromAPI: String
   public var originalRecipeUrl: String
   public var title: String
@@ -22,5 +23,27 @@ struct Recipe {
     self.title = title
     self.image = image
     self.isFavorite = isFavorite
+  }
+  
+  mutating func saveToFirebase(userId: String) {
+    self.isFavorite = true
+    var refPath = "users/" + userId
+    let usersRef = Database.database().reference(withPath: refPath).child("favorites")
+    let dict = [
+      "idFromAPI": self.idFromAPI,
+      "originalRecipeUrl": self.originalRecipeUrl,
+      "title": self.title,
+      "image": self.image,
+      "isFavorite": String(self.isFavorite),
+      "whichCollectionToBelong": self.whichCollectionToBelong
+    ]
+    let favoriteRecipeRef = usersRef.childByAutoId()
+    favoriteRecipeRef.setValue(dict)
+  }
+}
+
+extension Recipe: Equatable {
+  public static func ==(lhs: Recipe, rhs: Recipe) -> Bool {
+    return lhs.idFromAPI == rhs.idFromAPI
   }
 }
