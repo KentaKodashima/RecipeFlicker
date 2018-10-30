@@ -32,8 +32,16 @@ Follow the guideline GUIDELINE.md.
 
 ## Specifications
 Language: Swift 4.2
-Libraries: Alamofire, SwiftyJSON, KolodaView
+
+Libraries: 
+
+- Alamofire: Simplifying networking process
+- SwiftyJSON: Simplifying parsing JSON data
+- KolodaView: Implement Tinder-like UI
+- KingFisher: Download and cache images
+
 API: EDAMAM Recipe Search API
+
 Database: Farebase
 
 ## Architecture
