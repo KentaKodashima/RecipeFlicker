@@ -25,7 +25,9 @@ class HomeVC: UIViewController {
   private var recipes = [Recipe]()
   private var recipeAPI = RecipeAPI()
   
+  var timer = Timer()
   private var countdownTimer = UILabel()
+  private var countdownView = UIView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,13 +41,7 @@ class HomeVC: UIViewController {
       self.userId = userId
     }
     
-    // Fetch data from API and bind to KolodaView
-    recipeAPI.getRandomRecipes { recipeArray, error in
-      for recipe in recipeArray! {
-        self.recipes.append(recipe)
-      }
-      self.kolodaView.reloadData()
-    }
+    fetchRecipesToBind()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +79,15 @@ class HomeVC: UIViewController {
     kolodaView.swipe(SwipeResultDirection.right)
   }
   
+  fileprivate func fetchRecipesToBind() {
+    // Fetch data from API and bind to KolodaView
+    recipeAPI.getRandomRecipes { recipeArray, error in
+      for recipe in recipeArray! {
+        self.recipes.append(recipe)
+      }
+      self.kolodaView.reloadData()
+    }
+  }
   
   fileprivate func setKolodaView() {
     let kolodaViewWidth = self.view.bounds.width * 0.9
@@ -101,7 +106,8 @@ class HomeVC: UIViewController {
   fileprivate func setCountdownView() {
     let countdownViewWidth = self.view.bounds.width
     let countdownViewHeight = self.view.bounds.height
-    let countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
+    countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
+    countdownView.backgroundColor = UIColor.white
     
     let countdownLabel = UILabel()
     countdownLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +121,7 @@ class HomeVC: UIViewController {
     countdownTimer.textAlignment = .center
     countdownTimer.font = UIFont(name: "ChalkboardSE-Bold", size: 24)
     
-    let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountdown), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountdown), userInfo: nil, repeats: true)
     
     let stack = UIStackView()
     stack.axis = .vertical
@@ -142,7 +148,13 @@ class HomeVC: UIViewController {
     let nextDay = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime)!
     let difference = calendar.dateComponents([.hour, .minute, .second], from: now, to: nextDay)
     let formatter = DateComponentsFormatter()
-    countdownTimer.text = formatter.string(from: difference)!
+    
+    if formatter.string(from: difference)! == "00:00:00" {
+      timer.invalidate()
+      countdownView.removeFromSuperview()
+    } else {
+      countdownTimer.text = formatter.string(from: difference)!
+    }
   }
 }
 
@@ -176,7 +188,8 @@ extension HomeVC: KolodaViewDelegate {
   }
   
   // Method called after all cards have been swiped
-  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-    setCountdownView()
-  }
+  // Uncomment out to show countdown view
+//  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+//    setCountdownView()
+//  }
 }
