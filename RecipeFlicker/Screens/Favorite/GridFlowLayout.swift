@@ -9,9 +9,7 @@
 import UIKit
 
 class GridFlowLayout: UICollectionViewFlowLayout {
-  
-  let itemHeight: CGFloat  = 160
-  
+
   func itemWidth() -> CGFloat {
     return (collectionView!.frame.width - 30) / 2
   }
@@ -34,10 +32,10 @@ class GridFlowLayout: UICollectionViewFlowLayout {
   
   override var itemSize: CGSize {
     set {
-      self.itemSize = CGSize(width: itemWidth(), height: itemHeight)
+      self.itemSize = CGSize(width: itemWidth(), height: itemWidth())
     }
     get {
-      return CGSize(width: itemWidth(), height: itemHeight)
+      return CGSize(width: itemWidth(), height: itemWidth())
     }
   }
   
