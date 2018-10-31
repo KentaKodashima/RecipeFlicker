@@ -16,6 +16,7 @@ class CollectionViewCellForList: UICollectionViewCell {
     }
   }
   
+  
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -34,12 +35,11 @@ class CollectionViewCellForList: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    layer.borderWidth = 0.5
     addSubview(recipeImage)
     setupImageConstraints()
     addSubview(titleLabel)
     setupLabelConstraints()
+    contentView.setBorder()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -73,5 +73,18 @@ class CollectionViewCellForList: UICollectionViewCell {
   func setupContents(withTitle title: String, andImage image: String) {
     titleLabel.text = title
     recipeImage.image = UIImage(named: image)
+  }
+}
+
+extension UIView {
+  func setBorder() {
+    let margin = 25
+    let border = CALayer()
+    border.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    border.borderWidth = 0.5
+    border.frame = CGRect(x: CGFloat(margin), y: self.frame.size.height - border.borderWidth, width: self.frame.size.width - CGFloat(integerLiteral: margin), height: border.borderWidth)
+    self.layer.addSublayer(border)
+    self.layer.masksToBounds = true
+    
   }
 }
