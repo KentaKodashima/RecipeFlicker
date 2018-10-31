@@ -27,6 +27,7 @@ class FavoriteVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    typeSegmentControll.tintColor = AppColors.accent.value
     collectionView.collectionViewLayout = listLayout
     collectionView.register(CollectionViewCellForList.self,
                             forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
