@@ -10,13 +10,44 @@ import UIKit
 
 class FavoriteVC: UIViewController {
   
+  enum ViewType {
+    case grid
+    case list
+  }
+  
+  @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
+  
+  let gridLayout = GridFlowLayout()
+  let listLayout = ListFlowLayout()
+  
+  let recipeFactory = ReplicaRecipeFactory()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    collectionView.collectionViewLayout = gridLayout
     
   }
   
+  @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case ViewType.grid.hashValue:
+      changeView(flowLayout: gridLayout)
+      break
+    case ViewType.list.hashValue:
+      changeView(flowLayout: listLayout)
+      break
+    default:
+      break
+    }
+  }
+  
+  func changeView(flowLayout: UICollectionViewFlowLayout) {
+    UIView.animate(withDuration: 0.2) {
+      self.collectionView.collectionViewLayout.invalidateLayout()
+      self.collectionView.setCollectionViewLayout(flowLayout, animated: true)
+    }
+  }
   
   /*
    // MARK: - Navigation
