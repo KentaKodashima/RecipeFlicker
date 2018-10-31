@@ -16,7 +16,7 @@ class ReplicaRecipeFactory {
     recipes = generateRecipes() + generateRecipes()
   }
   
-  func generateRecipes() -> [ReplicaRecipe] {
+  private func generateRecipes() -> [ReplicaRecipe] {
     var newRecipes = [ReplicaRecipe]()
     let category = ["Spanish", "Vietnameese", "Italian", "Japanese", "Chinese", "Korean"]
     for i in 0..<6 {

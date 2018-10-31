@@ -10,7 +10,7 @@ import UIKit
 
 class ListFlowLayout: UICollectionViewFlowLayout {
   
-  let itemHeight: CGFloat = 80
+  let itemHeight: CGFloat = 100
 
   func itemWidth() -> CGFloat {
     return collectionView!.frame.width

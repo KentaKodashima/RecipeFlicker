@@ -24,8 +24,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sti-9O-CDd">
                                 <rect key="frame" x="-10" y="120" width="395" height="29"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="All"/>
+                                    <segment title="Collection"/>
                                 </segments>
                                 <connections>
                                     <action selector="onSegmentControlTapped:" destination="hhK-yq-OKT" eventType="valueChanged" id="knD-xo-gZv"/>
@@ -41,7 +41,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="UeK-p5-2ar">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="UeK-p5-2ar">
                                         <rect key="frame" x="0.0" y="0.0" width="130" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -59,13 +59,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FdH-tS-JDc" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="1Wh-W0-CI2"/>
-                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="5kH-hE-Ud0"/>
+                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="BmR-Du-G7X"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="top" secondItem="sti-9O-CDd" secondAttribute="bottom" id="GIo-E9-Orl"/>
-                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="Qh2-NI-u82"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="cAk-Se-bou"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
                             <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="FdH-tS-JDc" secondAttribute="bottom" id="mOx-mg-prX"/>
+                            <constraint firstAttribute="trailing" secondItem="ORM-Se-Cbw" secondAttribute="trailing" id="pnf-tK-ToV"/>
                             <constraint firstItem="FdH-tS-JDc" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="wIA-H4-3om"/>
                             <constraint firstItem="FdH-tS-JDc" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="xYX-sd-kgA"/>
                         </constraints>

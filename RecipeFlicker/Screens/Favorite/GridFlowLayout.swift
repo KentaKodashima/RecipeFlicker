@@ -11,7 +11,7 @@ import UIKit
 class GridFlowLayout: UICollectionViewFlowLayout {
 
   func itemWidth() -> CGFloat {
-    return (collectionView!.frame.width - 30) / 2
+    return (collectionView!.frame.width - 10) / 2
   }
   
   func setUpLayout() {
