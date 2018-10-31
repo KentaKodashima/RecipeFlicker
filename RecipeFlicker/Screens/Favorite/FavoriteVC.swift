@@ -10,9 +10,11 @@ import UIKit
 
 class FavoriteVC: UIViewController {
   
-  enum ViewType {
-    case grid
+  enum ViewType: Int {
     case list
+    case grid
+    
+    
   }
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
@@ -25,17 +27,22 @@ class FavoriteVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.collectionViewLayout = gridLayout
+    collectionView.collectionViewLayout = listLayout
+    collectionView.register(CollectionViewCellForList.self,
+                            forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
+    collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
     
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
-    case ViewType.grid.hashValue:
-      changeView(flowLayout: gridLayout)
-      break
-    case ViewType.list.hashValue:
+    case ViewType.list.rawValue:
       changeView(flowLayout: listLayout)
+      print("list")
+      break
+    case ViewType.grid.rawValue:
+      changeView(flowLayout: gridLayout)
+      print("grid")
       break
     default:
       break
@@ -43,10 +50,9 @@ class FavoriteVC: UIViewController {
   }
   
   func changeView(flowLayout: UICollectionViewFlowLayout) {
-    UIView.animate(withDuration: 0.2) {
-      self.collectionView.collectionViewLayout.invalidateLayout()
-      self.collectionView.setCollectionViewLayout(flowLayout, animated: true)
-    }
+    self.collectionView.collectionViewLayout.invalidateLayout()
+    self.collectionView.reloadData()
+    self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
   }
   
   /*
@@ -63,11 +69,27 @@ class FavoriteVC: UIViewController {
 
 extension FavoriteVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    <#code#>
+    return recipeFactory.recipes.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    <#code#>
+    let recipe = recipeFactory.recipes[indexPath.row]
+    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
+        for: indexPath)
+        as! CollectionViewCellForList
+      cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
+      return cell
+    } else {
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
+        for: indexPath)
+        as! CollectionViewCellForGrid
+      cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
+      return cell
+    }
+
   }
   
   

@@ -10,8 +10,8 @@
 		05109EB018E3CA8ABC23AEE4 /* Pods_RecipeFlickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC40101523712B61344ACC6 /* Pods_RecipeFlickerUITests.framework */; };
 		0DFBA13775B5EC4844EB2167 /* Pods_RecipeFlickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9F95F027927D986A11750C /* Pods_RecipeFlickerTests.framework */; };
 		880328B6F0FE0820D5FC3D0C /* Pods_RecipeFlicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2435FB2D5AB1F93D0917DA4 /* Pods_RecipeFlicker.framework */; };
-		D8376C92218935A400E2404A /* CollectionViewCellForAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C91218935A400E2404A /* CollectionViewCellForAll.swift */; };
-		D8376C94218935B900E2404A /* CollectionViewCellForCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C93218935B900E2404A /* CollectionViewCellForCollection.swift */; };
+		D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C91218935A400E2404A /* CollectionViewCellForList.swift */; };
+		D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */; };
 		D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */; };
 		D8CF7B0021823C9C00979729 /* GridFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */; };
 		D8F128DF2188DBEA00DABF2F /* ListFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */; };
@@ -68,8 +68,8 @@
 		93690584F11FF7DC24DDD273 /* Pods-RecipeFlickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlickerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlickerTests/Pods-RecipeFlickerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A2435FB2D5AB1F93D0917DA4 /* Pods_RecipeFlicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2503D6BDFAF864703A47433 /* Pods-RecipeFlickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlickerUITests/Pods-RecipeFlickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		D8376C91218935A400E2404A /* CollectionViewCellForAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForAll.swift; sourceTree = "<group>"; };
-		D8376C93218935B900E2404A /* CollectionViewCellForCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForCollection.swift; sourceTree = "<group>"; };
+		D8376C91218935A400E2404A /* CollectionViewCellForList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForList.swift; sourceTree = "<group>"; };
+		D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForGrid.swift; sourceTree = "<group>"; };
 		D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplicaRecipeFactory.swift; sourceTree = "<group>"; };
 		D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFlowLayout.swift; sourceTree = "<group>"; };
 		D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowLayout.swift; sourceTree = "<group>"; };
@@ -164,11 +164,11 @@
 				D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */,
 				ED0AFC122175C618009A2976 /* Favorite.storyboard */,
 				ED0AFC102175C602009A2976 /* FavoriteVC.swift */,
-				D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */,
 				D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */,
+				D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */,
 				D8F128E02188F7BA00DABF2F /* ReplicaRecipe.swift */,
-				D8376C91218935A400E2404A /* CollectionViewCellForAll.swift */,
-				D8376C93218935B900E2404A /* CollectionViewCellForCollection.swift */,
+				D8376C91218935A400E2404A /* CollectionViewCellForList.swift */,
+				D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -550,7 +550,7 @@
 				EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */,
 				D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */,
 				ED414A9B2182A13C00903FE3 /* User+CoreDataClass.swift in Sources */,
-				D8376C92218935A400E2404A /* CollectionViewCellForAll.swift in Sources */,
+				D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */,
 				EDC8465D217FC4A600C3543A /* Colors.swift in Sources */,
 				D8CF7B0021823C9C00979729 /* GridFlowLayout.swift in Sources */,
 				ED0AFC112175C602009A2976 /* FavoriteVC.swift in Sources */,
@@ -563,7 +563,7 @@
 				EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */,
 				ED414A9C2182A13C00903FE3 /* User+CoreDataProperties.swift in Sources */,
 				EDC84667217FFD3600C3543A /* CardView.swift in Sources */,
-				D8376C94218935B900E2404A /* CollectionViewCellForCollection.swift in Sources */,
+				D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */,
 				ED599C9321757B3C0007E929 /* RecipeFlicker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
