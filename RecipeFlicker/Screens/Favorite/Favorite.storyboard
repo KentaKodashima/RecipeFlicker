@@ -28,10 +28,38 @@
                                     <segment title="Second"/>
                                 </segments>
                             </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ORM-Se-Cbw">
+                                <rect key="frame" x="0.0" y="148" width="375" height="470"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nfl-fQ-1DG">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="UeK-p5-2ar">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="hhK-yq-OKT" id="cNG-sw-789"/>
+                                    <outlet property="delegate" destination="hhK-yq-OKT" id="me2-Pe-Vfj"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FdH-tS-JDc" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="1Wh-W0-CI2"/>
+                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="5kH-hE-Ud0"/>
+                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="top" secondItem="sti-9O-CDd" secondAttribute="bottom" id="GIo-E9-Orl"/>
+                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="Qh2-NI-u82"/>
+                            <constraint firstItem="ORM-Se-Cbw" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="cAk-Se-bou"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
                             <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="FdH-tS-JDc" secondAttribute="bottom" id="mOx-mg-prX"/>
@@ -47,6 +75,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
                         <segue destination="ljj-uv-6fb" kind="show" id="vha-eT-D7w"/>
                     </connections>
                 </viewController>
