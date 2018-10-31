@@ -10,6 +10,7 @@ import UIKit
 
 class FavoriteVC: UIViewController {
   
+  @IBOutlet weak var collectionView: UICollectionView!
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -26,5 +27,17 @@ class FavoriteVC: UIViewController {
    // Pass the selected object to the new view controller.
    }
    */
+  
+}
+
+extension FavoriteVC: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    <#code#>
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    <#code#>
+  }
+  
   
 }
