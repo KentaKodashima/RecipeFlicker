@@ -19,7 +19,7 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   private var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    label.font = UIFont.boldSystemFont(ofSize: 25)
+    label.font = UIFont.boldSystemFont(ofSize: 24)
     return label
   }()
   
@@ -62,6 +62,35 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   func setupContents(withTitle title: String, andImage image: String) {
     titleLabel.text = title
     recipeImage.image = UIImage(named: image)
+//    if let image = UIImage(named: image) {
+//      recipeImage.image = darken(image: image)
+//    }
+  }
+  
+  func darken(image: UIImage) -> UIImage {
+    // create a black layer
+    let blackFrame = CGRect(origin: CGPoint(x: 0, y: 0),
+                            size: (image.size))
+    let blackView = UIView(frame: blackFrame)
+    blackView.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
+    blackView.alpha = 0.3
+    
+    // draw the image
+    UIGraphicsBeginImageContext(blackFrame.size)
+    let context = UIGraphicsGetCurrentContext()
+    image.draw(in: blackFrame)
+    
+    // put the black layer over the context
+    context!.translateBy(x: 0, y: blackFrame.size.height)
+    context!.scaleBy(x: 1.0, y: -1.0)
+    context!.clip(to: blackFrame, mask: image.cgImage!)
+    blackView.layer.render(in: context!)
+    
+    // Produce a new image from this context
+    let imageRef = context!.makeImage()
+    let renderedImage = UIImage(cgImage: imageRef!)
+    UIGraphicsEndImageContext()
+    return renderedImage
   }
   
 }
