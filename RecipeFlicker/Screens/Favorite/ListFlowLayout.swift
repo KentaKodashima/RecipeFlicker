@@ -27,6 +27,7 @@ class ListFlowLayout: UICollectionViewFlowLayout {
   
   override init() {
     super.init()
+    setupLayout()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -35,8 +36,8 @@ class ListFlowLayout: UICollectionViewFlowLayout {
   }
   
   func setupLayout() {
+    minimumInteritemSpacing = 0
     minimumLineSpacing = 0
-    minimumLineSpacing = 1
     scrollDirection = .vertical
   }
   
