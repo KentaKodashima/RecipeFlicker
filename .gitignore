@@ -76,4 +76,4 @@ iOSInjectionProject/
 # EDITER: Minami
 # Ignore all images for demo.
 # TODO: Delete them after testing.
-*food*.imageset/
+# *food*.imageset/
