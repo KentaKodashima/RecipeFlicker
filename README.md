@@ -49,6 +49,6 @@ We adopt simple MVC architecture so that we can keep the app simple. Additionall
 
 ![architecture](https://user-images.githubusercontent.com/18434054/47101258-5e574780-d1ee-11e8-9ea9-5f6499c23f36.png)
 
-## Object Map
+## Class Map
 
-![objectmap](https://user-images.githubusercontent.com/18434054/47105540-1a1d7480-d1f9-11e8-9993-5cb7b3980ed8.png)
+![class map](https://user-images.githubusercontent.com/18434054/47760738-051df800-dc73-11e8-8c0c-0fced85a1d8c.png)

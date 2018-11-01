@@ -149,7 +149,9 @@ class HomeVC: UIViewController {
     let difference = calendar.dateComponents([.hour, .minute, .second], from: now, to: nextDay)
     let formatter = DateComponentsFormatter()
     
-    if formatter.string(from: difference)! == "00:00:00" {
+    // Test the string
+    // Test if the UI exists after 7:00 am
+    if formatter.string(from: difference)! == "0" {
       timer.invalidate()
       countdownView.removeFromSuperview()
     } else {
@@ -189,7 +191,7 @@ extension HomeVC: KolodaViewDelegate {
   
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
-//  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-//    setCountdownView()
-//  }
+  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+    setCountdownView()
+  }
 }
