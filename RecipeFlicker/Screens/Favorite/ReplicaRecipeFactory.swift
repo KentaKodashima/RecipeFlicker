@@ -20,6 +20,12 @@ class ReplicaRecipeFactory {
     var newRecipes = [ReplicaRecipe]()
     let category = ["Vietnameese", "Italian", "Japanese", "Chinese", "Korean", "Spanish"]
     for i in 0..<6 {
+      if i % 3 == 0 {
+        newRecipes.append(ReplicaRecipe(
+          title: "Recipe Title",
+          image: "nil",
+          whichCollectionToBelong: category[i] ))
+      }
       newRecipes.append(ReplicaRecipe(
         title: "Recipe Title",
         image: "food" + String(i + 1),
