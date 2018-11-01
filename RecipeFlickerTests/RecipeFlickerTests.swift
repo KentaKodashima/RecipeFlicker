@@ -20,4 +20,12 @@ class RecipeFlickerTests: XCTestCase {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
   }
   
+  func testCountdownString() {
+    let calendar = Calendar(identifier: .gregorian)
+    var components = DateComponents(hour: 00, minute: 00, second: 00)
+    let formatter = DateComponentsFormatter()
+    let result = formatter.string(from: components)
+    XCTAssertEqual(result!, "0", "components are properly converted.")
+  }
+  
 }
