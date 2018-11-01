@@ -72,7 +72,11 @@ class CollectionViewCellForList: UICollectionViewCell {
   
   func setupContents(withTitle title: String, andImage image: String) {
     titleLabel.text = title
-    recipeImage.image = UIImage(named: image)
+    guard let thumbnail = UIImage(named: image) else {
+      recipeImage.image = UIImage(named: "NoImage")
+      return
+    }
+    recipeImage.image = thumbnail
   }
 }
 
