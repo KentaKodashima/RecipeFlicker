@@ -28,10 +28,14 @@ class FavoriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     typeSegmentControll.tintColor = AppColors.accent.value
-    collectionView.collectionViewLayout = listLayout
-    collectionView.register(CollectionViewCellForList.self,
-                            forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
-    collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+    if recipeFactory.recipes.count > 0 {
+      collectionView.collectionViewLayout = listLayout
+      collectionView.register(CollectionViewCellForList.self,
+                              forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
+      collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+    } else {
+      collectionView.setNoDataLabelForCollectionView()
+    }
     
   }
   
