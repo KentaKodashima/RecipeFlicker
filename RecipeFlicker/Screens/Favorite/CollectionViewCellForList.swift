@@ -1,5 +1,5 @@
 //
-//  CollectionViewCellForAll.swift
+//  CollectionViewCellForList.swift
 //  RecipeFlicker
 //
 //  Created by minami on 2018-10-30.
@@ -12,7 +12,7 @@ class CollectionViewCellForList: UICollectionViewCell {
   
   static var reuseIdentifier: String {
     get {
-      return "CellForAll"
+      return "CellForList"
     }
   }
   

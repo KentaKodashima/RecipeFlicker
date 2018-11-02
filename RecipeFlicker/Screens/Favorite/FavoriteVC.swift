@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 class FavoriteVC: UIViewController {
   
   enum ViewType: Int {
     case list
     case grid
-    
-    
   }
+  
+  var ref: DatabaseReference!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
@@ -24,15 +25,39 @@ class FavoriteVC: UIViewController {
   let listLayout = ListFlowLayout()
   
   let recipeFactory = ReplicaRecipeFactory()
+  var favoriteRecipes = [Recipe]()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    ref = Database.database().reference()
+    let userID = Auth.auth().currentUser?.uid
+    ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
+      self.favoriteRecipes.removeAll()
+      for child in snapshot.children {
+        if let recipe = (child as! DataSnapshot).value as? [String: String],
+          let id = recipe["recipeId"],
+          let url = recipe["originalRecipeUrl"],
+          let title = recipe["title"],
+          let image = recipe["image"],
+          let isFavotiteLiteral = recipe["isFavorite"] {
+          let favoriteRecipe = Recipe(recipeId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"))
+          favoriteRecipe.whichCollectionToBelong = recipe["whichCollectionToBelong"]
+          print(favoriteRecipe)
+          self.favoriteRecipes.append(favoriteRecipe)
+        }
+      }
+      if self.favoriteRecipes.count <= 0 {
+        self.collectionView.setNoDataLabelForCollectionView()
+      }
+      self.collectionView.reloadData()
+    }
+    
     typeSegmentControll.tintColor = AppColors.accent.value
     collectionView.collectionViewLayout = listLayout
     collectionView.register(CollectionViewCellForList.self,
                             forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
     collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
-    
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
@@ -55,26 +80,19 @@ class FavoriteVC: UIViewController {
     self.collectionView.reloadData()
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
   }
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
 }
 
 extension FavoriteVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return recipeFactory.recipes.count
+    if favoriteRecipes.count > 0 {
+      return favoriteRecipes.count
+    } else {
+      return 0
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let recipe = recipeFactory.recipes[indexPath.row]
+    let recipe = favoriteRecipes[indexPath.row]
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
@@ -90,7 +108,7 @@ extension FavoriteVC: UICollectionViewDataSource {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       return cell
     }
-
+    
   }
   
   
