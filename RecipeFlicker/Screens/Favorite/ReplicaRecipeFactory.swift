@@ -13,7 +13,7 @@ class ReplicaRecipeFactory {
   
   init() {
     recipes = [ReplicaRecipe]()
-//    recipes = generateRecipes() + generateRecipes()
+    recipes = generateRecipes() + generateRecipes()
   }
   
   private func generateRecipes() -> [ReplicaRecipe] {
