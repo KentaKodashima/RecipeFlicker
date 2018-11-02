@@ -16,7 +16,7 @@ extension UICollectionView {
     let noDataLabel = UILabel(
       frame: CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
     )
-    noDataLabel.text = "There are no pages yet."
+    noDataLabel.text = "There is no favorite page yet."
     noDataLabel.textColor = AppColors.appText.value
     noDataLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 18)
     noDataLabel.textAlignment = .center
