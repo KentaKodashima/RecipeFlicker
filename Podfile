@@ -9,6 +9,7 @@ target 'RecipeFlicker' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'RealmSwift', '~> 3.1'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.2'
   pod 'Koloda', '~> 4.5'

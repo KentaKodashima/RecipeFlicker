@@ -8,42 +8,38 @@
 
 import Foundation
 import Firebase
+import RealmSwift
 
-struct Recipe: Codable {
-  public var idFromAPI: String
-  public var originalRecipeUrl: String
-  public var title: String
-  public var image: String
-  public var isFavorite: Bool
-  public var whichCollectionToBelong: String?
+@objcMembers public class Recipe: Object {
+  @objc dynamic public var recipeId = ""
+  @objc dynamic public var originalRecipeUrl = ""
+  @objc dynamic public var title = ""
+  @objc dynamic public var image = ""
+  @objc dynamic public var isFavorite = false
+  @objc dynamic public var whichCollectionToBelong: String?
   
-  init(idFromAPI: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool) {
-    self.idFromAPI = idFromAPI
+  convenience init(recipeId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool) {
+    self.init()
+    self.recipeId = recipeId
     self.originalRecipeUrl = originalRecipeUrl
     self.title = title
     self.image = image
     self.isFavorite = isFavorite
   }
   
-  mutating func saveToFirebase(userId: String) {
+  func saveToFirebase(userId: String) {
     self.isFavorite = true
-    var refPath = "users/" + userId
-    let usersRef = Database.database().reference(withPath: refPath).child("favorites")
+    var refPath = "favorites/" + userId
+    guard let key = Database.database().reference(withPath: refPath).childByAutoId().key else { return }
+    let favoriteRecipeRef = Database.database().reference(withPath: refPath).child(key)
     let dict = [
-      "idFromAPI": self.idFromAPI,
+      "recipeId": key,
       "originalRecipeUrl": self.originalRecipeUrl,
       "title": self.title,
       "image": self.image,
       "isFavorite": String(self.isFavorite),
       "whichCollectionToBelong": self.whichCollectionToBelong
     ]
-    let favoriteRecipeRef = usersRef.childByAutoId()
     favoriteRecipeRef.setValue(dict)
-  }
-}
-
-extension Recipe: Equatable {
-  public static func ==(lhs: Recipe, rhs: Recipe) -> Bool {
-    return lhs.idFromAPI == rhs.idFromAPI
   }
 }
