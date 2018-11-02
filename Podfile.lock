@@ -70,6 +70,11 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - pop (1.0.12)
+  - Realm (3.11.1):
+    - Realm/Headers (= 3.11.1)
+  - Realm/Headers (3.11.1)
+  - RealmSwift (3.11.1):
+    - Realm (= 3.11.1)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
@@ -79,6 +84,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Kingfisher (~> 4.0)
   - Koloda (~> 4.5)
+  - RealmSwift (~> 3.1)
   - SwiftyJSON (~> 4.2)
 
 SPEC REPOS:
@@ -99,6 +105,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - pop
+    - Realm
+    - RealmSwift
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -118,8 +126,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  Realm: 037c5919b9ceb59d6beed5d3b031096856b119b3
+  RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: d86e27a20b5ce094de143bf0f0974c2af8c8b326
+PODFILE CHECKSUM: 932423b7b0d6628412a2d99c52c0d599d4986b47
 
 COCOAPODS: 1.5.3

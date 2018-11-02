@@ -11,23 +11,25 @@ import Koloda
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import RealmSwift
 import Kingfisher
 
 class HomeVC: UIViewController {
 
-  private var appDelegate = UIApplication.shared.delegate as! AppDelegate
-  private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   private var userRef: DatabaseReference!
   private var userId: String!
   
   private let kolodaView = KolodaView()
-  private var users = [CDUser]()
+  private var rlmUser: RLMUser?
+  private var users: Results<RLMUser>?
   private var recipes = [Recipe]()
   private var recipeAPI = RecipeAPI()
   
   var timer = Timer()
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
+  
+  private let realm = try! Realm()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,27 +48,23 @@ class HomeVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    // Fetch existing user from Core Data
-    do {
-      users = try context.fetch(CDUser.fetchRequest())
-    } catch {
-      print("Could not fetch. \(error), \(error._userInfo)")
-    }
+    // Fetch existing user from Realm
+    users = RLMUser.all()
     
     // Create new user in both Core Data and Firebase, if there is none
+    guard let users = self.users else { return }
     if users.count == 0 {
       Auth.auth().signInAnonymously() { (authResult, error) in
         let user = authResult?.user
         let uid = user?.uid
-        let newUser = CDUser(context: self.context)
-        newUser.userId = uid
-        self.userId = uid
-        self.appDelegate.saveContext()
-        self.users.append(newUser)
+        self.rlmUser = RLMUser(userId: uid!)
+        try! self.realm.write {
+          self.realm.add(self.rlmUser!)
+        }
         
         // Create new user in Firebase
         self.userRef = Database.database().reference()
-        self.userRef.child("users").child(newUser.userId!).child("userId").setValue(self.users[0].userId)
+        self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.users![0].userId)
       }
     }
   }
@@ -84,6 +82,9 @@ class HomeVC: UIViewController {
     recipeAPI.getRandomRecipes { recipeArray, error in
       for recipe in recipeArray! {
         self.recipes.append(recipe)
+      }
+      try! self.realm.write {
+        self.rlmUser?.recipesOfTheDay.append(objectsIn: self.recipes)
       }
       self.kolodaView.reloadData()
     }
@@ -115,7 +116,6 @@ class HomeVC: UIViewController {
     countdownLabel.textAlignment = .center
     countdownLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 18)
     
-//    let countdownTimer = UILabel()
     countdownTimer.translatesAutoresizingMaskIntoConstraints = false
     countdownTimer.text = ""
     countdownTimer.textAlignment = .center
@@ -185,13 +185,15 @@ extension HomeVC: KolodaViewDelegate {
   func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
     if direction == .right {
       var recipe = recipes[index]
-      recipe.saveToFirebase(userId: userId)
+      try! realm.write {
+        recipe.saveToFirebase(userId: userId)
+      }
     }
   }
   
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
-  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-    setCountdownView()
-  }
+//  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+//    setCountdownView()
+//  }
 }

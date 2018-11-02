@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDUser" representedClassName=".CDUser" syncable="YES">
+        <attribute name="isFirstSignIn" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="recipesOfTheDay" optional="YES" attributeType="Transformable" customClassName="[Recipe]" syncable="YES"/>
         <attribute name="userId" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDUser" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CDUser" positionX="0" positionY="0" width="128" height="90"/>
     </elements>
 </model>
