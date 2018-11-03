@@ -11,6 +11,12 @@ import UIKit
 import RealmSwift
 
 @objcMembers class RLMUser: Object {
+  
+  enum Property: String {
+    case userId, realmId
+  }
+  
+  @objc dynamic private(set) var realmId = UUID().uuidString
   @objc dynamic public var userId = ""
   @objc dynamic public var isFirstSignIn = false
   public var recipesOfTheDay = List<Recipe>()
@@ -18,6 +24,10 @@ import RealmSwift
   convenience init(userId: String) {
     self.init()
     self.userId = userId
+  }
+  
+  override static func primaryKey() -> String? {
+    return Recipe.Property.realmId.rawValue
   }
 }
 
