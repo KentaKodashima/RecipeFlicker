@@ -31,6 +31,10 @@
 		ED599CA321757B3D0007E929 /* RecipeFlickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CA221757B3D0007E929 /* RecipeFlickerTests.swift */; };
 		ED599CAE21757B3D0007E929 /* RecipeFlickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */; };
 		ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CD37217E43F8009300C8 /* Recipe.swift */; };
+		EDAC61FA218E0CF400C2DB22 /* AddCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */; };
+		EDAC61FC218E0D1900C2DB22 /* AddCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */; };
+		EDAC61FF218E113E00C2DB22 /* SelectRecipesToAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */; };
+		EDAC6201218E115400C2DB22 /* SelectReciepsToAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */; };
 		EDC64794218C29980000DF9F /* UItableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64792218C29980000DF9F /* UItableView+Extensions.swift */; };
 		EDC64795218C29980000DF9F /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */; };
 		EDC64797218C2B0A0000DF9F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64796218C2B0A0000DF9F /* User.swift */; };
@@ -96,6 +100,10 @@
 		ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFlickerUITests.swift; sourceTree = "<group>"; };
 		ED599CAF21757B3D0007E929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED84CD37217E43F8009300C8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddCollection.storyboard; sourceTree = "<group>"; };
+		EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionVC.swift; sourceTree = "<group>"; };
+		EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectRecipesToAdd.storyboard; sourceTree = "<group>"; };
+		EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReciepsToAddVC.swift; sourceTree = "<group>"; };
 		EDC64792218C29980000DF9F /* UItableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UItableView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC64796218C2B0A0000DF9F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -251,6 +259,8 @@
 		ED599CBC21757B8B0007E929 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EDAC61FD218E112400C2DB22 /* SelectRecipesToAdd */,
+				EDAC61F8218E0CCC00C2DB22 /* AddCollection */,
 				ED599C8E21757B3C0007E929 /* Main.storyboard */,
 				EDC84662217FFB9600C3543A /* Common */,
 				ED599CBD21757B920007E929 /* Home */,
@@ -286,6 +296,31 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		EDAC61F8218E0CCC00C2DB22 /* AddCollection */ = {
+			isa = PBXGroup;
+			children = (
+				EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */,
+				EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */,
+			);
+			path = AddCollection;
+			sourceTree = "<group>";
+		};
+		EDAC61FD218E112400C2DB22 /* SelectRecipesToAdd */ = {
+			isa = PBXGroup;
+			children = (
+				EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */,
+				EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */,
+			);
+			path = SelectRecipesToAdd;
+			sourceTree = "<group>";
+		};
+		EDAC6202218E16D000C2DB22 /* CollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollectionViewLayout;
+			sourceTree = "<group>";
+		};
 		EDC8465B217FC43F00C3543A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +336,7 @@
 		EDC84662217FFB9600C3543A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EDAC6202218E16D000C2DB22 /* CollectionViewLayout */,
 				EDC84663217FFBA400C3543A /* Cell */,
 				EDC84666217FFD3600C3543A /* CardView.swift */,
 				ED00508921802CDD00038FBA /* CardView.xib */,
@@ -424,8 +460,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED599C9821757B3D0007E929 /* LaunchScreen.storyboard in Resources */,
+				EDAC61FF218E113E00C2DB22 /* SelectRecipesToAdd.storyboard in Resources */,
 				ED414A84218269F200903FE3 /* GoogleService-Info.plist in Resources */,
 				ED0AFC152175C739009A2976 /* Home.storyboard in Resources */,
+				EDAC61FA218E0CF400C2DB22 /* AddCollection.storyboard in Resources */,
 				ED599C9521757B3D0007E929 /* Assets.xcassets in Resources */,
 				ED00508A21802CDD00038FBA /* CardView.xib in Resources */,
 				ED0AFC132175C618009A2976 /* Favorite.storyboard in Resources */,
@@ -560,8 +598,10 @@
 				ED0AFC112175C602009A2976 /* FavoriteVC.swift in Sources */,
 				D8F128E12188F7BA00DABF2F /* ReplicaRecipe.swift in Sources */,
 				EDC64797218C2B0A0000DF9F /* User.swift in Sources */,
+				EDAC6201218E115400C2DB22 /* SelectReciepsToAddVC.swift in Sources */,
 				ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */,
 				ED599C8D21757B3C0007E929 /* HomeVC.swift in Sources */,
+				EDAC61FC218E0D1900C2DB22 /* AddCollectionVC.swift in Sources */,
 				ED599C8B21757B3C0007E929 /* AppDelegate.swift in Sources */,
 				EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */,
 				EDC64795218C29980000DF9F /* UICollectionView+Extensions.swift in Sources */,
