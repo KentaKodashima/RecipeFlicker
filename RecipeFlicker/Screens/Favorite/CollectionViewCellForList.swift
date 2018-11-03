@@ -70,13 +70,14 @@ class CollectionViewCellForList: UICollectionViewCell {
     recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
-  func setupContents(withTitle title: String, andImage image: String) {
+  func setupContents(withTitle title: String, andImage imagePath: String) {
     titleLabel.text = title
-    guard let thumbnail = UIImage(named: image) else {
-      recipeImage.image = UIImage(named: "NoImage")
-      return
-    }
-    recipeImage.image = thumbnail
+    let imageUrl = URL(string: imagePath)
+    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
+      (image, error, cacheType, imageUrl) in
+      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
+      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+    })
   }
 }
 
