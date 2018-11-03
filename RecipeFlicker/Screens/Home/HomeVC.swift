@@ -15,46 +15,53 @@ import RealmSwift
 import Kingfisher
 
 class HomeVC: UIViewController {
-
+  
+  // MARK: - Properties
   private var userRef: DatabaseReference!
   private var userId: String!
+  private let realm = try! Realm()
+  private var rlmUser: RLMUser!
   
   private let kolodaView = KolodaView()
-  private var rlmUser: RLMUser?
-  private var users: Results<RLMUser>?
-  private var recipes = [Recipe]()
   private var recipeAPI = RecipeAPI()
   
   var timer = Timer()
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
   
-  private let realm = try! Realm()
   
+  // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    kolodaView.delegate = self
-    kolodaView.dataSource = self
-    setKolodaView()
     
     // Fetch anonymous user's uid from Firebase
     if let userId = Auth.auth().currentUser?.uid {
       self.userId = userId
     }
     
-    fetchRecipesToBind()
+    // Fetch existing user from Realm
+    rlmUser = RLMUser.all().first
+
+    createUserIfThereIsNone()
+    
+    kolodaView.delegate = self
+    kolodaView.dataSource = self
+    setKolodaView()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    // Fetch existing user from Realm
-    users = RLMUser.all()
-    
+  // MARK: - Actions
+  @IBAction func dislikeButtonTapped(_ sender: UIButton) {
+    kolodaView.swipe(SwipeResultDirection.left)
+  }
+  
+  @IBAction func likeButtonTapped(_ sender: UIButton) {
+    kolodaView.swipe(SwipeResultDirection.right)
+  }
+  
+  fileprivate func createUserIfThereIsNone() {
     // Create new user in both Core Data and Firebase, if there is none
-    guard let users = self.users else { return }
-    if users.count == 0 {
-      Auth.auth().signInAnonymously() { (authResult, error) in
+    Auth.auth().signInAnonymously() { (authResult, error) in
+      if self.rlmUser == nil {
         let user = authResult?.user
         let uid = user?.uid
         self.rlmUser = RLMUser(userId: uid!)
@@ -64,27 +71,31 @@ class HomeVC: UIViewController {
         
         // Create new user in Firebase
         self.userRef = Database.database().reference()
-        self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.users![0].userId)
+        self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.rlmUser!.userId)
+        
+        // Fetch recipes
+        self.fetchRecipesToBind()
+        try! self.realm.write {
+          self.rlmUser.isFirstSignIn = false
+        }
+      } else {
+        if self.rlmUser.isFirstSignIn {
+          self.fetchRecipesToBind()
+          try! self.realm.write {
+            self.rlmUser.isFirstSignIn = false
+          }
+        }
       }
     }
-  }
-  
-  @IBAction func dislikeButtonTapped(_ sender: UIButton) {
-    kolodaView.swipe(SwipeResultDirection.left)
-  }
-  
-  @IBAction func likeButtonTapped(_ sender: UIButton) {
-    kolodaView.swipe(SwipeResultDirection.right)
   }
   
   fileprivate func fetchRecipesToBind() {
     // Fetch data from API and bind to KolodaView
     recipeAPI.getRandomRecipes { recipeArray, error in
-      for recipe in recipeArray! {
-        self.recipes.append(recipe)
-      }
       try! self.realm.write {
-        self.rlmUser?.recipesOfTheDay.append(objectsIn: self.recipes)
+        for recipe in recipeArray! {
+          self.rlmUser?.recipesOfTheDay.append(recipe)
+        }
       }
       self.kolodaView.reloadData()
     }
@@ -153,6 +164,9 @@ class HomeVC: UIViewController {
     // Test if the UI exists after 7:00 am
     if formatter.string(from: difference)! == "0" {
       timer.invalidate()
+      try! self.realm.write {
+        self.rlmUser.isFirstSignIn = true
+      }
       countdownView.removeFromSuperview()
     } else {
       countdownTimer.text = formatter.string(from: difference)!
@@ -160,14 +174,15 @@ class HomeVC: UIViewController {
   }
 }
 
+// MARK: - KolodaView Data Source
 extension HomeVC: KolodaViewDataSource {
   func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-    return recipes.count
+    return rlmUser?.recipesOfTheDay.count ?? 0
   }
   
   func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
     let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-    let recipe = recipes[index]
+    let recipe = rlmUser.recipesOfTheDay[index]
     let imageUrl = URL(string: recipe.image)!
     
     card.cardImage.kf.setImage(with: imageUrl)
@@ -177,6 +192,7 @@ extension HomeVC: KolodaViewDataSource {
   }
 }
 
+// MARK: - KolodaView delegate
 extension HomeVC: KolodaViewDelegate {
   func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
     return [.left, .right]
@@ -184,10 +200,13 @@ extension HomeVC: KolodaViewDelegate {
   
   func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
     if direction == .right {
-      var recipe = recipes[index]
+      var recipe = rlmUser!.recipesOfTheDay[index]
       try! realm.write {
         recipe.saveToFirebase(userId: userId)
       }
+    }
+    try! realm.write {
+      rlmUser!.recipesOfTheDay.remove(at: index)
     }
   }
   

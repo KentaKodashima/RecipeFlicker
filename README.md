@@ -28,7 +28,7 @@ Implement full functionality.
 - Like someone's post
 
 ## Implementation Style
-Follow the guideline GUIDELINE.md.
+Follow this guideline. [GUIDELINE.md](GUIDELINE.md)
 
 ## Specifications
 Language: Swift 4.2
@@ -42,7 +42,7 @@ Libraries:
 
 API: EDAMAM Recipe Search API
 
-Database: Farebase
+Database: Farebase, Realm
 
 ## Architecture
 We adopt simple MVC architecture so that we can keep the app simple. Additionally, MVC is easy to understand thanks to its simplicity.
