@@ -40,10 +40,9 @@ class FavoriteVC: UIViewController {
           let url = recipe["originalRecipeUrl"],
           let title = recipe["title"],
           let image = recipe["image"],
-          let isFavotiteLiteral = recipe["isFavorite"] {
-          let favoriteRecipe = Recipe(recipeId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"))
-          favoriteRecipe.whichCollectionToBelong = recipe["whichCollectionToBelong"]
-          print(favoriteRecipe)
+          let isFavotiteLiteral = recipe["isFavorite"],
+          let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }
