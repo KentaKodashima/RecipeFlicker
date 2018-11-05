@@ -36,7 +36,7 @@ import RealmSwift
     self.isFavorite = isFavorite
   }
   
-  convenience init(firebaseId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, whichCollectionToBelong: String) {
+  convenience init(firebaseId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, whichCollectionToBelong: String?) {
     self.init()
     self.firebaseId = firebaseId
     self.originalRecipeUrl = originalRecipeUrl
@@ -49,7 +49,7 @@ import RealmSwift
 
 extension Recipe {
   func saveToFirebase(userId: String) {
-    var refPath = "favorites/" + userId
+    let refPath = "favorites/" + userId
     guard let key = Database.database().reference(withPath: refPath).childByAutoId().key else { return }
     self.isFavorite = true
     self.firebaseId = key
@@ -64,5 +64,18 @@ extension Recipe {
       "whichCollectionToBelong": self.whichCollectionToBelong
     ]
     favoriteRecipeRef.setValue(dict)
+  }
+  
+  func convertToJSON() -> Dictionary<String, Any> {
+    let recipeDict = [
+      "firebaseId": self.firebaseId,
+      "realmId": self.realmId,
+      "originalRecipeUrl": self.originalRecipeUrl,
+      "title": self.title,
+      "image": self.image,
+      "isFavorite": String(self.isFavorite),
+      "whichCollectionToBelong": self.whichCollectionToBelong
+    ]
+    return recipeDict
   }
 }

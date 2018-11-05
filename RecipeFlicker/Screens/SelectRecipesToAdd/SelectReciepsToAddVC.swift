@@ -7,24 +7,108 @@
 //
 
 import UIKit
+import Firebase
+import RealmSwift
+import Kingfisher
 
 class SelectReciepsToAddVC: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+  // MARK: - Outlets
+  @IBOutlet weak var recipeTableView: UITableView!
+  
+  // MARK: - Properties
+  public var collectionName: String?
+  private var userRef: DatabaseReference!
+  private var userId: String!
+  private let realm = try! Realm()
+  private var rlmUser: RLMUser! {
+    didSet {
+      userId = rlmUser.userId
     }
+  }
+  private var favoriteRecipes = [Recipe]()
+  private var doneButton: UIBarButtonItem!
+  
+  // MARK: - View controller life-cycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // Fetch existing user from Realm
+    rlmUser = RLMUser.all().first
+    
+    // Reference in Firebase
+    userRef = Database.database().reference()
+    
+    setRightBarButton()
+    registerTableViewCells()
+    getFavoriteRecipes()
+    
+    recipeTableView.allowsMultipleSelectionDuringEditing = true
+    recipeTableView.setEditing(true, animated: false)
+  }
+  
+  // MARK: - Actions
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    recipeTableView.setEditing(editing, animated: animated)
+  }
+  
+  fileprivate func setRightBarButton() {
+    doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+    doneButton.isEnabled = false
+    navigationItem.rightBarButtonItem = doneButton
+  }
+  
+  @objc fileprivate func doneButtonTapped() {
+    recipeTableView.indexPathsForVisibleRows
+  }
+  
+  func registerTableViewCells() {
+    let recipeListTableViewCell = UINib(nibName: "RecipeListTableViewCell", bundle: nil)
+    recipeTableView.register(recipeListTableViewCell, forCellReuseIdentifier: "RecipeListTableViewCell")
+  }
+  
+  func getFavoriteRecipes() {
+    let userID = Auth.auth().currentUser?.uid
+    userRef.child("favorites").child(userID!).observe(.value) { (snapshot) in
+      self.favoriteRecipes.removeAll()
+      for child in snapshot.children {
+        if let recipe = (child as! DataSnapshot).value as? [String: String] {
+          let id = recipe["firebaseId"]
+          let url = recipe["originalRecipeUrl"]
+          let title = recipe["title"]
+          let image = recipe["image"]
+          let isFavotiteLiteral = recipe["isFavorite"]
+          let whichCollectionToBelong = recipe["whichCollectionToBelong"]
+          let favoriteRecipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
+          self.favoriteRecipes.append(favoriteRecipe)
+        }
+      }
+      if self.favoriteRecipes.count <= 0 {
+        self.recipeTableView.setNoDataLabelForTableView()
+      }
+      self.recipeTableView.reloadData()
     }
-    */
+  }
+}
 
+extension SelectReciepsToAddVC: UITableViewDelegate {
+  
+}
+
+extension SelectReciepsToAddVC: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return favoriteRecipes.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeListTableViewCell") as! RecipeListTableViewCell
+    let recipe = favoriteRecipes[indexPath.row]
+    let imageUrl = URL(string: recipe.image)
+    cell.recipeImage.kf.setImage(with: imageUrl)
+    cell.recipeTitle.text = recipe.title
+    cell.accessoryType = .checkmark
+    
+    return cell
+  }
 }

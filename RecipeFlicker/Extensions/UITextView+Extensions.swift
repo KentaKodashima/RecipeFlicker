@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UITextView {
-  public func createToolbarForKeyboard() {
+  public func setToolbarForKeyboard() {
     // Create close button above the textView keyboard
     // Tool bar
     let closeBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
