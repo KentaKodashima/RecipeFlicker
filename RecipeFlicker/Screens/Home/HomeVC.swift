@@ -25,7 +25,7 @@ class HomeVC: UIViewController {
   private let kolodaView = KolodaView()
   private var recipeAPI = RecipeAPI()
   
-  var timer = Timer()
+  private var timer = Timer()
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
   

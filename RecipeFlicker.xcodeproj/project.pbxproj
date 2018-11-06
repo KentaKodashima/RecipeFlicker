@@ -38,7 +38,7 @@
 		EDAC6201218E115400C2DB22 /* SelectReciepsToAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */; };
 		EDC64794218C29980000DF9F /* UItableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64792218C29980000DF9F /* UItableView+Extensions.swift */; };
 		EDC64795218C29980000DF9F /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */; };
-		EDC64797218C2B0A0000DF9F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64796218C2B0A0000DF9F /* User.swift */; };
+		EDC64797218C2B0A0000DF9F /* RLMUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC64796218C2B0A0000DF9F /* RLMUser.swift */; };
 		EDC8465D217FC4A600C3543A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465C217FC4A600C3543A /* Colors.swift */; };
 		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
 		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
@@ -110,7 +110,7 @@
 		EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReciepsToAddVC.swift; sourceTree = "<group>"; };
 		EDC64792218C29980000DF9F /* UItableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UItableView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		EDC64796218C2B0A0000DF9F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EDC64796218C2B0A0000DF9F /* RLMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMUser.swift; sourceTree = "<group>"; };
 		EDC8465C217FC4A600C3543A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				ED84CD37217E43F8009300C8 /* Recipe.swift */,
-				EDC64796218C2B0A0000DF9F /* User.swift */,
+				EDC64796218C2B0A0000DF9F /* RLMUser.swift */,
 				ED422675218FC807004F92BA /* Collection.swift */,
 			);
 			path = Model;
@@ -607,7 +607,7 @@
 				EDC64794218C29980000DF9F /* UItableView+Extensions.swift in Sources */,
 				ED0AFC112175C602009A2976 /* FavoriteVC.swift in Sources */,
 				D8F128E12188F7BA00DABF2F /* ReplicaRecipe.swift in Sources */,
-				EDC64797218C2B0A0000DF9F /* User.swift in Sources */,
+				EDC64797218C2B0A0000DF9F /* RLMUser.swift in Sources */,
 				EDAC6201218E115400C2DB22 /* SelectReciepsToAddVC.swift in Sources */,
 				ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */,
 				ED599C8D21757B3C0007E929 /* HomeVC.swift in Sources */,

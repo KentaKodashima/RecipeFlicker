@@ -17,10 +17,10 @@ import RealmSwift
   }
   
   @objc dynamic private(set) var realmId = UUID().uuidString
-  @objc dynamic public var firebaseId = ""
-  @objc dynamic public var originalRecipeUrl = ""
-  @objc dynamic public var title = ""
-  @objc dynamic public var image = ""
+  @objc dynamic private(set) var firebaseId = ""
+  @objc dynamic private(set) var originalRecipeUrl = ""
+  @objc dynamic private(set) var title = ""
+  @objc dynamic private(set) var image = ""
   @objc dynamic public var isFavorite = false
   @objc dynamic public var whichCollectionToBelong: String?
   
