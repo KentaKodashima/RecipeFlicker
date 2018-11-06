@@ -76,7 +76,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ejr-Xx-qLq">
                             <color key="tintColor" red="0.92549019610000005" green="0.4941176471" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="8Ea-wt-zke" kind="show" id="IjU-wp-fGd"/>
+                                <segue destination="8Ea-wt-zke" kind="show" identifier="goToAddCollection" id="IjU-wp-fGd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
