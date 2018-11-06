@@ -131,7 +131,7 @@ extension SelectReciepsToAddVC: UITableViewDataSource {
     let imageUrl = URL(string: recipe.image)
     cell.recipeImage.kf.setImage(with: imageUrl)
     cell.recipeTitle.text = recipe.title
-    cell.accessoryType = .checkmark
+    cell.tintColor = #colorLiteral(red: 0.9473584294, green: 0.5688932538, blue: 0, alpha: 1)
     
     return cell
   }
