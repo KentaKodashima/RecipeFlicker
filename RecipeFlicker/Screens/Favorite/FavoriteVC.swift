@@ -107,8 +107,5 @@ extension FavoriteVC: UICollectionViewDataSource {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       return cell
     }
-    
   }
-  
-  
 }

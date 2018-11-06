@@ -29,10 +29,27 @@ extension Collection {
     let dict: [String : Any] = [
       "firebaseId": key,
       "name": self.collectionName,
-      "recipes": [
-        self.recipes.map { $0.firebaseId }: self.recipes.map { $0.convertToJSON() }
-      ]
+      "recipes": ""
     ]
     collectionsRef.setValue(dict)
+    for recipe in self.recipes {
+      let recipeRef = collectionsRef.child("recipes").child(recipe.firebaseId)
+      recipeRef.setValue(recipe.convertToJSON())
+    }
   }
+//  func saveToFirebase(userId: String) {
+//    let refPath = "collections/" + userId
+//    guard let key = Database.database().reference(withPath: refPath).childByAutoId().key else { return }
+//    self.firebaseId = key
+//    let collectionsRef = Database.database().reference(withPath: refPath).child(key)
+//    let dict: [String : Any] = [
+//      "firebaseId": key,
+//      "name": self.collectionName,
+//      "recipes": [
+//        self.recipes.map { $0.firebaseId as! String }: self.recipes.map { $0.convertToJSON() }
+//      ]
+//    ]
+//    print(dict)
+//    collectionsRef.setValue(dict)
+//  }
 }
