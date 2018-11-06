@@ -13,19 +13,26 @@ RecipeFlicker allows you to make your own favorite recipe lists. Even if you can
 
 ## Implementation Phases
 ### Phase 1
-#### Objectiev
-Publishing the app without any trouble.
+#### Objective
+Implement the core functions and publish the app without any trouble.
 #### Functionalities
 - Swipe to decide recipe(Tinder-like UI)
-- Favorite recipe list (two patterns of UI using TableView and CollectionView)
+- Next random recipes are available at 7 am everyday
+- Open up WebKitView to see the detail of the recipe
+- List right-swiped recipes as the user's favorites
 - Use Firebase as database for the later use
+- Use Realm to store Firebase anonymous user id and everyday's random recipes
+
 ### Phase 2
 #### Objective
 Implement full functionality.
 #### Functionalities
+- Firebase authentication (email / password, Facebook, Google)
+- Register preferable and unpreferable ingredients
+- Random recommendation of someone's collection shows up after the user swipes all recipes of the day
 - Post URL with comment
-- Follow people
-- Like someone's post
+- Follow / Unfollow people
+- Save someone's recipe to the user's favorite
 
 ## Implementation Style
 Follow this guideline. [GUIDELINE.md](GUIDELINE.md)
@@ -49,6 +56,45 @@ We adopt simple MVC architecture so that we can keep the app simple. Additionall
 
 ![architecture](https://user-images.githubusercontent.com/18434054/47101258-5e574780-d1ee-11e8-9ea9-5f6499c23f36.png)
 
+## Database Architecture
+### Firebase
+```
+root
+  ├ collections
+  |  └ userId
+  |     └ collectionId
+  |        ├ firebaseId
+  |        ├ name
+  |        └ recipes
+  |           └ recipeId
+  |              ├ firebaseId
+  |              ├ image
+  |              ├ isFavorite
+  |              ├ originalRecipeUrl
+  |              ├ realmId
+  |              └ title
+  | 
+  ├ favorites
+  |  └ userId
+  |     └ recipeId
+  |        ├ firebaseId
+  |        ├ image
+  |        ├ isFavorite
+  |        ├ originalRecipeUrl
+  |        ├ realmId
+  |        └ title
+  └ users
+     └ userId
+        └ userId
+```
+
 ## Class Map
 
-![class map](https://user-images.githubusercontent.com/18434054/47760738-051df800-dc73-11e8-8c0c-0fced85a1d8c.png)
+![class map](https://user-images.githubusercontent.com/18434054/48048240-bcbd7900-e14f-11e8-9dcc-a37ef2890c52.png)
+
+## Team Member
+Project Manager, Leader, Developer - Kenta (Me)
+
+Developer - [Minami](https://github.com/Minamiciccc)
+
+Designer - [Nagisa](https://github.com/beach1208)
