@@ -18,6 +18,7 @@ class SelectReciepsToAddVC: UIViewController {
   
   // MARK: - Properties
   public var collectionName: String?
+  
   private var userRef: DatabaseReference!
   private var userId: String!
   private let realm = try! Realm()
@@ -60,7 +61,16 @@ class SelectReciepsToAddVC: UIViewController {
   }
   
   @objc fileprivate func doneButtonTapped() {
-    recipeTableView.indexPathsForVisibleRows
+    var collectionItems = [Recipe]()
+    let userID = Auth.auth().currentUser?.uid
+    if let indexPaths = recipeTableView.indexPathsForSelectedRows, let collectionName = self.collectionName {
+      for indexPath in indexPaths {
+        collectionItems.append(favoriteRecipes[indexPath.row])
+      }
+      var collection = Collection(collectionName: collectionName, recipes: collectionItems)
+      collection.saveToFirebase(userId: userID!)
+    }
+    navigationController?.popToRootViewController(animated: true)
   }
   
   func registerTableViewCells() {
@@ -93,7 +103,21 @@ class SelectReciepsToAddVC: UIViewController {
 }
 
 extension SelectReciepsToAddVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    toggleDoneButton()
+  }
   
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    toggleDoneButton()
+  }
+  
+  fileprivate func toggleDoneButton() {
+    if recipeTableView.indexPathsForSelectedRows == nil {
+      doneButton.isEnabled = false
+    } else {
+      doneButton.isEnabled = true
+    }
+  }
 }
 
 extension SelectReciepsToAddVC: UITableViewDataSource {
