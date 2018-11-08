@@ -11,8 +11,8 @@ import Firebase
 
 class Collection {
   public var firebaseId: String?
-  private var collectionName: String
-  private var recipes: [Recipe]
+  public var collectionName: String
+  public var recipes: [Recipe]
   
   init(collectionName: String, recipes: [Recipe]) {
     self.collectionName = collectionName
