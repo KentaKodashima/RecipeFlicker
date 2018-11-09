@@ -35,15 +35,14 @@ struct RecipeAPI {
           let json = JSON(value)
           for result in json["hits"].arrayValue {
             var recipe = result["recipe"]
-            let realmId = recipe["uri"].stringValue
             let originalRecipeUrl = recipe["url"].stringValue
             let title = recipe["label"].stringValue
             let image = recipe["image"].stringValue
-            var recipeObj = Recipe(originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: false)
+            let recipeObj = Recipe(originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: false)
             recipeStore.append(recipeObj)
           }
           while randomRecipes.count < 15 {
-            var randomRecipe = recipeStore.randomElement()!
+            let randomRecipe = recipeStore.randomElement()!
             randomRecipes.append(randomRecipe)
             recipeStore.remove(at: recipeStore.firstIndex(of: randomRecipe)!)
           }
