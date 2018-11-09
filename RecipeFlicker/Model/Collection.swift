@@ -12,40 +12,31 @@ import Firebase
 class Collection {
   public var firebaseId: String?
   public var name: String
-  // Mark: Delete 'recipes' property and hold recipe IDs in a different firebase reference.
-  public var recipes = [Recipe]()
   public var image: String?
-  // Mark: Remove recipes from the constructor.
-  init(collectionName: String, recipes: [Recipe]) {
-    self.name = collectionName
-    self.recipes = recipes
-  }
   
-  init(withFirebaseId id: String, andName name: String, andImageUrl image: String?) {
-    self.firebaseId = id
+  init(withName name: String, andImageUrl image: String?) {
     self.name = name
     self.image = image
   }
 }
 
 extension Collection {
-  // Mark: Modify function
-  func saveToFirebase(userId: String) {
-    let refPath = "collections/" + userId
-    guard let key = Database.database().reference(withPath: refPath).childByAutoId().key else { return }
+  func saveToFirebase(userId: String, recipes: [Recipe]) {
+    let userCollectionsRefPath = "userCollections/" + userId
+    guard let key = Database.database().reference(withPath: userCollectionsRefPath).childByAutoId().key else { return }
     self.firebaseId = key
-    let collectionsRef = Database.database().reference(withPath: refPath).child(key)
-    let dict: [String : Any] = [
+    let collectionsRef = Database.database().reference(withPath: userCollectionsRefPath).child(key)
+    let collection: [String : String] = [
       "firebaseId": key,
       "name": self.name,
-      "recipes": ""
+      "image": self.image ?? ""
     ]
-    // TODO: Re-consider dict making process
-    // self.recipes.map { $0.firebaseId as! String }: self.recipes.map { $0.convertToJSON() }
-    collectionsRef.setValue(dict)
-    for recipe in self.recipes {
-      let recipeRef = collectionsRef.child("recipes").child(recipe.firebaseId)
-      recipeRef.setValue(recipe.convertToJSON())
+    collectionsRef.setValue(collection)
+    
+    let recipeCollectionsRefPath = "recipeCollections/" + key
+    for recipe in recipes {
+      Database.database().reference(withPath: recipeCollectionsRefPath)
+        .child(recipe.firebaseId).setValue(recipe.convertToJSON())
     }
   }
 }
