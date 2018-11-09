@@ -46,6 +46,10 @@ class HomeVC: UIViewController {
     
     kolodaView.delegate = self
     kolodaView.dataSource = self
+//    setKolodaView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
     setKolodaView()
   }
   
@@ -93,7 +97,7 @@ class HomeVC: UIViewController {
     // Fetch data from API and bind to KolodaView
     recipeAPI.getRandomRecipes { recipeArray, error in
       try! self.realm.write {
-        for recipe in recipeArray! {
+        for recipe in recipeArray ?? [Recipe]() {
           self.rlmUser?.recipesOfTheDay.append(recipe)
         }
       }
@@ -112,7 +116,13 @@ class HomeVC: UIViewController {
     kolodaView.layer.shadowOpacity = 1.0
     kolodaView.layer.shadowRadius = 7.0
     kolodaView.layer.masksToBounds =  false
+    kolodaView.alpha = 0.0
     self.view.addSubview(kolodaView)
+    self.kolodaView.animator.animateAppearance(2)
+    
+    UIView.animate(withDuration: 0.1, delay: 1, options: [], animations: { () in
+      self.kolodaView.alpha = 1.0
+    })
   }
   
   fileprivate func setCountdownView() {
@@ -200,16 +210,21 @@ extension HomeVC: KolodaViewDelegate {
   
   func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
     if direction == .right {
-      var recipe = rlmUser!.recipesOfTheDay[index]
+      let recipe = rlmUser!.recipesOfTheDay[index]
       try! realm.write {
         recipe.saveToFirebase(userId: userId)
       }
     }
+    print(rlmUser.recipesOfTheDay[index])
     try! realm.write {
       rlmUser!.recipesOfTheDay.remove(at: index)
     }
+    self.kolodaView.resetCurrentCardIndex()
   }
   
+  func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool {
+    return false
+  }
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
 //  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
