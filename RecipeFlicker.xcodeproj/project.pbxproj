@@ -31,6 +31,7 @@
 		ED599C9821757B3D0007E929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED599C9621757B3D0007E929 /* LaunchScreen.storyboard */; };
 		ED599CA321757B3D0007E929 /* RecipeFlickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CA221757B3D0007E929 /* RecipeFlickerTests.swift */; };
 		ED599CAE21757B3D0007E929 /* RecipeFlickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */; };
+		ED64A8382195410F00C62ADD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED64A8372195410F00C62ADD /* Constants.swift */; };
 		ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CD37217E43F8009300C8 /* Recipe.swift */; };
 		EDAC61FA218E0CF400C2DB22 /* AddCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */; };
 		EDAC61FC218E0D1900C2DB22 /* AddCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */; };
@@ -103,6 +104,7 @@
 		ED599CA921757B3D0007E929 /* RecipeFlickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipeFlickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED599CAD21757B3D0007E929 /* RecipeFlickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFlickerUITests.swift; sourceTree = "<group>"; };
 		ED599CAF21757B3D0007E929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED64A8372195410F00C62ADD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED84CD37217E43F8009300C8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddCollection.storyboard; sourceTree = "<group>"; };
 		EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionVC.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				ED599C9421757B3D0007E929 /* Assets.xcassets */,
 				ED599C9621757B3D0007E929 /* LaunchScreen.storyboard */,
+				ED64A8372195410F00C62ADD /* Constants.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				EDC84667217FFD3600C3543A /* CardView.swift in Sources */,
 				EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */,
 				D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */,
+				ED64A8382195410F00C62ADD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,19 +60,9 @@ We adopt simple MVC architecture so that we can keep the app simple. Additionall
 ### Firebase
 ```
 root
-  ├ collections
+  ├ users
   |  └ userId
-  |     └ collectionId
-  |        ├ firebaseId
-  |        ├ name
-  |        └ recipes
-  |           └ recipeId
-  |              ├ firebaseId
-  |              ├ image
-  |              ├ isFavorite
-  |              ├ originalRecipeUrl
-  |              ├ realmId
-  |              └ title
+  |     └ userId
   | 
   ├ favorites
   |  └ userId
@@ -83,9 +73,23 @@ root
   |        ├ originalRecipeUrl
   |        ├ realmId
   |        └ title
-  └ users
-     └ userId
-        └ userId
+  | 
+  ├ userCollections
+  |  └ userId
+  |     └ collectionId
+  |        ├ collectionId
+  |        ├ name
+  |        └ image
+  |            
+  └ recipeCollections
+     └ collectionId
+        └ recipeId (= firebaseId)
+           ├ firebaseId
+           ├ image
+           ├ isFavorite
+           ├ originalRecipeUrl
+           ├ realmId
+           └ title
 ```
 
 ## Class Map

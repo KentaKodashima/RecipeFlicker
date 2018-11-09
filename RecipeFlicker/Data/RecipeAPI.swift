@@ -12,8 +12,8 @@ import SwiftyJSON
 
 struct RecipeAPI {
   private let BASE_SEARCH_URL = "https://api.edamam.com/search?"
-  private let APP_ID = "&app_id=64e158b2"
-  private let APP_KEY = "&app_key=7826daf17b47075ec9f3c74964f2ed8d"
+  private let APP_ID = EDAMAM_APP_ID
+  private let APP_KEY = EDAMAM_APP_KEY
   private let DEFAULT_QUERY_PARAM = "q=quick"
   private var REQUEST_STRING: String {
     return BASE_SEARCH_URL + DEFAULT_QUERY_PARAM + APP_ID + APP_KEY

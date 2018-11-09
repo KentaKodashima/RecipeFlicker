@@ -215,7 +215,7 @@ extension HomeVC: KolodaViewDelegate {
         recipe.saveToFirebase(userId: userId)
       }
     }
-    print(rlmUser.recipesOfTheDay[index])
+    
     try! realm.write {
       rlmUser!.recipesOfTheDay.remove(at: index)
     }
