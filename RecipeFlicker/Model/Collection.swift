@@ -11,12 +11,20 @@ import Firebase
 
 class Collection {
   public var firebaseId: String?
-  public var collectionName: String
-  public var recipes: [Recipe]
-  
+  public var name: String
+  // Mark: Delete 'recipes' property and hold recipe IDs in a different firebase reference.
+  public var recipes = [Recipe]()
+  public var image: String?
+  // Mark: Remove recipes from the constructor.
   init(collectionName: String, recipes: [Recipe]) {
-    self.collectionName = collectionName
+    self.name = collectionName
     self.recipes = recipes
+  }
+  
+  init(withFirebaseId id: String, andName name: String, andImageUrl image: String?) {
+    self.firebaseId = id
+    self.name = name
+    self.image = image
   }
 }
 
@@ -28,7 +36,7 @@ extension Collection {
     let collectionsRef = Database.database().reference(withPath: refPath).child(key)
     let dict: [String : Any] = [
       "firebaseId": key,
-      "name": self.collectionName,
+      "name": self.name,
       "recipes": ""
     ]
     // TODO: Re-consider dict making process
