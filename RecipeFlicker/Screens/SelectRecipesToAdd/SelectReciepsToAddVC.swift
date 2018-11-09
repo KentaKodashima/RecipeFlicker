@@ -70,6 +70,7 @@ class SelectReciepsToAddVC: UIViewController {
       var collection = Collection(withName: collectionName,
                                   andImageUrl: collectionItems[collectionItems.count - 1].image)
       collection.saveToFirebase(userId: userID!, recipes: collectionItems)
+
     }
     navigationController?.popToRootViewController(animated: true)
   }

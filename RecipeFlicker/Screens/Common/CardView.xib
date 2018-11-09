@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,8 +23,8 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-XP-FiX">
                     <rect key="frame" x="16" y="16" width="268" height="216.5"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-0r-fXv">
-                    <rect key="frame" x="0.0" y="240.5" width="300" height="45.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-0r-fXv">
+                    <rect key="frame" x="16" y="240.5" width="268" height="45.5"/>
                     <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="32"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -32,8 +32,9 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="eGp-0r-fXv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8BB-hi-Kba"/>
                 <constraint firstItem="LKR-XP-FiX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8eL-g9-AGK"/>
-                <constraint firstItem="eGp-0r-fXv" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="9no-SC-vZF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eGp-0r-fXv" secondAttribute="trailing" constant="16" id="NTK-ui-VXZ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="eGp-0r-fXv" secondAttribute="bottom" constant="14" id="WT5-wE-Nzk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LKR-XP-FiX" secondAttribute="trailing" constant="16" id="WcA-6K-WEt"/>
                 <constraint firstItem="eGp-0r-fXv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="adE-dd-0er"/>
