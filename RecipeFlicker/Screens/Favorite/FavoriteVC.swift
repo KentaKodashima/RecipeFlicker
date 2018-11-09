@@ -26,31 +26,62 @@ class FavoriteVC: UIViewController {
   
   let recipeFactory = ReplicaRecipeFactory()
   var favoriteRecipes = [Recipe]()
+  var collections = [Collection]()
   
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    ref = Database.database().reference()
-    let userID = Auth.auth().currentUser?.uid
+  fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
       for child in snapshot.children {
         if let recipe = (child as! DataSnapshot).value as? [String: String],
-          let id = recipe["recipeId"],
+          let id = recipe["firebaseId"],
           let url = recipe["originalRecipeUrl"],
           let title = recipe["title"],
           let image = recipe["image"],
-          let isFavotiteLiteral = recipe["isFavorite"],
-          let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+          let isFavotiteLiteral = recipe["isFavorite"]
+        {
+          let whichCollectionToBelong = recipe["whichCollectionToBelong"]
           let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }
-      if self.favoriteRecipes.count <= 0 {
+      if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
+        && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
       }
       self.collectionView.reloadData()
     }
+  }
+  
+  fileprivate func getCollectionsFromFirebase(_ userID: String?) {
+    ref.child("collections").child(userID!).observe(.value) { (snapshot) in
+      self.collections.removeAll()
+      for child in snapshot.children {
+        if let collectionData = (child as! DataSnapshot).value as? [String: String],
+        let id = collectionData["firebaseId"],
+        let name = collectionData["name"]
+        {
+          let image = collectionData["image"]
+          let collection = Collection(withFirebaseId: id , andName: name , andImageUrl: image)
+          self.collections.append(collection)
+        }
+      }
+      if self.typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue
+        && self.collections.count <= 0 {
+        self.collectionView.setNoDataLabelForCollectionView()
+      }
+      self.collectionView.reloadData()
+    }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    ref = Database.database().reference()
+    let userID = Auth.auth().currentUser?.uid
+    
+    getFavoriteRecipesFromFirebase(userID)
+    getCollectionsFromFirebase(userID)
     
     typeSegmentControll.tintColor = AppColors.accent.value
     collectionView.collectionViewLayout = listLayout
@@ -63,10 +94,16 @@ class FavoriteVC: UIViewController {
     switch sender.selectedSegmentIndex {
     case ViewType.list.rawValue:
       changeView(flowLayout: listLayout)
+      if favoriteRecipes.count <= 0 {
+        collectionView.setNoDataLabelForCollectionView()
+      }
       print("list")
       break
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
+      if collections.count <= 0 {
+       collectionView.setNoDataLabelForCollectionView()
+      }
       print("grid")
       break
     default:
@@ -75,6 +112,7 @@ class FavoriteVC: UIViewController {
   }
   
   func changeView(flowLayout: UICollectionViewFlowLayout) {
+    self.collectionView.removeNoDataLabel()
     self.collectionView.collectionViewLayout.invalidateLayout()
     self.collectionView.reloadData()
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
@@ -83,16 +121,24 @@ class FavoriteVC: UIViewController {
 
 extension FavoriteVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if favoriteRecipes.count > 0 {
-      return favoriteRecipes.count
+    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
+      if favoriteRecipes.count > 0 {
+        return favoriteRecipes.count
+      } else {
+        return 0
+      }
     } else {
-      return 0
+      if collections.count > 0 {
+        return collections.count
+      } else {
+        return 0
+      }
     }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let recipe = favoriteRecipes[indexPath.row]
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
+      let recipe = favoriteRecipes[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
         for: indexPath)
@@ -100,11 +146,12 @@ extension FavoriteVC: UICollectionViewDataSource {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       return cell
     } else {
+      let collection = collections[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
         for: indexPath)
         as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
+      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
       return cell
     }
   }
