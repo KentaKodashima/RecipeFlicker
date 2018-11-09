@@ -54,15 +54,15 @@ class FavoriteVC: UIViewController {
   }
   
   fileprivate func getCollectionsFromFirebase(_ userID: String?) {
-    ref.child("collections").child(userID!).observe(.value) { (snapshot) in
+    ref.child("userCollections").child(userID!).observe(.value) { (snapshot) in
       self.collections.removeAll()
       for child in snapshot.children {
         if let collectionData = (child as! DataSnapshot).value as? [String: String],
-        let id = collectionData["firebaseId"],
         let name = collectionData["name"]
         {
+          print(child)
           let image = collectionData["image"]
-          let collection = Collection(withFirebaseId: id , andName: name , andImageUrl: image)
+          let collection = Collection(withName: name , andImageUrl: image)
           self.collections.append(collection)
         }
       }
@@ -152,6 +152,8 @@ extension FavoriteVC: UICollectionViewDataSource {
         for: indexPath)
         as! CollectionViewCellForGrid
       cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
+      print(collection.name)
+      print("image: \(collection.image)")
       return cell
     }
   }

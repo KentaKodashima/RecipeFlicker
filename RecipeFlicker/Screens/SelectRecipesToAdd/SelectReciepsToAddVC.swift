@@ -67,8 +67,9 @@ class SelectReciepsToAddVC: UIViewController {
       for indexPath in indexPaths {
         collectionItems.append(favoriteRecipes[indexPath.row])
       }
-      var collection = Collection(collectionName: collectionName, recipes: collectionItems)
-      collection.saveToFirebase(userId: userID!)
+      var collection = Collection(withName: collectionName,
+                                  andImageUrl: collectionItems[collectionItems.count - 1].image)
+      collection.saveToFirebase(userId: userID!, recipes: collectionItems)
     }
     navigationController?.popToRootViewController(animated: true)
   }
