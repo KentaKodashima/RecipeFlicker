@@ -29,6 +29,7 @@ class Collection {
 }
 
 extension Collection {
+  // Mark: Modify function
   func saveToFirebase(userId: String) {
     let refPath = "collections/" + userId
     guard let key = Database.database().reference(withPath: refPath).childByAutoId().key else { return }
