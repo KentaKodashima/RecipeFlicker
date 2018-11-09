@@ -61,11 +61,12 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   
   func setupContents(withTitle title: String, andImage image: String) {
     titleLabel.text = title
-    guard let thumbnail = UIImage(named: image) else {
-      recipeImage.image = UIImage(named: "NoImage")
-      return
-    }
-    recipeImage.image = thumbnail
+    let imageUrl = URL(string: image)
+    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
+      (image, error, cacheType, imageUrl) in
+      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
+      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+    })
 //    if let image = UIImage(named: image) {
 //      recipeImage.image = darken(image: image)
 //    }
