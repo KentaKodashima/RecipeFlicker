@@ -60,7 +60,6 @@ class FavoriteVC: UIViewController {
         if let collectionData = (child as! DataSnapshot).value as? [String: String],
         let name = collectionData["name"]
         {
-          print(child)
           let image = collectionData["image"]
           let collection = Collection(withName: name , andImageUrl: image)
           self.collections.append(collection)
@@ -97,14 +96,12 @@ class FavoriteVC: UIViewController {
       if favoriteRecipes.count <= 0 {
         collectionView.setNoDataLabelForCollectionView()
       }
-      print("list")
       break
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
-      print("grid")
       break
     default:
       break
@@ -152,8 +149,6 @@ extension FavoriteVC: UICollectionViewDataSource {
         for: indexPath)
         as! CollectionViewCellForGrid
       cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
-      print(collection.name)
-      print("image: \(collection.image)")
       return cell
     }
   }
