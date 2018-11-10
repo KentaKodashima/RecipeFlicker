@@ -7,8 +7,11 @@
 //
 
 import XCTest
+@testable import RecipeFlicker
 
 class RecipeFlickerUITests: XCTestCase {
+  
+  let app = XCUIApplication()
   
   override func setUp() {
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,31 +31,8 @@ class RecipeFlickerUITests: XCTestCase {
   
   func testCardViews() {
     
-    let app = XCUIApplication()
-    
-    let dislikebtnButton = app.buttons["dislikeBtn"]
-    dislikebtnButton/*@START_MENU_TOKEN@*/.swipeRight()/*[[".swipeUp()",".swipeRight()"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-    
-    app.statusBars.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .other).element(boundBy: 1)/*@START_MENU_TOKEN@*/.swipeLeft()/*[[".swipeDown()",".swipeLeft()"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-    
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    
-    app.staticTexts["Your next recipes are coming in..."].tap()
-    app.staticTexts["16:13:15"].tap()
-    app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).tap()
-    
+        
+        
   }
   
 }
