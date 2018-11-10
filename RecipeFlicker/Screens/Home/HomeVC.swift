@@ -46,11 +46,16 @@ class HomeVC: UIViewController {
     
     kolodaView.delegate = self
     kolodaView.dataSource = self
-//    setKolodaView()
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    setKolodaView()
+    if rlmUser != nil {
+      if rlmUser.isFirstSignIn == true {
+        setKolodaView()
+      } else {
+        setCountdownView()
+      }
+    }
   }
   
   // MARK: - Actions
@@ -79,9 +84,7 @@ class HomeVC: UIViewController {
         
         // Fetch recipes
         self.fetchRecipesToBind()
-        try! self.realm.write {
-          self.rlmUser.isFirstSignIn = false
-        }
+        self.setKolodaView()
       } else {
         if self.rlmUser.isFirstSignIn {
           self.fetchRecipesToBind()
@@ -138,9 +141,10 @@ class HomeVC: UIViewController {
     countdownLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 18)
     
     countdownTimer.translatesAutoresizingMaskIntoConstraints = false
-    countdownTimer.text = ""
     countdownTimer.textAlignment = .center
     countdownTimer.font = UIFont(name: "ChalkboardSE-Bold", size: 24)
+    countdownTimer.accessibilityIdentifier = "00:00:01"
+    countdownTimer.setCountdownTimerText()
     
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountdown), userInfo: nil, repeats: true)
     
@@ -163,23 +167,16 @@ class HomeVC: UIViewController {
   }
   
   @objc fileprivate func startCountdown() {
-    let now = Date()
-    let calendar = Calendar.current
-    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
-    let nextDay = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime)!
-    let difference = calendar.dateComponents([.hour, .minute, .second], from: now, to: nextDay)
-    let formatter = DateComponentsFormatter()
-    
     // Test the string
     // Test if the UI exists after 7:00 am
-    if formatter.string(from: difference)! == "0" {
+    if countdownTimer.text == "00:00:00" {
       timer.invalidate()
       try! self.realm.write {
         self.rlmUser.isFirstSignIn = true
       }
       countdownView.removeFromSuperview()
     } else {
-      countdownTimer.text = formatter.string(from: difference)!
+      countdownTimer.setCountdownTimerText()
     }
   }
 }
@@ -193,10 +190,17 @@ extension HomeVC: KolodaViewDataSource {
   func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
     let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     let recipe = rlmUser.recipesOfTheDay[index]
+    let noImage = UIImage(named: "NoImage")
     let imageUrl = URL(string: recipe.image)!
     
-    card.cardImage.kf.setImage(with: imageUrl)
+    card.cardImage.kf.setImage(with: imageUrl, completionHandler: {
+      (image, error, cacheType, imageUrl) in
+      if image == nil || error != nil {
+        card.cardImage.image = noImage
+      }
+    })
     card.recipeTitle.text = recipe.title
+    card.recipeTitle.adjustsFontSizeToFitWidth = true
     
     return card
   }
@@ -227,7 +231,7 @@ extension HomeVC: KolodaViewDelegate {
   }
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
-//  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-//    setCountdownView()
-//  }
+  func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+    setCountdownView()
+  }
 }

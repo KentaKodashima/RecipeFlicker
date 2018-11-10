@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_RecipeFlickerUITestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_RecipeFlickerUITestsVersionString[];
+FOUNDATION_EXPORT double Pods_RecipeFlicker_RecipeFlickerUITestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_RecipeFlicker_RecipeFlickerUITestsVersionString[];
 
