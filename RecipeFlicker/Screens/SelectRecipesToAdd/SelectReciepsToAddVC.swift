@@ -132,6 +132,8 @@ extension SelectReciepsToAddVC: UITableViewDataSource {
     let recipe = favoriteRecipes[indexPath.row]
     let imageUrl = URL(string: recipe.image)
     cell.recipeImage.kf.setImage(with: imageUrl)
+    cell.recipeImage.layer.cornerRadius = cell.recipeImage.frame.size.width * 0.1
+    cell.recipeImage.clipsToBounds = true
     cell.recipeTitle.text = recipe.title
     cell.tintColor = #colorLiteral(red: 0.9473584294, green: 0.5688932538, blue: 0, alpha: 1)
     

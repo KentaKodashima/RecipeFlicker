@@ -18,7 +18,7 @@ import RealmSwift
   
   @objc dynamic private(set) var realmId = UUID().uuidString
   @objc dynamic public var userId = ""
-  @objc dynamic public var isFirstSignIn = false
+  @objc dynamic public var isFirstSignIn = true
   public var recipesOfTheDay = List<Recipe>()
   
   convenience init(userId: String) {

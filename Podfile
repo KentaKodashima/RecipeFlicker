@@ -14,15 +14,17 @@ target 'RecipeFlicker' do
   pod 'SwiftyJSON', '~> 4.2'
   pod 'Koloda', '~> 4.5'
   pod 'Kingfisher', '~> 4.0'
-
+  
   target 'RecipeFlickerTests' do
-    inherit! :search_paths
     # Pods for testing
+    pod 'Firebase/Core'
+    pod 'Alamofire', '~> 4.7'
   end
-
+  
   target 'RecipeFlickerUITests' do
-    inherit! :search_paths
     # Pods for testing
+    pod 'Firebase/Core'
+    pod 'Alamofire', '~> 4.7'
   end
 
 end
