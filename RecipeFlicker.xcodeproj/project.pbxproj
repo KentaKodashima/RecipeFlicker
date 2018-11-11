@@ -13,6 +13,8 @@
 		D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */; };
 		D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */; };
 		D8CF7B0021823C9C00979729 /* GridFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */; };
+		D8DFF6902198B60E004C3558 /* Collection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8DFF68F2198B60E004C3558 /* Collection.storyboard */; };
+		D8DFF6922198B652004C3558 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DFF6912198B652004C3558 /* CollectionVC.swift */; };
 		D8F128DF2188DBEA00DABF2F /* ListFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */; };
 		D8F128E12188F7BA00DABF2F /* ReplicaRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F128E02188F7BA00DABF2F /* ReplicaRecipe.swift */; };
 		ED00508A21802CDD00038FBA /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED00508921802CDD00038FBA /* CardView.xib */; };
@@ -79,6 +81,8 @@
 		D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForGrid.swift; sourceTree = "<group>"; };
 		D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplicaRecipeFactory.swift; sourceTree = "<group>"; };
 		D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFlowLayout.swift; sourceTree = "<group>"; };
+		D8DFF68F2198B60E004C3558 /* Collection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collection.storyboard; sourceTree = "<group>"; };
+		D8DFF6912198B652004C3558 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowLayout.swift; sourceTree = "<group>"; };
 		D8F128E02188F7BA00DABF2F /* ReplicaRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplicaRecipe.swift; sourceTree = "<group>"; };
 		D9AA5377724BE8528660A2F7 /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +180,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D8DFF68E2198B5D9004C3558 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				D8DFF68F2198B60E004C3558 /* Collection.storyboard */,
+				D8DFF6912198B652004C3558 /* CollectionVC.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		ED0AFC0F2175C5E7009A2976 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +279,7 @@
 		ED599CBC21757B8B0007E929 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D8DFF68E2198B5D9004C3558 /* Collection */,
 				EDAC61FD218E112400C2DB22 /* SelectRecipesToAdd */,
 				EDAC61F8218E0CCC00C2DB22 /* AddCollection */,
 				ED599C8E21757B3C0007E929 /* Main.storyboard */,
@@ -476,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8DFF6902198B60E004C3558 /* Collection.storyboard in Resources */,
 				ED599C9821757B3D0007E929 /* LaunchScreen.storyboard in Resources */,
 				EDAC61FF218E113E00C2DB22 /* SelectRecipesToAdd.storyboard in Resources */,
 				ED414A84218269F200903FE3 /* GoogleService-Info.plist in Resources */,
@@ -706,6 +721,7 @@
 				EDC84667217FFD3600C3543A /* CardView.swift in Sources */,
 				EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */,
 				D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */,
+				D8DFF6922198B652004C3558 /* CollectionVC.swift in Sources */,
 				ED64A8382195410F00C62ADD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -885,7 +901,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlicker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -901,7 +920,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlicker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -922,7 +944,11 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 				);
 				INFOPLIST_FILE = RecipeFlickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -944,7 +970,11 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 				);
 				INFOPLIST_FILE = RecipeFlickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -961,7 +991,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlickerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -978,7 +1012,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlickerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
