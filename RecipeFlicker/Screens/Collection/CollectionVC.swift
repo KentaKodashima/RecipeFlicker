@@ -14,14 +14,9 @@ class CollectionVC: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   var ref: DatabaseReference!
+  @IBOutlet weak var editButton: UIBarButtonItem!
   
-  var collectionID: String? {
-    didSet {
-      ref = Database.database().reference()
-//      getCollectionRecipes(collectionID: collectionID)
-      print("Set id")
-    }
-  }
+  var collectionID: String?
   
   private var collectionRecipes = [Recipe]()
   
@@ -30,14 +25,10 @@ class CollectionVC: UIViewController {
     
     tableView.delegate = self
     tableView.dataSource = self
-    
-//    tableView.register(RecipeListTableViewCell.self, forCellReuseIdentifier: "RecipeListTableViewCell")
-//
 
     registerTableViewCells()
     
     ref = Database.database().reference()
-    let userID = Auth.auth().currentUser?.uid
     getCollectionRecipes(collectionID: collectionID)
   }
   
@@ -47,8 +38,6 @@ class CollectionVC: UIViewController {
   }
   
   func getCollectionRecipes(collectionID: String?) {
-    print("CollectionView: \(collectionID)")
-    print(ref.child("recipeCollections"))
     ref.child("recipeCollections").child(collectionID!).observe(.value) { (snapshot) in
       self.collectionRecipes.removeAll()
       for child in snapshot.children {
@@ -61,7 +50,6 @@ class CollectionVC: UIViewController {
           let whichCollectionToBelong = recipe["whichCollectionToBelong"]
           let recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
           self.collectionRecipes.append(recipe)
-          print(recipe)
         }
         
       }
@@ -70,6 +58,10 @@ class CollectionVC: UIViewController {
       }
       self.tableView.reloadData()
     }
+  }
+  
+  
+  @IBAction func onEditButtonClicked(_ sender: UIBarButtonItem) {
   }
   
 }
@@ -83,17 +75,14 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeListTableViewCell") as! RecipeListTableViewCell
-    print("yes")
     let recipe = collectionRecipes[indexPath.row]
     print(cell)
     let imageUrl = URL(string: recipe.image)
     cell.recipeImage.kf.setImage(with: imageUrl)
-    print("text")
     cell.recipeImage.layer.cornerRadius = cell.recipeImage.frame.size.width * 0.1
     cell.recipeImage.clipsToBounds = true
     cell.recipeTitle.text = recipe.title
     cell.tintColor = #colorLiteral(red: 0.9473584294, green: 0.5688932538, blue: 0, alpha: 1)
-    
     return cell
   }
   

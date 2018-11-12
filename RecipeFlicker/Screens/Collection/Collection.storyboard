@@ -26,8 +26,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Qzj-t1-Y86"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2GD-fe-scH"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2GD-fe-scH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="nGp-tD-Y4K">
+                            <connections>
+                                <action selector="onEditButtonClicked:" destination="nMB-ha-Efy" id="6sq-qE-vtR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editButton" destination="nGp-tD-Y4K" id="5mK-Cn-cYf"/>
                         <outlet property="tableView" destination="RPf-fP-h8g" id="CGk-To-RBY"/>
                     </connections>
                 </viewController>
