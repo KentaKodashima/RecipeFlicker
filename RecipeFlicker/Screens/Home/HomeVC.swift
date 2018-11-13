@@ -29,7 +29,6 @@ class HomeVC: UIViewController {
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
   
-  
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -169,7 +168,8 @@ class HomeVC: UIViewController {
   @objc fileprivate func startCountdown() {
     // Test the string
     // Test if the UI exists after 7:00 am
-    if countdownTimer.text == "00:00:00" {
+    let now = Date()
+    if now.isItTime() {
       timer.invalidate()
       try! self.realm.write {
         self.rlmUser.isFirstSignIn = true
