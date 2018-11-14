@@ -16,7 +16,8 @@ class CollectionVC: UIViewController {
   var ref: DatabaseReference!
   @IBOutlet weak var editButton: UIBarButtonItem!
   
-  var collectionID: String?
+  var collectionId: String?
+  var userId: String?
   
   private var collectionRecipes = [Recipe]()
   
@@ -29,7 +30,8 @@ class CollectionVC: UIViewController {
     registerTableViewCells()
     
     ref = Database.database().reference()
-    getCollectionRecipes(collectionID: collectionID)
+    userId = Auth.auth().currentUser?.uid
+    getCollectionRecipes(collectionId: collectionId)
   }
   
   func registerTableViewCells() {
@@ -37,8 +39,8 @@ class CollectionVC: UIViewController {
     tableView.register(recipeListTableViewCell, forCellReuseIdentifier: "RecipeListTableViewCell")
   }
   
-  func getCollectionRecipes(collectionID: String?) {
-    ref.child("recipeCollections").child(collectionID!).observe(.value) { (snapshot) in
+  func getCollectionRecipes(collectionId: String?) {
+    ref.child("recipeCollections").child(collectionId!).observe(.value) { (snapshot) in
       self.collectionRecipes.removeAll()
       for child in snapshot.children {
         if let recipe = (child as! DataSnapshot).value as? [String: String] {
@@ -62,21 +64,27 @@ class CollectionVC: UIViewController {
   
   
   @IBAction func onEditButtonClicked(_ sender: UIBarButtonItem) {
+    tableView.setEditing(true, animated: true)
+    
   }
   
+  func deleteDataFromFirebase(recipeId: String) {
+    ref.child("recipeCollections").child(collectionId!).child(recipeId).removeValue()
+    if collectionRecipes.count == 0 {
+      ref.child("userCollections").child(userId!).child(collectionId!).removeValue()
+    }
+  }
 }
 
 extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    print("count \(collectionRecipes.count)")
     return collectionRecipes.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeListTableViewCell") as! RecipeListTableViewCell
     let recipe = collectionRecipes[indexPath.row]
-    print(cell)
     let imageUrl = URL(string: recipe.image)
     cell.recipeImage.kf.setImage(with: imageUrl)
     cell.recipeImage.layer.cornerRadius = cell.recipeImage.frame.size.width * 0.1
@@ -84,6 +92,16 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
     cell.recipeTitle.text = recipe.title
     cell.tintColor = #colorLiteral(red: 0.9473584294, green: 0.5688932538, blue: 0, alpha: 1)
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    let deleteItem = self.collectionRecipes.remove(at: indexPath.row)
+    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    deleteDataFromFirebase(recipeId: deleteItem.firebaseId)
   }
   
 }
