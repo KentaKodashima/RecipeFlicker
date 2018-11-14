@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31F5620DCB4977CBD7638B2F /* Pods_RecipeFlicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4CF2823652DBAA0436DAF /* Pods_RecipeFlicker.framework */; };
-		86E6C61601DA69BA14B939BA /* Pods_RecipeFlicker_RecipeFlickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5964FD74765DF41370F72B2 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */; };
+		1D0B72581093DB73BE951FAF /* Pods_RecipeFlicker_RecipeFlickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B48950ABA39FFC1A1B8B75 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */; };
+		89F14B4B8C7CEBE371C32FE2 /* Pods_RecipeFlicker_RecipeFlickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E88FF955E004D0C581318425 /* Pods_RecipeFlicker_RecipeFlickerTests.framework */; };
 		D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C91218935A400E2404A /* CollectionViewCellForList.swift */; };
 		D8376C94218935B900E2404A /* CollectionViewCellForGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */; };
 		D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */; };
@@ -48,7 +48,7 @@
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 		EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */; };
 		EDFAA31F218FF6E400EF99D1 /* RecipeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDFAA31D218FF6E400EF99D1 /* RecipeListTableViewCell.xib */; };
-		F5D9DB54A52C445A2E3F6872 /* Pods_RecipeFlicker_RecipeFlickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50786DAC99E06141DC71A2AE /* Pods_RecipeFlicker_RecipeFlickerTests.framework */; };
+		FF013FCF7F81E73158F39900 /* Pods_RecipeFlicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6F51724B7DF62A38E5B728B /* Pods_RecipeFlicker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,20 +69,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BD4CF2823652DBAA0436DAF /* Pods_RecipeFlicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E38D44694D0529CE536EC0D /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig"; sourceTree = "<group>"; };
-		25BD10DFEDF1CB1DB1E20795 /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		50786DAC99E06141DC71A2AE /* Pods_RecipeFlicker_RecipeFlickerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker_RecipeFlickerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5964FD74765DF41370F72B2 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker_RecipeFlickerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFF8DCB4FF23BC923C4A7893 /* Pods-RecipeFlicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker/Pods-RecipeFlicker.debug.xcconfig"; sourceTree = "<group>"; };
-		C5BBB698E04B1BCC87E94112 /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2F5BB801BC9BD450B2546AF3 /* Pods-RecipeFlicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker/Pods-RecipeFlicker.release.xcconfig"; sourceTree = "<group>"; };
+		557DA0000205E29A3AA9A0FD /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		96B48950ABA39FFC1A1B8B75 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker_RecipeFlickerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1312AC27C917075EB4BA22D /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; sourceTree = "<group>"; };
+		BEA269FAC54FA3A4187D92E0 /* Pods-RecipeFlicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker/Pods-RecipeFlicker.debug.xcconfig"; sourceTree = "<group>"; };
+		C6F51724B7DF62A38E5B728B /* Pods_RecipeFlicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9F81FCDE1BF94537A4C341F /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8376C91218935A400E2404A /* CollectionViewCellForList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForList.swift; sourceTree = "<group>"; };
 		D8376C93218935B900E2404A /* CollectionViewCellForGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellForGrid.swift; sourceTree = "<group>"; };
 		D89711F7218A110B00CF7EF1 /* ReplicaRecipeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplicaRecipeFactory.swift; sourceTree = "<group>"; };
 		D8CF7AFF21823C9C00979729 /* GridFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFlowLayout.swift; sourceTree = "<group>"; };
 		D8F128DE2188DBEA00DABF2F /* ListFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlowLayout.swift; sourceTree = "<group>"; };
 		D8F128E02188F7BA00DABF2F /* ReplicaRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplicaRecipe.swift; sourceTree = "<group>"; };
-		D9AA5377724BE8528660A2F7 /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig"; sourceTree = "<group>"; };
+		E2E14A94024C1959564C202E /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E88FF955E004D0C581318425 /* Pods_RecipeFlicker_RecipeFlickerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeFlicker_RecipeFlickerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED00508921802CDD00038FBA /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		ED0AFC102175C602009A2976 /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
 		ED0AFC122175C618009A2976 /* Favorite.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = "<group>"; };
@@ -113,7 +114,6 @@
 		EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionVC.swift; sourceTree = "<group>"; };
 		EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectRecipesToAdd.storyboard; sourceTree = "<group>"; };
 		EDAC6200218E115400C2DB22 /* SelectReciepsToAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectReciepsToAddVC.swift; sourceTree = "<group>"; };
-		EDC53CB3654CC760F1E35277 /* Pods-RecipeFlicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeFlicker.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecipeFlicker/Pods-RecipeFlicker.release.xcconfig"; sourceTree = "<group>"; };
 		EDC64792218C29980000DF9F /* UItableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UItableView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC64796218C2B0A0000DF9F /* RLMUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLMUser.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31F5620DCB4977CBD7638B2F /* Pods_RecipeFlicker.framework in Frameworks */,
+				FF013FCF7F81E73158F39900 /* Pods_RecipeFlicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5D9DB54A52C445A2E3F6872 /* Pods_RecipeFlicker_RecipeFlickerTests.framework in Frameworks */,
+				89F14B4B8C7CEBE371C32FE2 /* Pods_RecipeFlicker_RecipeFlickerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,32 +148,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86E6C61601DA69BA14B939BA /* Pods_RecipeFlicker_RecipeFlickerUITests.framework in Frameworks */,
+				1D0B72581093DB73BE951FAF /* Pods_RecipeFlicker_RecipeFlickerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D2BA173889B7501A0AA95B5 /* Frameworks */ = {
+		058A80BC8E761B3579929572 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0BD4CF2823652DBAA0436DAF /* Pods_RecipeFlicker.framework */,
-				50786DAC99E06141DC71A2AE /* Pods_RecipeFlicker_RecipeFlickerTests.framework */,
-				A5964FD74765DF41370F72B2 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B10CF21E7878A660CE33E034 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AFF8DCB4FF23BC923C4A7893 /* Pods-RecipeFlicker.debug.xcconfig */,
-				EDC53CB3654CC760F1E35277 /* Pods-RecipeFlicker.release.xcconfig */,
-				25BD10DFEDF1CB1DB1E20795 /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */,
-				D9AA5377724BE8528660A2F7 /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */,
-				C5BBB698E04B1BCC87E94112 /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */,
-				1E38D44694D0529CE536EC0D /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */,
+				BEA269FAC54FA3A4187D92E0 /* Pods-RecipeFlicker.debug.xcconfig */,
+				2F5BB801BC9BD450B2546AF3 /* Pods-RecipeFlicker.release.xcconfig */,
+				557DA0000205E29A3AA9A0FD /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */,
+				B1312AC27C917075EB4BA22D /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */,
+				E2E14A94024C1959564C202E /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */,
+				C9F81FCDE1BF94537A4C341F /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -207,8 +197,8 @@
 				ED599CA121757B3D0007E929 /* RecipeFlickerTests */,
 				ED599CAC21757B3D0007E929 /* RecipeFlickerUITests */,
 				ED599C8821757B3C0007E929 /* Products */,
-				B10CF21E7878A660CE33E034 /* Pods */,
-				1D2BA173889B7501A0AA95B5 /* Frameworks */,
+				058A80BC8E761B3579929572 /* Pods */,
+				F78FD37048E9EC037B80F7CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -369,6 +359,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F78FD37048E9EC037B80F7CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6F51724B7DF62A38E5B728B /* Pods_RecipeFlicker.framework */,
+				E88FF955E004D0C581318425 /* Pods_RecipeFlicker_RecipeFlickerTests.framework */,
+				96B48950ABA39FFC1A1B8B75 /* Pods_RecipeFlicker_RecipeFlickerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -376,11 +376,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED599CB221757B3D0007E929 /* Build configuration list for PBXNativeTarget "RecipeFlicker" */;
 			buildPhases = (
-				2685B76123DDD89D99C0CE2B /* [CP] Check Pods Manifest.lock */,
+				B37D27722D204A7F76AEC300 /* [CP] Check Pods Manifest.lock */,
 				ED599C8321757B3C0007E929 /* Sources */,
 				ED599C8421757B3C0007E929 /* Frameworks */,
 				ED599C8521757B3C0007E929 /* Resources */,
-				9E8DF72A0A27E7FC781C567A /* [CP] Embed Pods Frameworks */,
+				4AC3462C43B8D482A9AE85FD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -395,11 +395,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED599CB521757B3D0007E929 /* Build configuration list for PBXNativeTarget "RecipeFlickerTests" */;
 			buildPhases = (
-				FA7080D2007D704B73A22B69 /* [CP] Check Pods Manifest.lock */,
+				6E884AA1130EA331664C8989 /* [CP] Check Pods Manifest.lock */,
 				ED599C9A21757B3D0007E929 /* Sources */,
 				ED599C9B21757B3D0007E929 /* Frameworks */,
 				ED599C9C21757B3D0007E929 /* Resources */,
-				4C31EB3572D83D4CB1AFBA2B /* [CP] Embed Pods Frameworks */,
+				CC7CDED3159EE87AFB5C75CB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -415,11 +415,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED599CB821757B3D0007E929 /* Build configuration list for PBXNativeTarget "RecipeFlickerUITests" */;
 			buildPhases = (
-				E9FB3D5207D0FF0495554330 /* [CP] Check Pods Manifest.lock */,
+				16622C649770B591A7F88A4B /* [CP] Check Pods Manifest.lock */,
 				ED599CA521757B3D0007E929 /* Sources */,
 				ED599CA621757B3D0007E929 /* Frameworks */,
 				ED599CA721757B3D0007E929 /* Resources */,
-				831D3873A9501E3663095263 /* [CP] Embed Pods Frameworks */,
+				8427047CC3E04DC75418896A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -510,7 +510,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2685B76123DDD89D99C0CE2B /* [CP] Check Pods Manifest.lock */ = {
+		16622C649770B591A7F88A4B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -521,90 +521,14 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RecipeFlicker-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-RecipeFlicker-RecipeFlickerUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4C31EB3572D83D4CB1AFBA2B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		831D3873A9501E3663095263 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9E8DF72A0A27E7FC781C567A /* [CP] Embed Pods Frameworks */ = {
+		4AC3462C43B8D482A9AE85FD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -642,25 +566,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker/Pods-RecipeFlicker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9FB3D5207D0FF0495554330 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RecipeFlicker-RecipeFlickerUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA7080D2007D704B73A22B69 /* [CP] Check Pods Manifest.lock */ = {
+		6E884AA1130EA331664C8989 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -676,6 +582,100 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8427047CC3E04DC75418896A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerUITests/Pods-RecipeFlicker-RecipeFlickerUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B37D27722D204A7F76AEC300 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RecipeFlicker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC7CDED3159EE87AFB5C75CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecipeFlicker-RecipeFlickerTests/Pods-RecipeFlicker-RecipeFlickerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -883,16 +883,13 @@
 		};
 		ED599CB321757B3D0007E929 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFF8DCB4FF23BC923C4A7893 /* Pods-RecipeFlicker.debug.xcconfig */;
+			baseConfigurationReference = BEA269FAC54FA3A4187D92E0 /* Pods-RecipeFlicker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlicker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -902,16 +899,13 @@
 		};
 		ED599CB421757B3D0007E929 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDC53CB3654CC760F1E35277 /* Pods-RecipeFlicker.release.xcconfig */;
+			baseConfigurationReference = 2F5BB801BC9BD450B2546AF3 /* Pods-RecipeFlicker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlicker/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -921,7 +915,7 @@
 		};
 		ED599CB621757B3D0007E929 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 25BD10DFEDF1CB1DB1E20795 /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */;
+			baseConfigurationReference = 557DA0000205E29A3AA9A0FD /* Pods-RecipeFlicker-RecipeFlickerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -932,11 +926,7 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 				);
 				INFOPLIST_FILE = RecipeFlickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -947,7 +937,7 @@
 		};
 		ED599CB721757B3D0007E929 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9AA5377724BE8528660A2F7 /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */;
+			baseConfigurationReference = B1312AC27C917075EB4BA22D /* Pods-RecipeFlicker-RecipeFlickerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -958,11 +948,7 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 				);
 				INFOPLIST_FILE = RecipeFlickerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -973,17 +959,13 @@
 		};
 		ED599CB921757B3D0007E929 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5BBB698E04B1BCC87E94112 /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */;
+			baseConfigurationReference = E2E14A94024C1959564C202E /* Pods-RecipeFlicker-RecipeFlickerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlickerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -994,17 +976,13 @@
 		};
 		ED599CBA21757B3D0007E929 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E38D44694D0529CE536EC0D /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */;
+			baseConfigurationReference = C9F81FCDE1BF94537A4C341F /* Pods-RecipeFlicker-RecipeFlickerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V4XVL227B6;
 				INFOPLIST_FILE = RecipeFlickerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kentakodashima.RecipeFlickerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

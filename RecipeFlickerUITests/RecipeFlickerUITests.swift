@@ -31,8 +31,25 @@ class RecipeFlickerUITests: XCTestCase {
   
   func testCardViews() {
     
-        
-        
+    let app = XCUIApplication()
+    let dislikebtnButton = app.buttons["dislikeBtn"]
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    dislikebtnButton.tap()
+    app.staticTexts["Your next recipes are coming in..."]
+    XCTAssert(app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.exists)
+    
   }
   
 }
