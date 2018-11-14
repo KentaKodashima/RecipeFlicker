@@ -17,9 +17,12 @@ class FavoriteVC: UIViewController {
   }
   
   var ref: DatabaseReference!
+  var selectedCollectionId: String!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var searchBar: UISearchBar!
+  
   
   let gridLayout = GridFlowLayout()
   let listLayout = ListFlowLayout()
@@ -48,6 +51,8 @@ class FavoriteVC: UIViewController {
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
+      } else {
+        self.collectionView.removeNoDataLabel()
       }
       self.collectionView.reloadData()
     }
@@ -58,17 +63,19 @@ class FavoriteVC: UIViewController {
       self.collections.removeAll()
       for child in snapshot.children {
         if let collectionData = (child as! DataSnapshot).value as? [String: String],
+        let id = collectionData["firebaseId"],
         let name = collectionData["name"]
         {
-          print(child)
           let image = collectionData["image"]
-          let collection = Collection(withName: name , andImageUrl: image)
+          let collection = Collection(withId: id, andName: name, andImageUrl: image)
           self.collections.append(collection)
         }
       }
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue
         && self.collections.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
+      } else {
+        self.collectionView.removeNoDataLabel()
       }
       self.collectionView.reloadData()
     }
@@ -76,6 +83,9 @@ class FavoriteVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    searchBar.layer.borderWidth = 1
+    searchBar.layer.borderColor = #colorLiteral(red: 1, green: 0.9420082569, blue: 0.7361317277, alpha: 1)
     
     ref = Database.database().reference()
     let userID = Auth.auth().currentUser?.uid
@@ -97,14 +107,12 @@ class FavoriteVC: UIViewController {
       if favoriteRecipes.count <= 0 {
         collectionView.setNoDataLabelForCollectionView()
       }
-      print("list")
       break
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
-      print("grid")
       break
     default:
       break
@@ -119,7 +127,7 @@ class FavoriteVC: UIViewController {
   }
 }
 
-extension FavoriteVC: UICollectionViewDataSource {
+extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if favoriteRecipes.count > 0 {
@@ -152,9 +160,33 @@ extension FavoriteVC: UICollectionViewDataSource {
         for: indexPath)
         as! CollectionViewCellForGrid
       cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
-      print(collection.name)
-      print("image: \(collection.image)")
       return cell
     }
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
+      self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+    } else {
+      let collection = collections[indexPath.row]
+      selectedCollectionId = collection.firebaseId
+      print(selectedCollectionId)
+      self.performSegue(withIdentifier: "goToCollection", sender: self.collectionView)
+    }
+    
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "goToCollection" {
+      let destVC = segue.destination as! CollectionVC
+      destVC.collectionId = selectedCollectionId
+      print("pass: \(destVC.collectionId)")
+    }
+  }
+}
+
+
+
+extension FavoriteVC: UISearchBarDelegate {
+  
 }

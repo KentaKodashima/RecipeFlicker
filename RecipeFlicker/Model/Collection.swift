@@ -14,6 +14,12 @@ class Collection {
   public var name: String
   public var image: String?
   
+  init(withId id: String, andName name: String, andImageUrl image: String?) {
+    self.firebaseId = id
+    self.name = name
+    self.image = image
+  }
+  
   init(withName name: String, andImageUrl image: String?) {
     self.name = name
     self.image = image
