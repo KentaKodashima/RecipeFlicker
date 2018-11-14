@@ -51,6 +51,8 @@ class FavoriteVC: UIViewController {
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
+      } else {
+        self.collectionView.removeNoDataLabel()
       }
       self.collectionView.reloadData()
     }
@@ -72,6 +74,8 @@ class FavoriteVC: UIViewController {
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue
         && self.collections.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
+      } else {
+        self.collectionView.removeNoDataLabel()
       }
       self.collectionView.reloadData()
     }
@@ -175,8 +179,8 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
-      destVC.collectionID = selectedCollectionId
-      print("pass: \(destVC.collectionID)")
+      destVC.collectionId = selectedCollectionId
+      print("pass: \(destVC.collectionId)")
     }
   }
 }
