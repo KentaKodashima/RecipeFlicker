@@ -17,10 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="FdH-tS-JDc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ORM-Se-Cbw">
                                 <rect key="frame" x="0.0" y="148" width="375" height="470"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,19 +52,31 @@
                                     <action selector="onSegmentControlTapped:" destination="hhK-yq-OKT" eventType="valueChanged" id="knD-xo-gZv"/>
                                 </connections>
                             </segmentedControl>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xn8-3a-qvT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <color key="barTintColor" red="1" green="0.93333333330000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="hhK-yq-OKT" id="DZr-uK-3RG"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FdH-tS-JDc" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="1Wh-W0-CI2"/>
+                            <constraint firstItem="Xn8-3a-qvT" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="Bap-WU-GrI"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="BmR-Du-G7X"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="top" secondItem="sti-9O-CDd" secondAttribute="bottom" id="GIo-E9-Orl"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="cAk-Se-bou"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
+                            <constraint firstItem="Xn8-3a-qvT" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="gEo-HF-edE"/>
                             <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
-                            <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="FdH-tS-JDc" secondAttribute="bottom" id="mOx-mg-prX"/>
+                            <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="Xn8-3a-qvT" secondAttribute="bottom" id="nuT-BJ-YH9"/>
                             <constraint firstAttribute="trailing" secondItem="ORM-Se-Cbw" secondAttribute="trailing" id="pnf-tK-ToV"/>
-                            <constraint firstItem="FdH-tS-JDc" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="wIA-H4-3om"/>
-                            <constraint firstItem="FdH-tS-JDc" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="xYX-sd-kgA"/>
+                            <constraint firstItem="Xn8-3a-qvT" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="xaH-d0-Hou"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jN8-1c-cuW"/>
                     </view>
@@ -83,13 +91,25 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
+                        <outlet property="searchBar" destination="Xn8-3a-qvT" id="eXK-yK-8ac"/>
+                        <outlet property="searchDisplayController" destination="lxq-Yj-vf7" id="TfV-n0-trf"/>
                         <outlet property="typeSegmentControll" destination="sti-9O-CDd" id="9Qp-Za-WZt"/>
-                        <segue destination="ljj-uv-6fb" kind="show" id="vha-eT-D7w"/>
+                        <segue destination="ilZ-Ca-ddA" kind="show" identifier="goToCollection" id="OsB-dl-PMa"/>
+                        <segue destination="ljj-uv-6fb" kind="show" identifier="goToDetail" id="L1j-7U-jVi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x3M-Gn-jeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="lxq-Yj-vf7">
+                    <connections>
+                        <outlet property="delegate" destination="hhK-yq-OKT" id="Wnb-SH-Ra2"/>
+                        <outlet property="searchBar" destination="Xn8-3a-qvT" id="iz1-D0-Lab"/>
+                        <outlet property="searchContentsController" destination="hhK-yq-OKT" id="gik-lh-vjT"/>
+                        <outlet property="searchResultsDataSource" destination="hhK-yq-OKT" id="rXX-Dy-K5O"/>
+                        <outlet property="searchResultsDelegate" destination="hhK-yq-OKT" id="15n-ZB-HMn"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1000.8" y="90.404797601199405"/>
+            <point key="canvasLocation" x="1105" y="90"/>
         </scene>
         <!--AddCollection-->
         <scene sceneID="WSY-6D-9PV">
@@ -106,6 +126,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jne-Hs-gK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1760" y="89.955022488755631"/>
+        </scene>
+        <!--Collection-->
+        <scene sceneID="4Rx-LY-kO3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Collection" id="ilZ-Ca-ddA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H9B-P4-LSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1854" y="197"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z8g-gZ-jiH">
