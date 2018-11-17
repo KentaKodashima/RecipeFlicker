@@ -48,13 +48,13 @@ class HomeVC: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-    if rlmUser != nil {
-      if rlmUser.isFirstSignIn == true {
-        setKolodaView()
-      } else {
-        setCountdownView()
-      }
-    }
+//    if rlmUser != nil {
+//      if rlmUser.isFirstSignIn == true {
+//        setKolodaView()
+//      } else {
+//        setCountdownView()
+//      }
+//    }
   }
   
   // MARK: - Actions
@@ -73,6 +73,7 @@ class HomeVC: UIViewController {
         let user = authResult?.user
         let uid = user?.uid
         self.rlmUser = RLMUser(userId: uid!)
+        self.rlmUser.isFirstSignIn = false
         try! self.realm.write {
           self.realm.add(self.rlmUser!)
         }
@@ -89,6 +90,13 @@ class HomeVC: UIViewController {
           self.fetchRecipesToBind()
           try! self.realm.write {
             self.rlmUser.isFirstSignIn = false
+          }
+        } else {
+          print(self.rlmUser.recipesOfTheDay.count)
+          if self.rlmUser.recipesOfTheDay.count == 0 {
+            self.setCountdownView()
+          } else {
+            self.setKolodaView()
           }
         }
       }
@@ -112,7 +120,6 @@ class HomeVC: UIViewController {
     let kolodaViewHeight = self.view.bounds.height * 0.4
     kolodaView.frame = CGRect(x: 0, y: 0, width: kolodaViewWidth, height: kolodaViewHeight)
     kolodaView.center = self.view.center
-    kolodaView.layer.cornerRadius = 20
     kolodaView.layer.shadowColor = UIColor.gray.cgColor
     kolodaView.layer.shadowOffset = CGSize.zero
     kolodaView.layer.shadowOpacity = 1.0
@@ -127,7 +134,7 @@ class HomeVC: UIViewController {
     })
   }
   
-  fileprivate func setCountdownView() {
+  func setCountdownView() { //fileprivate func setCountdownView() {
     let countdownViewWidth = self.view.bounds.width
     let countdownViewHeight = self.view.bounds.height
     countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
@@ -193,12 +200,15 @@ extension HomeVC: KolodaViewDataSource {
     let noImage = UIImage(named: "NoImage")
     let imageUrl = URL(string: recipe.image)!
     
+    card.clipsToBounds = true
+    card.layer.cornerRadius = card.frame.size.width * 0.1
     card.cardImage.kf.setImage(with: imageUrl, completionHandler: {
       (image, error, cacheType, imageUrl) in
       if image == nil || error != nil {
         card.cardImage.image = noImage
       }
     })
+    card.cardImage.layer.cornerRadius = card.cardImage.frame.size.width * 0.1
     card.recipeTitle.text = recipe.title
     card.recipeTitle.adjustsFontSizeToFitWidth = true
     
