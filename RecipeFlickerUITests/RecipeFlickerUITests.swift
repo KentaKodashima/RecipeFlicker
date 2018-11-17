@@ -23,33 +23,44 @@ class RecipeFlickerUITests: XCTestCase {
     XCUIApplication().launch()
     
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    let homeVC = HomeVC()
+    homeVC.setCountdownView()
   }
   
   override func tearDown() {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
   }
   
-  func testCardViews() {
-    
-    let app = XCUIApplication()
+  func testIfCountdownViewAppears() {
     let dislikebtnButton = app.buttons["dislikeBtn"]
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    dislikebtnButton.tap()
-    app.staticTexts["Your next recipes are coming in..."]
-    XCTAssert(app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.exists)
     
+    DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      dislikebtnButton.tap()
+      
+      self.app.staticTexts["Your next recipes are coming in..."]
+      XCTAssert(self.app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.exists)
+    }
   }
   
+  func testIfCountdownViewDissapears() {
+    let countdownTimerText = self.app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+    XCTAssertFalse(countdownTimerText.exists)
+    let exists = NSPredicate(format: "exists == true")
+    expectation(for: exists, evaluatedWith: countdownTimerText, handler: nil)
+    
+    
+  }
 }

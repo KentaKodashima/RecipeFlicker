@@ -13,7 +13,6 @@ class CardView: UIView {
   @IBOutlet weak var cardImage: UIImageView!
   @IBOutlet weak var recipeTitle: UILabel!
   
-  
   /// For using custom view in code
   override init(frame: CGRect) {
     super.init(frame: frame)

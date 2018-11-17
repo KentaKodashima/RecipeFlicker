@@ -21,11 +21,10 @@ class RecipeFlickerTests: XCTestCase {
   }
   
   func testCountdownString() {
-    let calendar = Calendar(identifier: .gregorian)
-    var components = DateComponents(hour: 00, minute: 00, second: 00)
-    let formatter = DateComponentsFormatter()
-    let result = formatter.string(from: components)
-    XCTAssertEqual(result!, "0", "components are properly converted.")
+    let now = Date()
+    let calendar = Calendar.current
+    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
+    let nextDay = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime)!
   }
   
 }
