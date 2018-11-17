@@ -72,10 +72,8 @@ class HomeVC: UIViewController {
         self.userRef = Database.database().reference()
         self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.rlmUser!.userId)
         
-        // Fetch recipes
+        // Fetch recipes and setKolodaView
         self.fetchRecipesToBind()
-        self.setKolodaView()
-        self.view.layoutIfNeeded()
       } else {
         if self.rlmUser.isFirstSignIn {
           self.fetchRecipesToBind()
@@ -101,6 +99,7 @@ class HomeVC: UIViewController {
           self.rlmUser?.recipesOfTheDay.append(recipe)
         }
       }
+      self.setKolodaView()
       self.kolodaView.reloadData()
     }
   }
