@@ -56,7 +56,7 @@ class AddCollectionVC: UIViewController {
 extension AddCollectionVC: UITextFieldDelegate {
   
   @objc func keyboardWillShow(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue {
+    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
       
@@ -68,7 +68,7 @@ extension AddCollectionVC: UITextFieldDelegate {
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue {
+    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
       

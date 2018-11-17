@@ -47,16 +47,6 @@ class HomeVC: UIViewController {
     kolodaView.dataSource = self
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-//    if rlmUser != nil {
-//      if rlmUser.isFirstSignIn == true {
-//        setKolodaView()
-//      } else {
-//        setCountdownView()
-//      }
-//    }
-  }
-  
   // MARK: - Actions
   @IBAction func dislikeButtonTapped(_ sender: UIButton) {
     kolodaView.swipe(SwipeResultDirection.left)
@@ -85,6 +75,7 @@ class HomeVC: UIViewController {
         // Fetch recipes
         self.fetchRecipesToBind()
         self.setKolodaView()
+        self.view.layoutIfNeeded()
       } else {
         if self.rlmUser.isFirstSignIn {
           self.fetchRecipesToBind()
@@ -92,7 +83,6 @@ class HomeVC: UIViewController {
             self.rlmUser.isFirstSignIn = false
           }
         } else {
-          print(self.rlmUser.recipesOfTheDay.count)
           if self.rlmUser.recipesOfTheDay.count == 0 {
             self.setCountdownView()
           } else {
