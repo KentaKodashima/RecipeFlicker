@@ -23,6 +23,7 @@
 		ED0AFC152175C739009A2976 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC142175C739009A2976 /* Home.storyboard */; };
 		ED0AFC182175C791009A2976 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC172175C791009A2976 /* Detail.storyboard */; };
 		ED0AFC1A2175C7A1009A2976 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0AFC192175C7A1009A2976 /* DetailVC.swift */; };
+		ED3A4C0521A0CC40003DDF31 /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */; };
 		ED414A84218269F200903FE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED414A83218269F200903FE3 /* GoogleService-Info.plist */; };
 		ED422676218FC807004F92BA /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED422675218FC807004F92BA /* Collection.swift */; };
 		ED599C8B21757B3C0007E929 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED599C8A21757B3C0007E929 /* AppDelegate.swift */; };
@@ -95,6 +96,7 @@
 		ED0AFC172175C791009A2976 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		ED0AFC192175C7A1009A2976 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		ED0AFC1B2175CBF5009A2976 /* GUIDELINE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = GUIDELINE.md; sourceTree = "<group>"; };
+		ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
 		ED414A83218269F200903FE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED422675218FC807004F92BA /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		ED599C8721757B3C0007E929 /* RecipeFlicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeFlicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,12 +343,13 @@
 			isa = PBXGroup;
 			children = (
 				EDC8465C217FC4A600C3543A /* Colors.swift */,
+				ED93C519219A770E0056F9F3 /* Date+Extensions.swift */,
 				EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */,
+				ED87083B21962A6F008675C5 /* UILabel+Extensions.swift */,
+				ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */,
 				EDC64792218C29980000DF9F /* UItableView+Extensions.swift */,
 				EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */,
 				EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */,
-				ED87083B21962A6F008675C5 /* UILabel+Extensions.swift */,
-				ED93C519219A770E0056F9F3 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				ED0AFC1A2175C7A1009A2976 /* DetailVC.swift in Sources */,
 				EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */,
 				D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */,
+				ED3A4C0521A0CC40003DDF31 /* UISearchBar+Extensions.swift in Sources */,
 				ED93C51A219A770E0056F9F3 /* Date+Extensions.swift in Sources */,
 				D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */,
 				EDC8465D217FC4A600C3543A /* Colors.swift in Sources */,
