@@ -81,6 +81,9 @@
                         <viewLayoutGuide key="safeArea" id="jN8-1c-cuW"/>
                     </view>
                     <navigationItem key="navigationItem" id="URi-cW-U6Q">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Qba-Lr-Uc9">
+                            <color key="tintColor" red="0.92549019610000005" green="0.4941176471" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ejr-Xx-qLq">
                             <color key="tintColor" red="0.92549019610000005" green="0.4941176471" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -91,6 +94,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
+                        <outlet property="editButton" destination="Qba-Lr-Uc9" id="D6t-Yd-Zvh"/>
                         <outlet property="searchBar" destination="Xn8-3a-qvT" id="eXK-yK-8ac"/>
                         <outlet property="searchDisplayController" destination="lxq-Yj-vf7" id="TfV-n0-trf"/>
                         <outlet property="typeSegmentControll" destination="sti-9O-CDd" id="9Qp-Za-WZt"/>
