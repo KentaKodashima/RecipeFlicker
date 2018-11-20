@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Set UINavigationBar's general appearance
     UINavigationBar.appearance().barTintColor = theme
     UINavigationBar.appearance().tintColor = accent
+
     // Remove the border at the bottom
     UINavigationBar.appearance().shadowImage = UIImage()
     UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ChalkboardSE-Bold", size: 22)!]
