@@ -67,7 +67,6 @@ class CollectionVC: UIViewController {
     isEditingMode = !isEditingMode
     tableView.setEditing(isEditingMode, animated: true)
     
-    
   }
   
   func deleteDataFromFirebase(recipeId: String) {
