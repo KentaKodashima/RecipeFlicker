@@ -23,8 +23,8 @@ class RecipeFlickerUITests: XCTestCase {
     XCUIApplication().launch()
     
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    let homeVC = HomeVC()
-    homeVC.setCountdownView()
+//    let homeVC = HomeVC()
+//    homeVC.setCountdownView()
   }
   
   override func tearDown() {
@@ -55,12 +55,14 @@ class RecipeFlickerUITests: XCTestCase {
     }
   }
   
-  func testIfCountdownViewDissapears() {
-    let countdownTimerText = self.app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-    XCTAssertFalse(countdownTimerText.exists)
-    let exists = NSPredicate(format: "exists == true")
-    expectation(for: exists, evaluatedWith: countdownTimerText, handler: nil)
-    
-    
-  }
+//  func testIfCountdownViewDissapears() {
+//    let currentDate = Date()
+//    
+//    let countdownTimerText = self.app.staticTexts["00:00:01"]
+//    XCTAssertFalse(countdownTimerText.exists)
+//    let exists = NSPredicate(format: "exists == true")
+//    expectation(for: exists, evaluatedWith: countdownTimerText, handler: nil)
+//    
+//    
+//  }
 }

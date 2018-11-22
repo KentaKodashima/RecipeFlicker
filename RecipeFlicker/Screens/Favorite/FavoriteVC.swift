@@ -84,8 +84,9 @@ class FavoriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    searchBar.layer.borderWidth = 1
-    searchBar.layer.borderColor = #colorLiteral(red: 1, green: 0.9420082569, blue: 0.7361317277, alpha: 1)
+//    searchBar.layer.borderWidth = 1
+//    searchBar.layer.borderColor = #colorLiteral(red: 1, green: 0.9420082569, blue: 0.7361317277, alpha: 1)
+    searchBar.setSearchBar()
     
     ref = Database.database().reference()
     let userID = Auth.auth().currentUser?.uid

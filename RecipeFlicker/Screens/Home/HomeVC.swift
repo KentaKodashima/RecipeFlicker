@@ -26,8 +26,10 @@ class HomeVC: UIViewController {
   private var recipeAPI = RecipeAPI()
   
   private var timer = Timer()
+  private var resetTimer: Timer!
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
+  private var currentDate: Date!
   
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
@@ -37,6 +39,9 @@ class HomeVC: UIViewController {
     if let userId = Auth.auth().currentUser?.uid {
       self.userId = userId
     }
+    
+    currentDate = Date()
+    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSign), userInfo: nil, repeats: false)
     
     // Fetch existing user from Realm
     rlmUser = RLMUser.all().first
@@ -162,18 +167,22 @@ class HomeVC: UIViewController {
   }
   
   @objc fileprivate func startCountdown() {
-    // Test the string
-    // Test if the UI exists after 7:00 am
-    let now = Date()
-    if now.isItTime() {
-      timer.invalidate()
-      try! self.realm.write {
-        self.rlmUser.isFirstSignIn = true
-      }
-      countdownView.removeFromSuperview()
-    } else {
-      countdownTimer.setCountdownTimerText()
+    countdownTimer.setCountdownTimerText()
+  }
+  
+  @objc fileprivate func resetIsFirstSign() {
+    try! self.realm.write {
+      self.rlmUser.isFirstSignIn = true
     }
+  }
+  
+  @objc fileprivate func removeCountdownView() {
+    timer.invalidate()
+    resetIsFirstSign()
+    if self.view.subviews.count != 0 {
+      countdownView.removeFromSuperview()
+    }
+    fetchRecipesToBind()
   }
 }
 
@@ -231,6 +240,10 @@ extension HomeVC: KolodaViewDelegate {
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
   func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-    setCountdownView()
+    if rlmUser.isFirstSignIn == true {
+      fetchRecipesToBind()
+    } else {
+      setCountdownView()
+    }
   }
 }
