@@ -41,7 +41,7 @@ class HomeVC: UIViewController {
     }
     
     currentDate = Date()
-    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSign), userInfo: nil, repeats: false)
+    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSignIn), userInfo: nil, repeats: false)
     
     // Fetch existing user from Realm
     rlmUser = RLMUser.all().first
@@ -86,10 +86,16 @@ class HomeVC: UIViewController {
             self.rlmUser.isFirstSignIn = false
           }
         } else {
-          if self.rlmUser.recipesOfTheDay.count == 0 {
-            self.setCountdownView()
+          // Check if this is a the first login in the day
+          if (self.currentDate > self.currentDate.get7am()) && (self.rlmUser.lastFetchTime! < self.currentDate.get7am()) {
+            self.resetIsFirstSignIn()
+            self.fetchRecipesToBind()
           } else {
-            self.setKolodaView()
+            if self.rlmUser.recipesOfTheDay.count == 0 {
+              self.setCountdownView()
+            } else {
+              self.setKolodaView()
+            }
           }
         }
       }
@@ -102,6 +108,7 @@ class HomeVC: UIViewController {
       try! self.realm.write {
         for recipe in recipeArray ?? [Recipe]() {
           self.rlmUser?.recipesOfTheDay.append(recipe)
+          self.rlmUser.lastFetchTime = Date()
         }
       }
       self.setKolodaView()
@@ -170,7 +177,7 @@ class HomeVC: UIViewController {
     countdownTimer.setCountdownTimerText()
   }
   
-  @objc fileprivate func resetIsFirstSign() {
+  @objc fileprivate func resetIsFirstSignIn() {
     try! self.realm.write {
       self.rlmUser.isFirstSignIn = true
     }
@@ -178,7 +185,7 @@ class HomeVC: UIViewController {
   
   @objc fileprivate func removeCountdownView() {
     timer.invalidate()
-    resetIsFirstSign()
+    resetIsFirstSignIn()
     if self.view.subviews.count != 0 {
       countdownView.removeFromSuperview()
     }
