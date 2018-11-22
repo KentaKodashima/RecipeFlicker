@@ -126,6 +126,11 @@ class FavoriteVC: UIViewController {
     self.collectionView.reloadData()
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
   }
+  
+  @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+    isEditing = !isEditing
+    viewDidLoad()
+  }
 }
 
 extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -153,6 +158,9 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         for: indexPath)
         as! CollectionViewCellForList
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
+      if isEditing {
+        cell.showEditMode()
+      }
       return cell
     } else {
       let collection = collections[indexPath.row]

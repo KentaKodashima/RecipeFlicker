@@ -83,6 +83,9 @@
                     <navigationItem key="navigationItem" id="URi-cW-U6Q">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="Qba-Lr-Uc9">
                             <color key="tintColor" red="0.92549019610000005" green="0.4941176471" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="editButtonTapped:" destination="hhK-yq-OKT" id="TPU-sf-etl"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ejr-Xx-qLq">
                             <color key="tintColor" red="0.92549019610000005" green="0.4941176471" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
