@@ -16,6 +16,15 @@ class CollectionViewCellForList: UICollectionViewCell {
     }
   }
   
+  private var isChecked: Bool = false
+  private var selectedImage = UIImage(named: "checkmark")
+  private var deselectedImage = UIImage(named: "defaultCheck")
+  private var leftConstraintOfImage: NSLayoutConstraint?
+  // check box constraint (left, width, vertical)
+  private var leftConstraintOfCheckBox: NSLayoutConstraint?
+  private var widthConstraintOfCheckBox: NSLayoutConstraint?
+  private var verticalConstraintOfCheckBox: NSLayoutConstraint?
+  
   
   private let titleLabel: UILabel = {
     let label = UILabel()
@@ -32,6 +41,22 @@ class CollectionViewCellForList: UICollectionViewCell {
     imageView.layer.masksToBounds = true
     return imageView
   }()
+  
+  private let checkBoxImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.contentMode = .center
+    imageView.image = UIImage(named: "defaultCheck")
+    return imageView
+  }()
+  
+  private func toggleCheckBox() {
+    isChecked = !isChecked
+    if (isChecked) {
+      checkBoxImage.image = selectedImage
+    } else {
+      checkBoxImage.image = deselectedImage
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -58,8 +83,9 @@ class CollectionViewCellForList: UICollectionViewCell {
   func setupImageConstraints() {
     recipeImage.translatesAutoresizingMaskIntoConstraints = false
     // left edge
-    recipeImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
-                                         constant: 16).isActive = true
+    leftConstraintOfImage = recipeImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
+                                                                 constant: 16)
+    leftConstraintOfImage?.isActive = true
     // width
     recipeImage.widthAnchor.constraint(equalToConstant: 130).isActive = true
     
@@ -78,6 +104,28 @@ class CollectionViewCellForList: UICollectionViewCell {
       if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
     })
+  }
+  
+  func showEditMode() {
+    leftConstraintOfImage?.isActive = false
+    addSubview(checkBoxImage)
+    setupCheckBoxConstraints()
+    leftConstraintOfImage = recipeImage.leadingAnchor.constraint(equalTo: checkBoxImage.trailingAnchor, constant: 8)
+    leftConstraintOfImage?.isActive = true
+  }
+  
+  private func setupCheckBoxConstraints() {
+    checkBoxImage.translatesAutoresizingMaskIntoConstraints = false
+    // width
+    widthConstraintOfCheckBox = checkBoxImage.widthAnchor.constraint(equalToConstant: 25)
+    widthConstraintOfCheckBox?.isActive = true
+    // left
+    leftConstraintOfCheckBox = checkBoxImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
+      constant: 8)
+    leftConstraintOfCheckBox?.isActive = true
+    // vertical
+    verticalConstraintOfCheckBox = checkBoxImage.centerYAnchor.constraint(equalTo: centerYAnchor)
+    verticalConstraintOfCheckBox?.isActive = true
   }
 }
 
