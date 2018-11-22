@@ -17,6 +17,7 @@ extension UISearchBar {
     let searchImageView = self.value(forKey: "_background") as? UIImageView
     searchImageView?.removeFromSuperview()
     self.backgroundColor = AppColors.theme.value
+    
     // Remove the borders
     self.layer.borderColor = AppColors.theme.value.cgColor
     self.layer.borderWidth = 1

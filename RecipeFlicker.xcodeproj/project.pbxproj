@@ -48,6 +48,7 @@
 		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
 		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
 		EDC84667217FFD3600C3543A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC84666217FFD3600C3543A /* CardView.swift */; };
+		EDD01E0621A32D3700EB9924 /* HomeVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */; };
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 		EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */; };
 		EDFAA31F218FF6E400EF99D1 /* RecipeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDFAA31D218FF6E400EF99D1 /* RecipeListTableViewCell.xib */; };
@@ -128,6 +129,7 @@
 		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC84666217FFD3600C3543A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EDCFB53921771A4A00EE7D1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCTests.swift; sourceTree = "<group>"; };
 		EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 		EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
 		EDFAA31D218FF6E400EF99D1 /* RecipeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeListTableViewCell.xib; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				ED599CA221757B3D0007E929 /* RecipeFlickerTests.swift */,
+				EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */,
 				ED599CA421757B3D0007E929 /* Info.plist */,
 			);
 			path = RecipeFlickerTests;
@@ -739,6 +742,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED599CA321757B3D0007E929 /* RecipeFlickerTests.swift in Sources */,
+				EDD01E0621A32D3700EB9924 /* HomeVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

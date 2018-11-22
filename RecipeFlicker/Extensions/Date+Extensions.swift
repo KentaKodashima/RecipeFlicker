@@ -18,18 +18,19 @@ extension Date {
     return difference
   }
   
-  func isItTime() -> Bool {
+  func get7am() -> Date {
     let calendar = Calendar.current
-    let difference = self.timeUntilNext7am()
-    var standard = calendar.dateComponents([.hour, .minute, .second], from: self)
-    standard.hour = 0
-    standard.minute = 0
-    standard.second = 0
+    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
+    let date = calendar.date(from: components)
     
-    if difference == standard {
-      return true
-    } else {
-      return false
-    }
+    return date!
   }
+  
+//  func getNextDay() -> Date {
+//    let calendar = Calendar.current
+//    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
+//    let nextDay = calendar.nextDate(after: self, matching: components, matchingPolicy: .nextTime)!
+//
+//    return nextDay
+//  }
 }
