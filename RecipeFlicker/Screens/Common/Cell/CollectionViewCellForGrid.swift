@@ -66,10 +66,13 @@ class CollectionViewCellForGrid: UICollectionViewCell {
       (image, error, cacheType, imageUrl) in
       if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+//      self.recipeImage.image = self.darken(image: image!)
+//      let blackLayer = UIView()
+//      blackLayer.backgroundColor = UIColor.black
+//      blackLayer.layer.opacity = 0.9
+//      self.recipeImage.image = image?.withRenderingMode(.automatic)
+//      self.recipeImage.addSubview(blackLayer)
     })
-//    if let image = UIImage(named: image) {
-//      recipeImage.image = darken(image: image)
-//    }
   }
   
   func darken(image: UIImage) -> UIImage {
@@ -78,7 +81,7 @@ class CollectionViewCellForGrid: UICollectionViewCell {
                             size: (image.size))
     let blackView = UIView(frame: blackFrame)
     blackView.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
-    blackView.alpha = 0.3
+    blackView.alpha = 1
     
     // draw the image
     UIGraphicsBeginImageContext(blackFrame.size)

@@ -19,11 +19,6 @@ class CollectionViewCellForList: UICollectionViewCell {
   private var isChecked: Bool = false
   private var selectedImage = UIImage(named: "checkmark")
   private var deselectedImage = UIImage(named: "defaultCheck")
-//  private var leftConstraintOfImage: NSLayoutConstraint?
-  // check box constraint (left, width, vertical)
-  private var leftConstraintOfCheckBox: NSLayoutConstraint?
-  private var widthConstraintOfCheckBox: NSLayoutConstraint?
-  private var verticalConstraintOfCheckBox: NSLayoutConstraint?
   
   lazy var stackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [checkBoxImage, recipeImage, titleLabel])
@@ -51,7 +46,7 @@ class CollectionViewCellForList: UICollectionViewCell {
     return imageView
   }()
   
-  private let checkBoxImage: UIImageView = {
+  public let checkBoxImage: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .center
     imageView.image = UIImage(named: "defaultCheck")
@@ -71,12 +66,8 @@ class CollectionViewCellForList: UICollectionViewCell {
     super.init(frame: frame)
     addSubview(stackView)
     setupStackViewConstraints()
-//    addSubview(checkBoxImage)
     setupCheckBoxConstraints()
-//    addSubview(recipeImage)
     setupImageConstraints()
-//    addSubview(titleLabel)
-//    setupLabelConstraints()
     checkBoxImage.isHidden = true
     contentView.setBorder()
   }
@@ -93,27 +84,12 @@ class CollectionViewCellForList: UICollectionViewCell {
     stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
-  private func setupLabelConstraints() {
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    titleLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor,
-                                       constant: 16).isActive = true
-    titleLabel.leadingAnchor.constraint(equalTo: recipeImage.trailingAnchor,
-                                      constant: 8).isActive = true
-  }
-  
   func setupImageConstraints() {
     recipeImage.translatesAutoresizingMaskIntoConstraints = false
-//    // left edge
-//    recipeImage.leadingAnchor.constraint(equalTo: checkBoxImage.trailingAnchor, constant: 8).isActive = true
     // width
     recipeImage.widthAnchor.constraint(equalToConstant: 130).isActive = true
-    
     // heigth
     recipeImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
-    
-//    // center vertical
-//    recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
   func setupContents(withTitle title: String, andImage imagePath: String) {
@@ -126,14 +102,18 @@ class CollectionViewCellForList: UICollectionViewCell {
     })
   }
   
-  func showEditMode() {
-    leftConstraintOfCheckBox?.constant = 25
-    checkBoxImage.isHidden = false
-  }
-  
-  func dismissEditMode() {
-    leftConstraintOfCheckBox?.constant = 0
-    
+  func toggleEditMode(isEditing: Bool) {
+    if isEditing {
+      UIView.animate(withDuration: 0.3) {
+        self.checkBoxImage.isHidden = false
+      }
+    } else {
+      if !checkBoxImage.isHidden {
+        UIView.animate(withDuration: 0.3) {
+          self.checkBoxImage.isHidden = true
+        }
+      }
+    }
   }
   
   private func setupCheckBoxConstraints() {
@@ -142,18 +122,16 @@ class CollectionViewCellForList: UICollectionViewCell {
     checkBoxImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
     // height
     checkBoxImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//    // width
-//    widthConstraintOfCheckBox = checkBoxImage.widthAnchor.constraint(equalToConstant: 0)
-//    widthConstraintOfCheckBox?.isActive = true
-//    // left
-//    leftConstraintOfCheckBox = checkBoxImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
-//      constant: 8)
-//    leftConstraintOfCheckBox?.isActive = true
-//    // vertical
-//    verticalConstraintOfCheckBox = checkBoxImage.centerYAnchor.constraint(equalTo: centerYAnchor)
-//    verticalConstraintOfCheckBox?.isActive = true
+  }
+  
+  override var isSelected: Bool {
+    didSet {
+      
+    }
   }
 }
+
+
 
 extension UIView {
   func setBorder() {
