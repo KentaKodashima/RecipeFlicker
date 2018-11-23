@@ -159,7 +159,12 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         as! CollectionViewCellForList
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       if isEditing {
+        UIView.animate(withDuration: 5) {
+          cell.showEditMode()
+        }
         cell.showEditMode()
+      } else {
+        cell.dismissEditMode()
       }
       return cell
     } else {
@@ -189,13 +194,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
-      print("pass: \(destVC.collectionId)")
     }
   }
 }
 
-
-
-extension FavoriteVC: UISearchBarDelegate {
-  
-}
