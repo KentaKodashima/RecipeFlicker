@@ -22,8 +22,6 @@ class FavoriteVC: UIViewController {
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
-  @IBOutlet weak var editButton: UIBarButtonItem!
-  
   
   let gridLayout = GridFlowLayout()
   let listLayout = ListFlowLayout()
@@ -85,8 +83,6 @@ class FavoriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    searchBar.layer.borderWidth = 1
-//    searchBar.layer.borderColor = #colorLiteral(red: 1, green: 0.9420082569, blue: 0.7361317277, alpha: 1)
     searchBar.setSearchBar()
     ref = Database.database().reference()
     let userID = Auth.auth().currentUser?.uid
@@ -99,6 +95,10 @@ class FavoriteVC: UIViewController {
     collectionView.register(CollectionViewCellForList.self,
                             forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
     collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+    
+    navigationItem.leftBarButtonItem = editButtonItem
+    // isEditing
+    // override func setEditing(_ editing: Bool, animated: Bool)
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
@@ -127,13 +127,15 @@ class FavoriteVC: UIViewController {
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
   }
   
-  @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-    isEditing = !isEditing
-    viewDidLoad()
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    collectionView.reloadData()
   }
+  
 }
 
 extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if favoriteRecipes.count > 0 {
@@ -158,14 +160,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         for: indexPath)
         as! CollectionViewCellForList
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
-      if isEditing {
-        UIView.animate(withDuration: 5) {
-          cell.showEditMode()
-        }
-        cell.showEditMode()
-      } else {
-        cell.dismissEditMode()
-      }
+      cell.toggleEditMode(isEditing: isEditing)
       return cell
     } else {
       let collection = collections[indexPath.row]
@@ -180,11 +175,15 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+//      let cell = collectionView.dequeueReusableCell(
+//        withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
+//        for: indexPath) as! CollectionViewCellForList
+      if !isEditing {
+        self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+      }
     } else {
       let collection = collections[indexPath.row]
       selectedCollectionId = collection.firebaseId
-      print(selectedCollectionId)
       self.performSegue(withIdentifier: "goToCollection", sender: self.collectionView)
     }
     
