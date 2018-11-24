@@ -70,6 +70,9 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rog-xk-Kzu"/>
                                     <barButtonItem title="Delete" id="fTz-YO-ci7">
                                         <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="deleteItems:" destination="hhK-yq-OKT" id="k5u-I9-wrn"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
