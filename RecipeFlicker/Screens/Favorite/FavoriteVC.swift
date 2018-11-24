@@ -17,6 +17,7 @@ class FavoriteVC: UIViewController {
   }
   
   var ref: DatabaseReference!
+  var userID: String!
   var selectedCollectionId: String!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
@@ -86,7 +87,7 @@ class FavoriteVC: UIViewController {
     
     searchBar.setSearchBar()
     ref = Database.database().reference()
-    let userID = Auth.auth().currentUser?.uid
+    userID = Auth.auth().currentUser?.uid
     
     getFavoriteRecipesFromFirebase(userID)
     getCollectionsFromFirebase(userID)
@@ -106,6 +107,7 @@ class FavoriteVC: UIViewController {
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
     case ViewType.list.rawValue:
+      navigationItem.leftBarButtonItem = editButtonItem
       changeView(flowLayout: listLayout)
       if favoriteRecipes.count <= 0 {
         collectionView.setNoDataLabelForCollectionView()
@@ -114,6 +116,7 @@ class FavoriteVC: UIViewController {
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
       isEditing = false
+      navigationItem.leftBarButtonItem = nil
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
@@ -148,6 +151,25 @@ class FavoriteVC: UIViewController {
       self.toolBar.isHidden = true
     }
 
+  }
+  @IBAction func deleteItems(_ sender: UIBarButtonItem) {
+    // update model
+    if let indexPaths = collectionView.indexPathsForSelectedItems {
+      let indices = indexPaths.map { $0.item }.sorted().reversed()
+      for index in indices {
+        deleteItemFromFirebase(recipe: favoriteRecipes[index])
+        favoriteRecipes.remove(at: index)
+      }
+      // update collectionView
+      collectionView.deleteItems(at: indexPaths)
+    }
+    // dismiss the toolbar
+    toolBar.isHidden = true
+  }
+  
+  func deleteItemFromFirebase(recipe: Recipe) {
+    ref.child("favorites").child(userID).child(recipe.firebaseId).removeValue()
+    // TODO: Delete items from collections
   }
   
 }
