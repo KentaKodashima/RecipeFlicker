@@ -16,7 +16,7 @@ class CollectionViewCellForList: UICollectionViewCell {
     }
   }
   
-  private var isChecked: Bool = false
+//  private var isChecked: Bool = false
   private var selectedImage = UIImage(named: "checkmark")
   private var deselectedImage = UIImage(named: "defaultCheck")
   
@@ -53,14 +53,14 @@ class CollectionViewCellForList: UICollectionViewCell {
     return imageView
   }()
   
-  private func toggleCheckBox() {
-    isChecked = !isChecked
-    if (isChecked) {
-      checkBoxImage.image = selectedImage
-    } else {
-      checkBoxImage.image = deselectedImage
-    }
-  }
+//  private func toggleCheckBox() {
+//    isChecked = !isChecked
+//    if (isChecked) {
+//      checkBoxImage.image = selectedImage
+//    } else {
+//      checkBoxImage.image = deselectedImage
+//    }
+//  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -126,7 +126,7 @@ class CollectionViewCellForList: UICollectionViewCell {
   
   override var isSelected: Bool {
     didSet {
-      
+      checkBoxImage.image = isSelected ? selectedImage: deselectedImage
     }
   }
 }
