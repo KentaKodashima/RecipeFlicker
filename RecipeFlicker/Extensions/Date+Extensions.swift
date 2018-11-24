@@ -20,17 +20,10 @@ extension Date {
   
   func get7am() -> Date {
     let calendar = Calendar.current
-    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
+    let componentsFromCurrentDate = calendar.dateComponents([.year, .month, .day, .hour], from: self)
+    let components = DateComponents(calendar: calendar, year: componentsFromCurrentDate.year, month: componentsFromCurrentDate.month, day: componentsFromCurrentDate.day, hour: 7)
     let date = calendar.date(from: components)
     
     return date!
   }
-  
-//  func getNextDay() -> Date {
-//    let calendar = Calendar.current
-//    let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
-//    let nextDay = calendar.nextDate(after: self, matching: components, matchingPolicy: .nextTime)!
-//
-//    return nextDay
-//  }
 }
