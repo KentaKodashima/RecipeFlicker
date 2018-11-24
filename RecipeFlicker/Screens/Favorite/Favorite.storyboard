@@ -64,18 +64,30 @@
                                     <action selector="onSegmentControlTapped:" destination="hhK-yq-OKT" eventType="valueChanged" id="knD-xo-gZv"/>
                                 </connections>
                             </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hef-Av-5nL">
+                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rog-xk-Kzu"/>
+                                    <barButtonItem title="Delete" id="fTz-YO-ci7">
+                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="Bap-WU-GrI"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="BmR-Du-G7X"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="top" secondItem="sti-9O-CDd" secondAttribute="bottom" id="GIo-E9-Orl"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="NI1-n3-THn"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="cAk-Se-bou"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="gEo-HF-edE"/>
                             <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="lWw-r8-Cw6"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="Xn8-3a-qvT" secondAttribute="bottom" id="nuT-BJ-YH9"/>
                             <constraint firstAttribute="trailing" secondItem="ORM-Se-Cbw" secondAttribute="trailing" id="pnf-tK-ToV"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="qJO-EG-VgT"/>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="xaH-d0-Hou"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jN8-1c-cuW"/>
@@ -93,6 +105,7 @@
                         <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
                         <outlet property="searchBar" destination="Xn8-3a-qvT" id="eXK-yK-8ac"/>
                         <outlet property="searchDisplayController" destination="lxq-Yj-vf7" id="TfV-n0-trf"/>
+                        <outlet property="toolBar" destination="Hef-Av-5nL" id="VUd-ks-zho"/>
                         <outlet property="typeSegmentControll" destination="sti-9O-CDd" id="9Qp-Za-WZt"/>
                         <segue destination="ilZ-Ca-ddA" kind="show" identifier="goToCollection" id="OsB-dl-PMa"/>
                         <segue destination="ljj-uv-6fb" kind="show" identifier="goToDetail" id="L1j-7U-jVi"/>

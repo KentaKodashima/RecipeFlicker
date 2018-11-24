@@ -22,6 +22,7 @@ class FavoriteVC: UIViewController {
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var toolBar: UIToolbar!
   
   let gridLayout = GridFlowLayout()
   let listLayout = ListFlowLayout()
@@ -99,6 +100,7 @@ class FavoriteVC: UIViewController {
     navigationItem.leftBarButtonItem = editButtonItem
     // isEditing
     // override func setEditing(_ editing: Bool, animated: Bool)
+    toolBar.isHidden = true
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
@@ -111,6 +113,7 @@ class FavoriteVC: UIViewController {
       break
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
+      isEditing = false
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
@@ -123,13 +126,28 @@ class FavoriteVC: UIViewController {
   func changeView(flowLayout: UICollectionViewFlowLayout) {
     self.collectionView.removeNoDataLabel()
     self.collectionView.collectionViewLayout.invalidateLayout()
+    if isEditing {
+      let indexPaths = collectionView.indexPathsForVisibleItems
+      for indexPath in indexPaths {
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCellForList
+        cell.checkBoxImage.isHidden = true
+      }
+    }
     self.collectionView.reloadData()
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
+
   }
   
   override func setEditing(_ editing: Bool, animated: Bool) {
     super.setEditing(editing, animated: animated)
     collectionView.reloadData()
+    collectionView.allowsMultipleSelection = true
+    if editing {
+      self.editButtonItem.title = "Cancel"
+    } else {
+      self.toolBar.isHidden = true
+    }
+
   }
   
 }
@@ -173,6 +191,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
   }
   
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
 //      let cell = collectionView.dequeueReusableCell(
@@ -180,6 +199,8 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
 //        for: indexPath) as! CollectionViewCellForList
       if !isEditing {
         self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+      } else {
+        self.toolBar.isHidden = false
       }
     } else {
       let collection = collections[indexPath.row]
@@ -195,5 +216,12 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       destVC.collectionId = selectedCollectionId
     }
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    if isEditing {
+      if let indexPaths = collectionView.indexPathsForSelectedItems, indexPaths.count == 0 {
+        self.toolBar.isHidden = true
+      }
+    }
+  }
 }
-
