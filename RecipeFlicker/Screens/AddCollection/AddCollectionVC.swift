@@ -26,6 +26,11 @@ class AddCollectionVC: UIViewController {
     setRightBarButton()
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillHideNotification, object: nil)
+  }
+  
   // MARK: - Actions
   @IBAction func textFieldEditingDidChanged(_ sender: UITextField) {
     if !(sender.text?.isEmpty)! && sender.text?.first != " " {
@@ -54,27 +59,26 @@ class AddCollectionVC: UIViewController {
 }
 
 extension AddCollectionVC: UITextFieldDelegate {
-  
   @objc func keyboardWillShow(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
+    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue {
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
       
       // Sliding origin when the keyboard will show
-      if view.frame.origin.y == 0 {
-        view.frame.origin.y -= keyboardHeight
+      if self.view.frame.origin.y == 0 {
+        self.view.frame.origin.y -= keyboardHeight
       }
     }
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
+    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue {
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
       
       // Sliding origin when the keyboard will show
-      if view.frame.origin.y != 0 {
-        view.frame.origin.y += keyboardHeight
+      if self.view.frame.origin.y != 0 {
+        self.view.frame.origin.y += keyboardHeight
       }
     }
   }
