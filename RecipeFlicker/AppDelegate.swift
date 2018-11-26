@@ -31,10 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Remove the border at the bottom
     UINavigationBar.appearance().shadowImage = UIImage()
     UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "ChalkboardSE-Bold", size: 22)!]
+    UINavigationBar.appearance().isTranslucent = false
     
     // Set UITabBar's general appearance
     UITabBar.appearance().barTintColor = theme
     UITabBar.appearance().tintColor = accent
+    UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     
     // TODO: Delete ----------
