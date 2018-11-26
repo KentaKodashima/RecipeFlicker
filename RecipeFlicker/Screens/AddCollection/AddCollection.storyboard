@@ -17,58 +17,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="nNs-SL-TLi">
-                                <rect key="frame" x="16" y="124" width="343" height="322.5"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzk-jL-kPk">
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfQ-fz-lUZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="51"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="36"/>
-                                        <color key="textColor" red="0.92549019607843142" green="0.49411764705882355" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" translatesAutoresizingMaskIntoConstraints="NO" id="Di6-4E-cp8">
-                                        <rect key="frame" x="0.0" y="81" width="343" height="142"/>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u3d-j4-znO">
-                                        <rect key="frame" x="0.0" y="253" width="343" height="69.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="nNs-SL-TLi">
+                                        <rect key="frame" x="0.0" y="60" width="343" height="322.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgq-ky-2Yw">
-                                                <rect key="frame" x="0.0" y="0.0" width="158.5" height="31.5"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="22"/>
-                                                <nil key="textColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Collection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfQ-fz-lUZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="51"/>
+                                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="36"/>
+                                                <color key="textColor" red="0.92549019607843142" green="0.49411764705882355" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUz-hi-EQ3">
-                                                <rect key="frame" x="0.0" y="39.5" width="343" height="30"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="textFieldEditingDidChanged:" destination="eo9-BJ-q7k" eventType="editingChanged" id="BNQ-RA-jIt"/>
-                                                </connections>
-                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" translatesAutoresizingMaskIntoConstraints="NO" id="Di6-4E-cp8">
+                                                <rect key="frame" x="0.0" y="81" width="343" height="142"/>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u3d-j4-znO">
+                                                <rect key="frame" x="0.0" y="253" width="343" height="69.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgq-ky-2Yw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="158.5" height="31.5"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="22"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUz-hi-EQ3">
+                                                        <rect key="frame" x="0.0" y="39.5" width="343" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="textFieldEditingDidChanged:" destination="eo9-BJ-q7k" eventType="editingChanged" id="BNQ-RA-jIt"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="lUz-hi-EQ3" secondAttribute="trailing" id="6Hm-AQ-73A"/>
+                                                    <constraint firstItem="lUz-hi-EQ3" firstAttribute="leading" secondItem="u3d-j4-znO" secondAttribute="leading" id="nwr-rs-zsv"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="lUz-hi-EQ3" secondAttribute="trailing" id="6Hm-AQ-73A"/>
-                                            <constraint firstItem="lUz-hi-EQ3" firstAttribute="leading" secondItem="u3d-j4-znO" secondAttribute="leading" id="nwr-rs-zsv"/>
+                                            <constraint firstAttribute="trailing" secondItem="u3d-j4-znO" secondAttribute="trailing" id="2V7-pD-tTv"/>
+                                            <constraint firstItem="Di6-4E-cp8" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="JFg-RL-sO3"/>
+                                            <constraint firstAttribute="trailing" secondItem="Di6-4E-cp8" secondAttribute="trailing" id="JsM-yo-Ib9"/>
+                                            <constraint firstAttribute="trailing" secondItem="YfQ-fz-lUZ" secondAttribute="trailing" id="Ohj-ud-suh"/>
+                                            <constraint firstItem="u3d-j4-znO" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="dK0-wb-Uli"/>
+                                            <constraint firstItem="YfQ-fz-lUZ" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="lMd-6X-7bc"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="u3d-j4-znO" secondAttribute="trailing" id="2V7-pD-tTv"/>
-                                    <constraint firstItem="Di6-4E-cp8" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="JFg-RL-sO3"/>
-                                    <constraint firstAttribute="trailing" secondItem="Di6-4E-cp8" secondAttribute="trailing" id="JsM-yo-Ib9"/>
-                                    <constraint firstAttribute="trailing" secondItem="YfQ-fz-lUZ" secondAttribute="trailing" id="Ohj-ud-suh"/>
-                                    <constraint firstItem="u3d-j4-znO" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="dK0-wb-Uli"/>
-                                    <constraint firstItem="YfQ-fz-lUZ" firstAttribute="leading" secondItem="nNs-SL-TLi" secondAttribute="leading" id="lMd-6X-7bc"/>
+                                    <constraint firstAttribute="bottom" secondItem="nNs-SL-TLi" secondAttribute="bottom" id="2GH-Qi-mai"/>
+                                    <constraint firstItem="nNs-SL-TLi" firstAttribute="width" secondItem="mzk-jL-kPk" secondAttribute="width" id="Bbd-nj-Qq3"/>
+                                    <constraint firstItem="nNs-SL-TLi" firstAttribute="leading" secondItem="mzk-jL-kPk" secondAttribute="leading" id="L9M-M4-YJv"/>
+                                    <constraint firstAttribute="trailing" secondItem="nNs-SL-TLi" secondAttribute="trailing" id="YtM-gl-AtO"/>
+                                    <constraint firstItem="nNs-SL-TLi" firstAttribute="top" secondItem="mzk-jL-kPk" secondAttribute="top" constant="60" id="ZK2-ha-O20"/>
                                 </constraints>
-                            </stackView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nNs-SL-TLi" firstAttribute="top" secondItem="kxk-e2-E8T" secondAttribute="top" constant="60" id="CQZ-I0-J9v"/>
-                            <constraint firstItem="kxk-e2-E8T" firstAttribute="trailing" secondItem="nNs-SL-TLi" secondAttribute="trailing" constant="16" id="ObP-kC-bWP"/>
-                            <constraint firstItem="nNs-SL-TLi" firstAttribute="leading" secondItem="kxk-e2-E8T" secondAttribute="leading" constant="16" id="dw5-xd-GrT"/>
+                            <constraint firstItem="mzk-jL-kPk" firstAttribute="top" secondItem="kxk-e2-E8T" secondAttribute="top" id="OKb-9m-s6F"/>
+                            <constraint firstItem="kxk-e2-E8T" firstAttribute="trailing" secondItem="mzk-jL-kPk" secondAttribute="trailing" constant="16" id="cpV-Ge-sVj"/>
+                            <constraint firstItem="kxk-e2-E8T" firstAttribute="bottom" secondItem="mzk-jL-kPk" secondAttribute="bottom" id="ggl-DV-vtR"/>
+                            <constraint firstItem="mzk-jL-kPk" firstAttribute="leading" secondItem="kxk-e2-E8T" secondAttribute="leading" constant="16" id="qJp-WX-Swb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kxk-e2-E8T"/>
                     </view>
@@ -76,6 +89,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionNameField" destination="lUz-hi-EQ3" id="FBf-Ss-yzS"/>
+                        <outlet property="scrollView" destination="mzk-jL-kPk" id="kkv-BR-QUR"/>
                         <segue destination="fTW-ZP-Akf" kind="show" identifier="goToSelectRecipes" id="0df-Nj-zte"/>
                     </connections>
                 </viewController>
