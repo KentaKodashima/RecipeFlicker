@@ -18,12 +18,13 @@ class FavoriteVC: UIViewController {
   }
   
   var ref: DatabaseReference!
+  var userID: String!
   var selectedCollectionId: String!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var searchBar: UISearchBar!
-  
+  @IBOutlet weak var toolBar: UIToolbar!
   
   let gridLayout = GridFlowLayout()
   let listLayout = ListFlowLayout()
@@ -90,12 +91,10 @@ class FavoriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    searchBar.layer.borderWidth = 1
-//    searchBar.layer.borderColor = #colorLiteral(red: 1, green: 0.9420082569, blue: 0.7361317277, alpha: 1)
     searchBar.setSearchBar()
     
     ref = Database.database().reference()
-    let userID = Auth.auth().currentUser?.uid
+    userID = Auth.auth().currentUser?.uid
     
     getFavoriteRecipesFromFirebase(userID)
     getCollectionsFromFirebase(userID)
@@ -105,11 +104,17 @@ class FavoriteVC: UIViewController {
     collectionView.register(CollectionViewCellForList.self,
                             forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
     collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+    
+    navigationItem.leftBarButtonItem = editButtonItem
+    // isEditing
+    // override func setEditing(_ editing: Bool, animated: Bool)
+    toolBar.isHidden = true
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
     switch sender.selectedSegmentIndex {
     case ViewType.list.rawValue:
+      navigationItem.leftBarButtonItem = editButtonItem
       changeView(flowLayout: listLayout)
       if favoriteRecipes.count <= 0 {
         collectionView.setNoDataLabelForCollectionView()
@@ -117,6 +122,8 @@ class FavoriteVC: UIViewController {
       break
     case ViewType.grid.rawValue:
       changeView(flowLayout: gridLayout)
+      isEditing = false
+      navigationItem.leftBarButtonItem = nil
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
@@ -129,12 +136,53 @@ class FavoriteVC: UIViewController {
   func changeView(flowLayout: UICollectionViewFlowLayout) {
     self.collectionView.removeNoDataLabel()
     self.collectionView.collectionViewLayout.invalidateLayout()
+    if isEditing {
+      let indexPaths = collectionView.indexPathsForVisibleItems
+      for indexPath in indexPaths {
+        let cell = collectionView.cellForItem(at: indexPath) as! CollectionViewCellForList
+        cell.checkBoxImage.isHidden = true
+      }
+    }
     self.collectionView.reloadData()
     self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
+
   }
+  
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    collectionView.reloadData()
+    collectionView.allowsMultipleSelection = true
+    if editing {
+      self.editButtonItem.title = "Cancel"
+    } else {
+      self.toolBar.isHidden = true
+    }
+
+  }
+  @IBAction func deleteItems(_ sender: UIBarButtonItem) {
+    // update model
+    if let indexPaths = collectionView.indexPathsForSelectedItems {
+      let indices = indexPaths.map { $0.item }.sorted().reversed()
+      for index in indices {
+        deleteItemFromFirebase(recipe: favoriteRecipes[index])
+        favoriteRecipes.remove(at: index)
+      }
+      // update collectionView
+      collectionView.deleteItems(at: indexPaths)
+    }
+    // dismiss the toolbar
+    toolBar.isHidden = true
+  }
+  
+  func deleteItemFromFirebase(recipe: Recipe) {
+    ref.child("favorites").child(userID).child(recipe.firebaseId).removeValue()
+    // TODO: Delete items from collections
+  }
+  
 }
 
 extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if favoriteRecipes.count > 0 {
@@ -159,6 +207,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         for: indexPath)
         as! CollectionViewCellForList
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
+      cell.toggleEditMode(isEditing: isEditing)
       return cell
     } else {
       let collection = collections[indexPath.row]
@@ -171,13 +220,20 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
   }
   
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+//      let cell = collectionView.dequeueReusableCell(
+//        withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
+//        for: indexPath) as! CollectionViewCellForList
+      if !isEditing {
+        self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+      } else {
+        self.toolBar.isHidden = false
+      }
     } else {
       let collection = collections[indexPath.row]
       selectedCollectionId = collection.firebaseId
-      print(selectedCollectionId)
       self.performSegue(withIdentifier: "goToCollection", sender: self.collectionView)
     }
     
@@ -187,13 +243,14 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
-      print("pass: \(destVC.collectionId)")
     }
   }
-}
-
-
-
-extension FavoriteVC: UISearchBarDelegate {
   
+  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    if isEditing {
+      if let indexPaths = collectionView.indexPathsForSelectedItems, indexPaths.count == 0 {
+        self.toolBar.isHidden = true
+      }
+    }
+  }
 }
