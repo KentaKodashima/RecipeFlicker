@@ -54,6 +54,10 @@ class HomeVC: UIViewController {
     kolodaView.dataSource = self
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    print(self.view.frame.origin.y)
+  }
+  
   // MARK: - Actions
   @IBAction func dislikeButtonTapped(_ sender: UIButton) {
     kolodaView.swipe(SwipeResultDirection.left)
@@ -108,6 +112,9 @@ class HomeVC: UIViewController {
     // Fetch data from API and bind to KolodaView
     recipeAPI.getRandomRecipes { recipeArray, error in
       try! self.realm.write {
+        if self.rlmUser?.recipesOfTheDay.count != 0 {
+          self.rlmUser?.recipesOfTheDay.removeAll()
+        }
         for recipe in recipeArray ?? [Recipe]() {
           self.rlmUser?.recipesOfTheDay.append(recipe)
           self.rlmUser.lastFetchTime = Date()
