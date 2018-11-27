@@ -33,6 +33,7 @@ class DetailVC: UIViewController {
     
     userId = Auth.auth().currentUser?.uid
     getRecipeFromFirebase()
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
   }
   
   // MARK: - Actions
@@ -62,8 +63,18 @@ class DetailVC: UIViewController {
   fileprivate func setToolBar() {
     let screenHeight = self.view.bounds.height
     let screenWidth = self.view.bounds.width
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
+    
     toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
+    toolBar.tintColor = AppColors.accent.value
+    toolBar.barTintColor = AppColors.theme.value
+    toolBar.layer.borderWidth = 1
+    toolBar.layer.borderColor = AppColors.theme.value.cgColor
+    toolBar.clipsToBounds = true
+    toolBar.isTranslucent = false
+    toolBar.translatesAutoresizingMaskIntoConstraints = false
 
+    toolBar.items = [backButton]
     webKitView.addSubview(toolBar)
     
     // Constraints
@@ -100,6 +111,7 @@ extension DetailVC: WKUIDelegate {
     webKitView = WKWebView(frame: .zero, configuration: webConfiguration)
     webKitView.uiDelegate = self
     webKitView.navigationDelegate = self
+    webKitView.allowsBackForwardNavigationGestures = true
     self.view = webKitView
   }
   
@@ -108,27 +120,43 @@ extension DetailVC: WKUIDelegate {
     let myRequest = URLRequest(url: myURL!)
     webKitView.load(myRequest)
   }
+  
+  
 }
 
 extension DetailVC: WKNavigationDelegate {
-  fileprivate func showActivityIndicator(show: Bool) {
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    showActivityIndicator(false)
+  }
+  
+  func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    showActivityIndicator(true)
+  }
+  
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    showActivityIndicator(false)
+  }
+  
+  @objc private func goBack() {
+    if webKitView.canGoBack {
+      webKitView.goBack()
+    } else {
+      self.navigationController?.popViewController(animated: true)
+      self.dismiss(animated: true, completion: nil)
+      self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+  }
+  
+  @objc private func goForward() {
+    webKitView.goForward()
+  }
+  
+  fileprivate func showActivityIndicator(_ show: Bool) {
     if show {
       activityIndicator.startAnimating()
     } else {
       activityIndicator.stopAnimating()
       activityIndicatorContainer.removeFromSuperview()
     }
-  }
-  
-  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    showActivityIndicator(show: false)
-  }
-  
-  func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-    showActivityIndicator(show: true)
-  }
-  
-  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-    showActivityIndicator(show: false)
   }
 }
