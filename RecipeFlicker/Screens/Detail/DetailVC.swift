@@ -16,6 +16,7 @@ class DetailVC: UIViewController {
   // MARK: - Properties
   private var webKitView: WKWebView!
   private var toolBar: UIToolbar!
+  private var activityIndicatorContainer: UIView!
   private var activityIndicator: UIActivityIndicatorView!
   
   private var userId: String!
@@ -32,7 +33,6 @@ class DetailVC: UIViewController {
     
     userId = Auth.auth().currentUser?.uid
     getRecipeFromFirebase()
-//    setActivityIndicator()
   }
   
   // MARK: - Actions
@@ -73,11 +73,23 @@ class DetailVC: UIViewController {
   }
   
   fileprivate func setActivityIndicator() {
+    activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    activityIndicatorContainer.center = webKitView.center
+    activityIndicatorContainer.backgroundColor = UIColor.black
+    activityIndicatorContainer.alpha = 0.8
+    activityIndicatorContainer.layer.cornerRadius = 10
+    
     activityIndicator = UIActivityIndicatorView()
-    activityIndicator.center = webKitView.center
     activityIndicator.hidesWhenStopped = true
-    activityIndicator.style = UIActivityIndicatorView.Style.gray
-    webKitView.addSubview(activityIndicator)
+    activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    
+    activityIndicatorContainer.addSubview(activityIndicator)
+    webKitView.addSubview(activityIndicatorContainer)
+    
+    // Constraints
+    activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
   }
   
 }
@@ -87,11 +99,11 @@ extension DetailVC: WKUIDelegate {
     let webConfiguration = WKWebViewConfiguration()
     webKitView = WKWebView(frame: .zero, configuration: webConfiguration)
     webKitView.uiDelegate = self
+    webKitView.navigationDelegate = self
     self.view = webKitView
   }
   
   private func sendRequest(urlString: String) {
-    print("This is THE URL: \(urlString)")
     let myURL = URL(string: urlString)
     let myRequest = URLRequest(url: myURL!)
     webKitView.load(myRequest)
@@ -104,6 +116,7 @@ extension DetailVC: WKNavigationDelegate {
       activityIndicator.startAnimating()
     } else {
       activityIndicator.stopAnimating()
+      activityIndicatorContainer.removeFromSuperview()
     }
   }
   
