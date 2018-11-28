@@ -174,9 +174,13 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      let recipe = favoriteRecipes[indexPath.row]
-      selectedRecipeId = recipe.firebaseId
-      self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+      if !isEditing {
+        let recipe = favoriteRecipes[indexPath.row]
+        selectedRecipeId = recipe.firebaseId
+        self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
+      } else {
+        self.toolBar.isHidden = false
+      }
     } else {
       let collection = collections[indexPath.row]
       selectedCollectionId = collection.firebaseId
