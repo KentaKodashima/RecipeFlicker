@@ -66,11 +66,6 @@ class DetailVC: UIViewController {
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBack))
     
     toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44))
-    toolBar.tintColor = AppColors.accent.value
-    toolBar.barTintColor = AppColors.theme.value
-    toolBar.layer.borderWidth = 1
-    toolBar.layer.borderColor = AppColors.theme.value.cgColor
-    toolBar.clipsToBounds = true
     toolBar.isTranslucent = false
     toolBar.translatesAutoresizingMaskIntoConstraints = false
 
