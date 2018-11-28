@@ -16,6 +16,19 @@ class CollectionViewCellForList: UICollectionViewCell {
     }
   }
   
+//  private var isChecked: Bool = false
+  private var selectedImage = UIImage(named: "checkmark")
+  private var deselectedImage = UIImage(named: "defaultCheck")
+  
+  lazy var stackView: UIStackView = {
+    let stackView = UIStackView(arrangedSubviews: [checkBoxImage, recipeImage, titleLabel])
+    stackView.alignment = .center
+    stackView.distribution = .fillProportionally
+    stackView.axis = .horizontal
+    stackView.spacing = 8
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
   
   private let titleLabel: UILabel = {
     let label = UILabel()
@@ -33,12 +46,29 @@ class CollectionViewCellForList: UICollectionViewCell {
     return imageView
   }()
   
+  public let checkBoxImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.contentMode = .center
+    imageView.image = UIImage(named: "defaultCheck")
+    return imageView
+  }()
+  
+//  private func toggleCheckBox() {
+//    isChecked = !isChecked
+//    if (isChecked) {
+//      checkBoxImage.image = selectedImage
+//    } else {
+//      checkBoxImage.image = deselectedImage
+//    }
+//  }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(recipeImage)
+    addSubview(stackView)
+    setupStackViewConstraints()
+    setupCheckBoxConstraints()
     setupImageConstraints()
-    addSubview(titleLabel)
-    setupLabelConstraints()
+    checkBoxImage.isHidden = true
     contentView.setBorder()
   }
   
@@ -46,28 +76,20 @@ class CollectionViewCellForList: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setupLabelConstraints() {
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    titleLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor,
-                                       constant: 16).isActive = true
-    titleLabel.leadingAnchor.constraint(equalTo: recipeImage.trailingAnchor,
-                                      constant: 8).isActive = true
+  private func setupStackViewConstraints() {
+    stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
+                                       constant: 8).isActive = true
+    stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor,
+                                        constant: 8).isActive = true
+    stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
   func setupImageConstraints() {
     recipeImage.translatesAutoresizingMaskIntoConstraints = false
-    // left edge
-    recipeImage.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
-                                         constant: 16).isActive = true
     // width
     recipeImage.widthAnchor.constraint(equalToConstant: 130).isActive = true
-    
     // heigth
     recipeImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
-    
-    // center vertical
-    recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
   func setupContents(withTitle title: String, andImage imagePath: String) {
@@ -79,11 +101,41 @@ class CollectionViewCellForList: UICollectionViewCell {
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
     })
   }
+  
+  func toggleEditMode(isEditing: Bool) {
+    if isEditing {
+      UIView.animate(withDuration: 0.3) {
+        self.checkBoxImage.isHidden = false
+      }
+    } else {
+      if !checkBoxImage.isHidden {
+        UIView.animate(withDuration: 0.3) {
+          self.checkBoxImage.isHidden = true
+        }
+      }
+    }
+  }
+  
+  private func setupCheckBoxConstraints() {
+    checkBoxImage.translatesAutoresizingMaskIntoConstraints = false
+    // width
+    checkBoxImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    // height
+    checkBoxImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+  }
+  
+  override var isSelected: Bool {
+    didSet {
+      checkBoxImage.image = isSelected ? selectedImage: deselectedImage
+    }
+  }
 }
+
+
 
 extension UIView {
   func setBorder() {
-    let margin = 25
+    let margin = 20
     let border = CALayer()
     border.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     border.borderWidth = 0.5

@@ -16,7 +16,7 @@ class CollectionVC: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   var ref: DatabaseReference!
   @IBOutlet weak var editButton: UIBarButtonItem!
-  
+  var isEditingMode: Bool = false
   var collectionId: String?
   var userId: String?
   
@@ -71,7 +71,8 @@ class CollectionVC: UIViewController {
   
   
   @IBAction func onEditButtonClicked(_ sender: UIBarButtonItem) {
-    tableView.setEditing(true, animated: true)
+    isEditingMode = !isEditingMode
+    tableView.setEditing(isEditingMode, animated: true)
     
   }
   

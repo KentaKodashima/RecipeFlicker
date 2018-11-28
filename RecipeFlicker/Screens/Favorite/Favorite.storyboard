@@ -21,17 +21,17 @@
                                 <rect key="frame" x="0.0" y="148" width="375" height="470"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nfl-fQ-1DG">
-                                    <size key="itemSize" width="130" height="60"/>
+                                    <size key="itemSize" width="233" height="161"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="UeK-p5-2ar">
-                                        <rect key="frame" x="0.0" y="0.0" width="130" height="60"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="UeK-p5-2ar" customClass="CollectionViewCellForList" customModule="RecipeFlicker" customModuleProvider="target">
+                                        <rect key="frame" x="71" y="0.0" width="233" height="161"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="130" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="233" height="161"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
@@ -41,17 +41,6 @@
                                     <outlet property="delegate" destination="hhK-yq-OKT" id="me2-Pe-Vfj"/>
                                 </connections>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sti-9O-CDd">
-                                <rect key="frame" x="-10" y="120" width="395" height="29"/>
-                                <segments>
-                                    <segment title="All"/>
-                                    <segment title="Collection"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="onSegmentControlTapped:" destination="hhK-yq-OKT" eventType="valueChanged" id="knD-xo-gZv"/>
-                                </connections>
-                            </segmentedControl>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Xn8-3a-qvT">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <color key="barTintColor" red="1" green="0.93333333330000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,18 +53,44 @@
                                     <outlet property="delegate" destination="hhK-yq-OKT" id="DZr-uK-3RG"/>
                                 </connections>
                             </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sti-9O-CDd">
+                                <rect key="frame" x="-10" y="120" width="395" height="29"/>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Collection"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="onSegmentControlTapped:" destination="hhK-yq-OKT" eventType="valueChanged" id="knD-xo-gZv"/>
+                                </connections>
+                            </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hef-Av-5nL">
+                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rog-xk-Kzu"/>
+                                    <barButtonItem title="Delete" id="fTz-YO-ci7">
+                                        <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="deleteItems:" destination="hhK-yq-OKT" id="k5u-I9-wrn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="Bap-WU-GrI"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="BmR-Du-G7X"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="top" secondItem="sti-9O-CDd" secondAttribute="bottom" id="GIo-E9-Orl"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="NI1-n3-THn"/>
                             <constraint firstItem="ORM-Se-Cbw" firstAttribute="bottom" secondItem="jN8-1c-cuW" secondAttribute="bottom" id="cAk-Se-bou"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="leading" secondItem="CaV-qu-rGi" secondAttribute="leading" constant="-10" id="cJ4-Ab-pNF"/>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="gEo-HF-edE"/>
                             <constraint firstAttribute="trailing" secondItem="sti-9O-CDd" secondAttribute="trailing" constant="-10" id="gcl-hj-rSw"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="trailing" secondItem="jN8-1c-cuW" secondAttribute="trailing" id="lWw-r8-Cw6"/>
                             <constraint firstItem="sti-9O-CDd" firstAttribute="top" secondItem="Xn8-3a-qvT" secondAttribute="bottom" id="nuT-BJ-YH9"/>
                             <constraint firstAttribute="trailing" secondItem="ORM-Se-Cbw" secondAttribute="trailing" id="pnf-tK-ToV"/>
+                            <constraint firstItem="Hef-Av-5nL" firstAttribute="leading" secondItem="jN8-1c-cuW" secondAttribute="leading" id="qJO-EG-VgT"/>
                             <constraint firstItem="Xn8-3a-qvT" firstAttribute="top" secondItem="jN8-1c-cuW" secondAttribute="top" id="xaH-d0-Hou"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jN8-1c-cuW"/>
@@ -93,6 +108,7 @@
                         <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
                         <outlet property="searchBar" destination="Xn8-3a-qvT" id="eXK-yK-8ac"/>
                         <outlet property="searchDisplayController" destination="lxq-Yj-vf7" id="TfV-n0-trf"/>
+                        <outlet property="toolBar" destination="Hef-Av-5nL" id="VUd-ks-zho"/>
                         <outlet property="typeSegmentControll" destination="sti-9O-CDd" id="9Qp-Za-WZt"/>
                         <segue destination="ilZ-Ca-ddA" kind="show" identifier="goToCollection" id="OsB-dl-PMa"/>
                         <segue destination="ljj-uv-6fb" kind="show" identifier="goToDetail" id="L1j-7U-jVi"/>
@@ -109,7 +125,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1105" y="90"/>
+            <point key="canvasLocation" x="1104.8" y="89.505247376311857"/>
         </scene>
         <!--AddCollection-->
         <scene sceneID="WSY-6D-9PV">
