@@ -91,8 +91,13 @@ class SelectReciepsToAddVC: UIViewController {
           let title = recipe["title"]
           let image = recipe["image"]
           let isFavotiteLiteral = recipe["isFavorite"]
-          let whichCollectionToBelong = recipe["whichCollectionToBelong"]
-          let favoriteRecipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
+          var whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
+            for collectionId in whichCollectionToBelong.keys {
+              whichCollectionToBelongList.append(collectionId)
+            }
+          }
+          let favoriteRecipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }

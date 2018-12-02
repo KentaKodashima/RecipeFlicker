@@ -22,7 +22,7 @@ import RealmSwift
   @objc dynamic private(set) var title = ""
   @objc dynamic private(set) var image = ""
   @objc dynamic public var isFavorite = false
-  @objc dynamic public var whichCollectionToBelong: String?
+  public var whichCollectionToBelong = List<String>()
   
   override public static func primaryKey() -> String? {
     return Recipe.Property.realmId.rawValue
@@ -36,7 +36,7 @@ import RealmSwift
     self.isFavorite = isFavorite
   }
   
-  convenience init(firebaseId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, whichCollectionToBelong: String?) {
+  convenience init(firebaseId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, whichCollectionToBelong: List<String>) {
     self.init()
     self.firebaseId = firebaseId
     self.originalRecipeUrl = originalRecipeUrl
@@ -60,22 +60,25 @@ extension Recipe {
       "originalRecipeUrl": self.originalRecipeUrl,
       "title": self.title,
       "image": self.image,
-      "isFavorite": String(self.isFavorite),
-      "whichCollectionToBelong": self.whichCollectionToBelong
+      "isFavorite": String(self.isFavorite)
     ]
     favoriteRecipeRef.setValue(dict)
+    
+    let whichCollectionToBelongRef = favoriteRecipeRef.child("whichCollectionToBelong")
+    whichCollectionToBelongRef.setValue(self.whichCollectionToBelong.toArray(ofType: String.self))
   }
   
   func convertToJSON() -> Dictionary<String, Any> {
-    let recipeDict = [
+    var recipeDict: [String:Any] = [
       "firebaseId": self.firebaseId,
       "realmId": self.realmId,
       "originalRecipeUrl": self.originalRecipeUrl,
       "title": self.title,
       "image": self.image,
-      "isFavorite": String(self.isFavorite),
-      "whichCollectionToBelong": self.whichCollectionToBelong
+      "isFavorite": String(self.isFavorite)
     ]
+    recipeDict["whichCollectionToBelong"] = self.whichCollectionToBelong.toArray(ofType: String.self)
+    
     return recipeDict
   }
 }

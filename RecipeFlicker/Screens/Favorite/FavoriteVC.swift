@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 class FavoriteVC: UIViewController {
   
@@ -44,8 +45,13 @@ class FavoriteVC: UIViewController {
           let image = recipe["image"],
           let isFavotiteLiteral = recipe["isFavorite"]
         {
-          let whichCollectionToBelong = recipe["whichCollectionToBelong"]
-          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
+          let whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
+            for collectionId in whichCollectionToBelong.keys {
+              whichCollectionToBelongList.append(collectionId)
+            }
+          }
+          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }
@@ -86,6 +92,7 @@ class FavoriteVC: UIViewController {
     super.viewDidLoad()
     
     searchBar.setSearchBar()
+    
     ref = Database.database().reference()
     userID = Auth.auth().currentUser?.uid
     

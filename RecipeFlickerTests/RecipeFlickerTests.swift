@@ -24,7 +24,10 @@ class RecipeFlickerTests: XCTestCase {
     let now = Date()
     let calendar = Calendar.current
     let components = DateComponents(calendar: calendar, hour: 7)  // <- 07:00 = 7am
-    let nextDay = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime)!
+    let nextDay = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime, direction: .forward)!
+    print(nextDay.description)
+    print(now.timeUntilNext7am())
+    
   }
   
 }

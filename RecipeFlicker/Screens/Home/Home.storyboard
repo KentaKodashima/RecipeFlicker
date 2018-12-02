@@ -54,6 +54,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="H5H-M3-d9p"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="buttonStack" destination="4SD-Ze-U8u" id="AUe-av-FDV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ri6-py-s2s" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,7 @@ class AddCollectionVC: UIViewController {
   
   // MARK: - Outlets
   @IBOutlet weak var collectionNameField: UITextField!
+  @IBOutlet weak var scrollView: UIScrollView!
   
   // MARK: - Properties
   private var nextButton: UIBarButtonItem!
@@ -21,9 +22,14 @@ class AddCollectionVC: UIViewController {
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: AddCollectionVC.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: AddCollectionVC.keyboardWillHideNotification, object: nil)
-  
+    
     collectionNameField.setToolbarForKeyboard()
     setRightBarButton()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillHideNotification, object: nil)
   }
   
   // MARK: - Actions
@@ -45,6 +51,10 @@ class AddCollectionVC: UIViewController {
     performSegue(withIdentifier: "goToSelectRecipes", sender: UIBarButtonItem.self)
   }
   
+  @objc fileprivate func printViewFrameOriginY() {
+    print(self.view.frame.origin.y)
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToSelectRecipes" {
       let selectRecipesToAddVC = segue.destination as! SelectReciepsToAddVC
@@ -54,33 +64,26 @@ class AddCollectionVC: UIViewController {
 }
 
 extension AddCollectionVC: UITextFieldDelegate {
-  
   @objc func keyboardWillShow(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
-      let keyboardRectangle = keyboardFrame.cgRectValue
-      let keyboardHeight = keyboardRectangle.height
-      
-      // Sliding origin when the keyboard will show
-      if view.frame.origin.y == 0 {
-        view.frame.origin.y -= keyboardHeight
-      }
-    }
+    adjustHeight(show: true, notification: notification)
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue {
-      let keyboardRectangle = keyboardFrame.cgRectValue
-      let keyboardHeight = keyboardRectangle.height
-      
-      // Sliding origin when the keyboard will show
-      if view.frame.origin.y != 0 {
-        view.frame.origin.y += keyboardHeight
-      }
-    }
+    adjustHeight(show: false, notification: notification)
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
+  
+  func adjustHeight(show:Bool, notification:NSNotification) {
+    var userInfo = notification.userInfo!
+    let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+    let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
+    
+    scrollView.contentInset.bottom += changeInHeight
+    scrollView.scrollIndicatorInsets.bottom += changeInHeight
+  }
+
 }

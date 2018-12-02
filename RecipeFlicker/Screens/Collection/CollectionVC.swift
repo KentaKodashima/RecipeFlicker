@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 import Kingfisher
 
 class CollectionVC: UIViewController {
@@ -43,14 +44,20 @@ class CollectionVC: UIViewController {
     ref.child("recipeCollections").child(collectionId!).observe(.value) { (snapshot) in
       self.collectionRecipes.removeAll()
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String: String] {
+        if let recipe = (child as! DataSnapshot).value as? [String:String] {
           let id = recipe["firebaseId"]
           let url = recipe["originalRecipeUrl"]
           let title = recipe["title"]
           let image = recipe["image"]
           let isFavotiteLiteral = recipe["isFavorite"]
-          let whichCollectionToBelong = recipe["whichCollectionToBelong"]
-          let recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelong)
+          var whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
+            for collectionId in whichCollectionToBelong.keys {
+              whichCollectionToBelongList.append(collectionId)
+            }
+          }
+          
+          let recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.collectionRecipes.append(recipe)
         }
         
