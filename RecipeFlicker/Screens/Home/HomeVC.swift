@@ -15,6 +15,8 @@ import RealmSwift
 import Kingfisher
 
 class HomeVC: UIViewController {
+  // MARK: - IBOutlets
+  @IBOutlet weak var buttonStack: UIStackView!
   
   // MARK: - Properties
   private var userRef: DatabaseReference!
@@ -26,8 +28,10 @@ class HomeVC: UIViewController {
   private var recipeAPI = RecipeAPI()
   
   private var timer = Timer()
+  private var resetTimer: Timer!
   private var countdownTimer = UILabel()
   private var countdownView = UIView()
+  private var currentDate: Date!
   
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
@@ -38,6 +42,9 @@ class HomeVC: UIViewController {
       self.userId = userId
     }
     
+    currentDate = Date()
+    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSignIn), userInfo: nil, repeats: false)
+    
     // Fetch existing user from Realm
     rlmUser = RLMUser.all().first
 
@@ -45,6 +52,10 @@ class HomeVC: UIViewController {
     
     kolodaView.delegate = self
     kolodaView.dataSource = self
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    print(self.view.frame.origin.y)
   }
   
   // MARK: - Actions
@@ -81,10 +92,16 @@ class HomeVC: UIViewController {
             self.rlmUser.isFirstSignIn = false
           }
         } else {
-          if self.rlmUser.recipesOfTheDay.count == 0 {
-            self.setCountdownView()
+          // Check if this is a the first login in the day
+          if (self.currentDate! > self.currentDate.get7am()) && (self.rlmUser.lastFetchTime! < self.currentDate.get7am()) {
+            self.resetIsFirstSignIn()
+            self.fetchRecipesToBind()
           } else {
-            self.setKolodaView()
+            if self.rlmUser.recipesOfTheDay.count == 0 {
+              self.setCountdownView()
+            } else {
+              self.setKolodaView()
+            }
           }
         }
       }
@@ -95,8 +112,12 @@ class HomeVC: UIViewController {
     // Fetch data from API and bind to KolodaView
     recipeAPI.getRandomRecipes { recipeArray, error in
       try! self.realm.write {
+        if self.rlmUser?.recipesOfTheDay.count != 0 {
+          self.rlmUser?.recipesOfTheDay.removeAll()
+        }
         for recipe in recipeArray ?? [Recipe]() {
           self.rlmUser?.recipesOfTheDay.append(recipe)
+          self.rlmUser.lastFetchTime = Date()
         }
       }
       self.setKolodaView()
@@ -105,25 +126,30 @@ class HomeVC: UIViewController {
   }
   
   fileprivate func setKolodaView() {
-    let kolodaViewWidth = self.view.bounds.width * 0.9
-    let kolodaViewHeight = self.view.bounds.height * 0.4
-    kolodaView.frame = CGRect(x: 0, y: 0, width: kolodaViewWidth, height: kolodaViewHeight)
-    kolodaView.center = self.view.center
+    kolodaView.frame = CGRect()
+    kolodaView.center.x = self.view.center.x
     kolodaView.layer.shadowColor = UIColor.gray.cgColor
     kolodaView.layer.shadowOffset = CGSize.zero
     kolodaView.layer.shadowOpacity = 1.0
     kolodaView.layer.shadowRadius = 7.0
-    kolodaView.layer.masksToBounds =  false
+    kolodaView.layer.masksToBounds = false
     kolodaView.alpha = 0.0
+    kolodaView.translatesAutoresizingMaskIntoConstraints = false
     self.view.addSubview(kolodaView)
     self.kolodaView.animator.animateAppearance(2)
     
     UIView.animate(withDuration: 0.1, delay: 1, options: [], animations: { () in
       self.kolodaView.alpha = 1.0
     })
+    
+    // Constraints
+    kolodaView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 16).isActive = true
+    kolodaView.bottomAnchor.constraint(equalTo: buttonStack.topAnchor, constant: -16).isActive = true
+    kolodaView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16).isActive = true
+    kolodaView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16).isActive = true
   }
   
-  func setCountdownView() { //fileprivate func setCountdownView() {
+  fileprivate func setCountdownView() {
     let countdownViewWidth = self.view.bounds.width
     let countdownViewHeight = self.view.bounds.height
     countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
@@ -156,24 +182,28 @@ class HomeVC: UIViewController {
     countdownView.addSubview(stack)
     self.view.addSubview(countdownView)
     
-    // Constraint
+    // Constraints
     stack.centerXAnchor.constraint(equalTo: countdownView.centerXAnchor).isActive = true
     stack.centerYAnchor.constraint(equalTo: countdownView.centerYAnchor).isActive = true
   }
   
   @objc fileprivate func startCountdown() {
-    // Test the string
-    // Test if the UI exists after 7:00 am
-    let now = Date()
-    if now.isItTime() {
-      timer.invalidate()
-      try! self.realm.write {
-        self.rlmUser.isFirstSignIn = true
-      }
-      countdownView.removeFromSuperview()
-    } else {
-      countdownTimer.setCountdownTimerText()
+    countdownTimer.setCountdownTimerText()
+  }
+  
+  @objc fileprivate func resetIsFirstSignIn() {
+    try! self.realm.write {
+      self.rlmUser.isFirstSignIn = true
     }
+  }
+  
+  @objc fileprivate func removeCountdownView() {
+    timer.invalidate()
+    resetIsFirstSignIn()
+    if self.view.subviews.count != 0 {
+      countdownView.removeFromSuperview()
+    }
+    fetchRecipesToBind()
   }
 }
 
@@ -200,6 +230,7 @@ extension HomeVC: KolodaViewDataSource {
     card.cardImage.layer.cornerRadius = card.cardImage.frame.size.width * 0.1
     card.recipeTitle.text = recipe.title
     card.recipeTitle.adjustsFontSizeToFitWidth = true
+    card.translatesAutoresizingMaskIntoConstraints = false
     
     return card
   }
@@ -231,6 +262,10 @@ extension HomeVC: KolodaViewDelegate {
   // Method called after all cards have been swiped
   // Uncomment out to show countdown view
   func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-    setCountdownView()
+    if rlmUser.isFirstSignIn == true {
+      fetchRecipesToBind()
+    } else {
+      setCountdownView()
+    }
   }
 }

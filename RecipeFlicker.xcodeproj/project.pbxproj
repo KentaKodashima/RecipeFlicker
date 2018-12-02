@@ -37,6 +37,7 @@
 		ED84CD38217E43F8009300C8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CD37217E43F8009300C8 /* Recipe.swift */; };
 		ED87083C21962A6F008675C5 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED87083B21962A6F008675C5 /* UILabel+Extensions.swift */; };
 		ED93C51A219A770E0056F9F3 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED93C519219A770E0056F9F3 /* Date+Extensions.swift */; };
+		ED98B6E521AA381A00A6B1B9 /* RealmList+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98B6E421AA381A00A6B1B9 /* RealmList+Extensions.swift */; };
 		EDAC61FA218E0CF400C2DB22 /* AddCollection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */; };
 		EDAC61FC218E0D1900C2DB22 /* AddCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */; };
 		EDAC61FF218E113E00C2DB22 /* SelectRecipesToAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */; };
@@ -48,6 +49,7 @@
 		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
 		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
 		EDC84667217FFD3600C3543A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC84666217FFD3600C3543A /* CardView.swift */; };
+		EDD01E0621A32D3700EB9924 /* HomeVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */; };
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 		EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */; };
 		EDFAA31F218FF6E400EF99D1 /* RecipeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDFAA31D218FF6E400EF99D1 /* RecipeListTableViewCell.xib */; };
@@ -116,6 +118,7 @@
 		ED84CD37217E43F8009300C8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		ED87083B21962A6F008675C5 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		ED93C519219A770E0056F9F3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		ED98B6E421AA381A00A6B1B9 /* RealmList+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmList+Extensions.swift"; sourceTree = "<group>"; };
 		EDAC61F9218E0CF400C2DB22 /* AddCollection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddCollection.storyboard; sourceTree = "<group>"; };
 		EDAC61FB218E0D1900C2DB22 /* AddCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionVC.swift; sourceTree = "<group>"; };
 		EDAC61FE218E113E00C2DB22 /* SelectRecipesToAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectRecipesToAdd.storyboard; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC84666217FFD3600C3543A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EDCFB53921771A4A00EE7D1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCTests.swift; sourceTree = "<group>"; };
 		EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
 		EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewCell.swift; sourceTree = "<group>"; };
 		EDFAA31D218FF6E400EF99D1 /* RecipeListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeListTableViewCell.xib; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				ED599CA221757B3D0007E929 /* RecipeFlickerTests.swift */,
+				EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */,
 				ED599CA421757B3D0007E929 /* Info.plist */,
 			);
 			path = RecipeFlickerTests;
@@ -344,6 +349,7 @@
 			children = (
 				EDC8465C217FC4A600C3543A /* Colors.swift */,
 				ED93C519219A770E0056F9F3 /* Date+Extensions.swift */,
+				ED98B6E421AA381A00A6B1B9 /* RealmList+Extensions.swift */,
 				EDC64793218C29980000DF9F /* UICollectionView+Extensions.swift */,
 				ED87083B21962A6F008675C5 /* UILabel+Extensions.swift */,
 				ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */,
@@ -705,6 +711,7 @@
 			files = (
 				ED0AFC1A2175C7A1009A2976 /* DetailVC.swift in Sources */,
 				EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */,
+				ED98B6E521AA381A00A6B1B9 /* RealmList+Extensions.swift in Sources */,
 				D89711F8218A110B00CF7EF1 /* ReplicaRecipeFactory.swift in Sources */,
 				ED3A4C0521A0CC40003DDF31 /* UISearchBar+Extensions.swift in Sources */,
 				ED93C51A219A770E0056F9F3 /* Date+Extensions.swift in Sources */,
@@ -739,6 +746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED599CA321757B3D0007E929 /* RecipeFlickerTests.swift in Sources */,
+				EDD01E0621A32D3700EB9924 /* HomeVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
