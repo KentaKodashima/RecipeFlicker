@@ -20,6 +20,7 @@ class FavoriteVC: UIViewController {
   var ref: DatabaseReference!
   var userID: String!
   var selectedCollectionId: String!
+  var selectedRecipeId: String?
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
@@ -223,10 +224,9 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-//      let cell = collectionView.dequeueReusableCell(
-//        withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
-//        for: indexPath) as! CollectionViewCellForList
       if !isEditing {
+        let recipe = favoriteRecipes[indexPath.row]
+        selectedRecipeId = recipe.firebaseId
         self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
       } else {
         self.toolBar.isHidden = false
@@ -243,6 +243,10 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
+      print("pass: \(destVC.collectionId)")
+    } else if segue.identifier == "goToDetail" {
+      let destVC = segue.destination as! DetailVC
+      destVC.recipeId = selectedRecipeId
     }
   }
   
