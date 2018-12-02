@@ -35,10 +35,9 @@
                 <constraints>
                     <constraint firstItem="xcG-Gx-ETa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3sD-kl-9la"/>
                     <constraint firstItem="xcG-Gx-ETa" firstAttribute="leading" secondItem="yQO-Ve-yKs" secondAttribute="trailing" constant="16" id="CdB-AY-WIH"/>
-                    <constraint firstItem="yQO-Ve-yKs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ieq-7w-EQS"/>
-                    <constraint firstItem="yQO-Ve-yKs" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="QLz-fX-B3Y"/>
                     <constraint firstAttribute="trailingMargin" secondItem="xcG-Gx-ETa" secondAttribute="trailing" id="a5Z-Od-HHf"/>
                     <constraint firstItem="yQO-Ve-yKs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="l5S-ao-UoG"/>
+                    <constraint firstItem="yQO-Ve-yKs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pGx-D2-KrE"/>
                     <constraint firstAttribute="bottomMargin" secondItem="xcG-Gx-ETa" secondAttribute="bottom" id="vz9-9Q-6nX"/>
                 </constraints>
             </tableViewCellContentView>
