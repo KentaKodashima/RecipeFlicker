@@ -34,6 +34,8 @@ class CollectionViewCellForList: UICollectionViewCell {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     label.textAlignment = .center
+//    label.numberOfLines = 3
+//    label.minimumScaleFactor = 0.5
     return label
   }()
   
