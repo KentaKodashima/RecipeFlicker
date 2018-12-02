@@ -96,6 +96,7 @@ class SelectReciepsToAddVC: UIViewController {
             for collectionId in whichCollectionToBelong.keys {
               whichCollectionToBelongList.append(collectionId)
             }
+            print("CHK!----- \(whichCollectionToBelong)")
           }
           let favoriteRecipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
@@ -132,6 +133,10 @@ extension SelectReciepsToAddVC: UITableViewDataSource {
     return favoriteRecipes.count
   }
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeListTableViewCell") as! RecipeListTableViewCell
     let recipe = favoriteRecipes[indexPath.row]
@@ -141,7 +146,6 @@ extension SelectReciepsToAddVC: UITableViewDataSource {
     cell.recipeImage.clipsToBounds = true
     cell.recipeTitle.text = recipe.title
     cell.tintColor = #colorLiteral(red: 0.9473584294, green: 0.5688932538, blue: 0, alpha: 1)
-    
     return cell
   }
 }
