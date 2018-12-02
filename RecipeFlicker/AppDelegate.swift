@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().barTintColor = theme
     UITabBar.appearance().tintColor = accent
     UITabBar.appearance().isTranslucent = false
+    UITabBar.appearance().layer.borderColor = AppColors.theme.value.cgColor
+    UITabBar.appearance().clipsToBounds = true
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     
     // TODO: Delete ----------
