@@ -17,14 +17,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="304" height="306"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-XP-FiX">
-                    <rect key="frame" x="16" y="16" width="268" height="216.5"/>
+                    <rect key="frame" x="16" y="16" width="272" height="222.5"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-0r-fXv">
-                    <rect key="frame" x="16" y="240.5" width="268" height="45.5"/>
+                    <rect key="frame" x="16" y="246.5" width="272" height="45.5"/>
                     <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="32"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -38,13 +38,12 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eGp-0r-fXv" secondAttribute="trailing" constant="16" id="NTK-ui-VXZ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="eGp-0r-fXv" secondAttribute="bottom" constant="14" id="WT5-wE-Nzk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LKR-XP-FiX" secondAttribute="trailing" constant="16" id="WcA-6K-WEt"/>
-                <constraint firstItem="eGp-0r-fXv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="adE-dd-0er"/>
                 <constraint firstItem="eGp-0r-fXv" firstAttribute="top" secondItem="LKR-XP-FiX" secondAttribute="bottom" constant="8" id="ozV-tK-aqW"/>
                 <constraint firstItem="LKR-XP-FiX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="pv3-Yc-FNF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="138.40000000000001" y="125.4872563718141"/>
+            <point key="canvasLocation" x="278.39999999999998" y="44.977511244377816"/>
         </view>
     </objects>
     <resources>
