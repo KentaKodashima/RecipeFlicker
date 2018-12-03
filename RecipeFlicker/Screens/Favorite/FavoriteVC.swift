@@ -38,22 +38,15 @@ class FavoriteVC: UIViewController {
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
-      print(userID)
       for child in snapshot.children {
-        print(child)
         if let recipe = (child as! DataSnapshot).value as? [String: Any]
         {
           
           let id = recipe["firebaseId"] as! String
-          print(id)
           let url = recipe["originalRecipeUrl"] as! String
-          print(url)
           let title = recipe["title"] as! String
-          print(title)
           let image = recipe["image"] as! String
-          print(image)
           let isFavotiteLiteral = recipe["isFavorite"]  as! String
-          print("whichCollectionToBelongList------")
           let whichCollectionToBelongList = List<String>()
           if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
             for collectionId in whichCollectionToBelong as! NSArray {
@@ -62,11 +55,8 @@ class FavoriteVC: UIViewController {
           }
           let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
-          print(self.favoriteRecipes)
-          print("count in for loop : \(self.favoriteRecipes.count)")
         }
       }
-      print("count: \(self.favoriteRecipes.count)")
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -187,13 +177,21 @@ class FavoriteVC: UIViewController {
   }
   
   func deleteItemFromFirebase(recipe: Recipe) {
+    // Delete items from favorite
     ref.child("favorites").child(userID).child(recipe.firebaseId).removeValue()
-    // TODO: Delete items from collections
+    // Delete items from collections
     for collectionId in recipe.whichCollectionToBelong {
       let ref = Database.database().reference()
-      print(collectionId)
-      print("recipeID: \(recipe.firebaseId)")
       ref.child("recipeCollections/\(collectionId)/\(recipe.firebaseId)").removeValue()
+      checkIfCollectionIsEmpty(collectionId: collectionId)
+    }
+  }
+  
+  func checkIfCollectionIsEmpty(collectionId: String) {
+    ref.child("recipeCollections").child(collectionId).observe(.value) { (snapshot) in
+      if !snapshot.exists() {
+        self.ref.child("userCollections").child(self.userID!).child(collectionId).removeValue()
+      }
     }
   }
   
@@ -260,7 +258,6 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
-      print("pass: \(destVC.collectionId)")
     } else if segue.identifier == "goToDetail" {
       let destVC = segue.destination as! DetailVC
       destVC.recipeId = selectedRecipeId
