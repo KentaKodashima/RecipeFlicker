@@ -33,6 +33,9 @@ class CollectionVC: UIViewController {
     ref = Database.database().reference()
     userId = Auth.auth().currentUser?.uid
     getCollectionRecipes(collectionId: collectionId)
+    
+    //    remove separator lines from empty cells.
+    tableView.tableFooterView = UIView(frame: .zero)
   }
   
   func registerTableViewCells() {

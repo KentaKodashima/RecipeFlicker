@@ -46,6 +46,9 @@ class SelectReciepsToAddVC: UIViewController {
     
     recipeTableView.allowsMultipleSelectionDuringEditing = true
     recipeTableView.setEditing(true, animated: false)
+    
+//    remove separator lines from empty cells.
+    recipeTableView.tableFooterView = UIView(frame: .zero)
   }
   
   // MARK: - Actions
