@@ -33,14 +33,14 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" identifier="CardView"/>
             <constraints>
-                <constraint firstItem="eGp-0r-fXv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8BB-hi-Kba"/>
-                <constraint firstItem="LKR-XP-FiX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="8eL-g9-AGK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eGp-0r-fXv" secondAttribute="trailing" constant="16" id="NTK-ui-VXZ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="eGp-0r-fXv" secondAttribute="bottom" constant="14" id="WT5-wE-Nzk"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LKR-XP-FiX" secondAttribute="trailing" constant="16" id="WcA-6K-WEt"/>
+                <constraint firstItem="eGp-0r-fXv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="8BB-hi-Kba"/>
+                <constraint firstItem="LKR-XP-FiX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="8eL-g9-AGK"/>
+                <constraint firstAttribute="trailing" secondItem="eGp-0r-fXv" secondAttribute="trailing" constant="16" id="NTK-ui-VXZ"/>
+                <constraint firstAttribute="bottom" secondItem="eGp-0r-fXv" secondAttribute="bottom" constant="14" id="WT5-wE-Nzk"/>
+                <constraint firstAttribute="trailing" secondItem="LKR-XP-FiX" secondAttribute="trailing" constant="16" id="WcA-6K-WEt"/>
                 <constraint firstItem="eGp-0r-fXv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="adE-dd-0er"/>
                 <constraint firstItem="eGp-0r-fXv" firstAttribute="top" secondItem="LKR-XP-FiX" secondAttribute="bottom" constant="8" id="ozV-tK-aqW"/>
-                <constraint firstItem="LKR-XP-FiX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="pv3-Yc-FNF"/>
+                <constraint firstItem="LKR-XP-FiX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="pv3-Yc-FNF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
