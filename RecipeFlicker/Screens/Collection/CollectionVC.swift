@@ -44,20 +44,20 @@ class CollectionVC: UIViewController {
     ref.child("recipeCollections").child(collectionId!).observe(.value) { (snapshot) in
       self.collectionRecipes.removeAll()
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String:String] {
-          let id = recipe["firebaseId"]
-          let url = recipe["originalRecipeUrl"]
-          let title = recipe["title"]
-          let image = recipe["image"]
-          let isFavotiteLiteral = recipe["isFavorite"]
-          var whichCollectionToBelongList = List<String>()
+        if let recipe = (child as! DataSnapshot).value as? [String:Any] {
+          let id = recipe["firebaseId"] as! String
+          let url = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let isFavotiteLiteral = recipe["isFavorite"] as! String
+          let whichCollectionToBelongList = List<String>()
           if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
             for collectionId in whichCollectionToBelong.keys {
               whichCollectionToBelongList.append(collectionId)
             }
           }
           
-          let recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
+          let recipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.collectionRecipes.append(recipe)
         }
         
@@ -88,6 +88,10 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return collectionRecipes.count
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

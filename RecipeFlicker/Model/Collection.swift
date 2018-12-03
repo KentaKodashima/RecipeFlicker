@@ -41,8 +41,15 @@ extension Collection {
     
     let recipeCollectionsRefPath = "recipeCollections/" + key
     for recipe in recipes {
+      recipe.whichCollectionToBelong.append(key)
+      recipe.updateWhichCollectionToBelong(userId: userId)
       Database.database().reference(withPath: recipeCollectionsRefPath)
         .child(recipe.firebaseId).setValue(recipe.convertToJSON())
     }
+  }
+  
+  func deleteRecipeFromCollection(recipe: Recipe) {
+    let ref = Database.database().reference()
+    ref.child("recipeCollections/\(self.firebaseId)/\(recipe.firebaseId)").removeValue()
   }
 }

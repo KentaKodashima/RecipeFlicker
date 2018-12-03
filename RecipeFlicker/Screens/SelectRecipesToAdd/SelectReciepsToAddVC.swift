@@ -67,7 +67,7 @@ class SelectReciepsToAddVC: UIViewController {
       for indexPath in indexPaths {
         collectionItems.append(favoriteRecipes[indexPath.row])
       }
-      var collection = Collection(withName: collectionName,
+      let collection = Collection(withName: collectionName,
                                   andImageUrl: collectionItems[collectionItems.count - 1].image)
       collection.saveToFirebase(userId: userID!, recipes: collectionItems)
 
@@ -85,20 +85,19 @@ class SelectReciepsToAddVC: UIViewController {
     userRef.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String: String] {
-          let id = recipe["firebaseId"]
-          let url = recipe["originalRecipeUrl"]
-          let title = recipe["title"]
-          let image = recipe["image"]
-          let isFavotiteLiteral = recipe["isFavorite"]
-          var whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-            for collectionId in whichCollectionToBelong.keys {
-              whichCollectionToBelongList.append(collectionId)
+        if let recipe = (child as! DataSnapshot).value as? [String: Any] {
+          let id = recipe["firebaseId"] as! String
+          let url = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let isFavotiteLiteral = recipe["isFavorite"] as! String
+          let whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
             }
-            print("CHK!----- \(whichCollectionToBelong)")
           }
-          let favoriteRecipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
+          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }

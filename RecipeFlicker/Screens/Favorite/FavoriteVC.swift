@@ -38,24 +38,35 @@ class FavoriteVC: UIViewController {
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
+      print(userID)
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String: String],
-          let id = recipe["firebaseId"],
-          let url = recipe["originalRecipeUrl"],
-          let title = recipe["title"],
-          let image = recipe["image"],
-          let isFavotiteLiteral = recipe["isFavorite"]
+        print(child)
+        if let recipe = (child as! DataSnapshot).value as? [String: Any]
         {
+          
+          let id = recipe["firebaseId"] as! String
+          print(id)
+          let url = recipe["originalRecipeUrl"] as! String
+          print(url)
+          let title = recipe["title"] as! String
+          print(title)
+          let image = recipe["image"] as! String
+          print(image)
+          let isFavotiteLiteral = recipe["isFavorite"]  as! String
+          print("whichCollectionToBelongList------")
           let whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-            for collectionId in whichCollectionToBelong.keys {
-              whichCollectionToBelongList.append(collectionId)
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
             }
           }
           let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
+          print(self.favoriteRecipes)
+          print("count in for loop : \(self.favoriteRecipes.count)")
         }
       }
+      print("count: \(self.favoriteRecipes.count)")
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -178,6 +189,12 @@ class FavoriteVC: UIViewController {
   func deleteItemFromFirebase(recipe: Recipe) {
     ref.child("favorites").child(userID).child(recipe.firebaseId).removeValue()
     // TODO: Delete items from collections
+    for collectionId in recipe.whichCollectionToBelong {
+      let ref = Database.database().reference()
+      print(collectionId)
+      print("recipeID: \(recipe.firebaseId)")
+      ref.child("recipeCollections/\(collectionId)/\(recipe.firebaseId)").removeValue()
+    }
   }
   
 }

@@ -81,4 +81,10 @@ extension Recipe {
     
     return recipeDict
   }
+  
+  func updateWhichCollectionToBelong(userId: String) {
+    let ref = Database.database().reference()
+    ref.child("favorites/\(userId)/\(self.firebaseId)/whichCollectionToBelong")
+      .setValue(self.whichCollectionToBelong.toArray(ofType: String.self))
+  }
 }

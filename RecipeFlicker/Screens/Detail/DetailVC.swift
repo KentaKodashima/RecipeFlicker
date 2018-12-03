@@ -40,19 +40,19 @@ class DetailVC: UIViewController {
   private func getRecipeFromFirebase() {
     recipeRef = userRef.child("favorites").child(userId!).child(recipeId!)
     recipeRef.observe(.value) { (snapshot) in
-      if let recipe = snapshot.value as? [String: String] {
-        let id = recipe["firebaseId"]
-        let url = recipe["originalRecipeUrl"]
-        let title = recipe["title"]
-        let image = recipe["image"]
-        let isFavotiteLiteral = recipe["isFavorite"]
-        var whichCollectionToBelongList = List<String>()
-        if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-          for collectionId in whichCollectionToBelong.keys {
-            whichCollectionToBelongList.append(collectionId)
+      if let recipe = snapshot.value as? [String: Any] {
+        let id = recipe["firebaseId"] as! String
+        let url = recipe["originalRecipeUrl"] as! String
+        let title = recipe["title"] as! String
+        let image = recipe["image"] as! String
+        let isFavotiteLiteral = recipe["isFavorite"] as! String
+        let whichCollectionToBelongList = List<String>()
+        if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+          for collectionId in whichCollectionToBelong as! NSArray {
+            whichCollectionToBelongList.append(collectionId as! String)
           }
         }
-        self.recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
+        self.recipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
         self.sendRequest(urlString: self.recipe.originalRecipeUrl)
         self.setToolBar()
         self.setActivityIndicator()
