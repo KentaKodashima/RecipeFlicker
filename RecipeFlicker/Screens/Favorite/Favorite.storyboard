@@ -68,6 +68,13 @@
                                 <rect key="frame" x="0.0" y="574" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rog-xk-Kzu"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dmc-1A-ONp"/>
+                                    <barButtonItem title="AddTo" id="9Dx-cs-Iqq">
+                                        <connections>
+                                            <action selector="addTo:" destination="hhK-yq-OKT" id="yo1-rE-2vh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yQ9-fS-vKC"/>
                                     <barButtonItem title="Delete" id="fTz-YO-ci7">
                                         <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>

@@ -70,8 +70,6 @@ class HomeVC: UIViewController {
   fileprivate func createUserIfThereIsNone() {
     // Create new user in both Core Data and Firebase, if there is none
     Auth.auth().signInAnonymously() { (authResult, error) in
-      print(authResult)
-      print(error)
       if self.rlmUser == nil {
         let user = authResult?.user
         let uid = user?.uid
