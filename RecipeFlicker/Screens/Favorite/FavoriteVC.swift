@@ -161,6 +161,17 @@ class FavoriteVC: UIViewController {
     }
 
   }
+  @IBAction func addTo(_ sender: UIBarButtonItem) {
+    showCollectionsToAdd()
+  }
+  
+  func showCollectionsToAdd() {
+    let collectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+    collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+    collectionView.alpha = 0.7
+    self.view.addSubview(collectionView)
+  }
+  
   @IBAction func deleteItems(_ sender: UIBarButtonItem) {
     // update model
     if let indexPaths = collectionView.indexPathsForSelectedItems {
