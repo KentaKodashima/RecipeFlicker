@@ -20,6 +20,8 @@ extension UITableView {
     noDataLabel.textColor = AppColors.appText.value
     noDataLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 18)
     noDataLabel.textAlignment = .center
+    noDataLabel.baselineAdjustment = .alignCenters
+    noDataLabel.lineBreakMode = .byClipping
     self.separatorStyle = .none
     self.backgroundView = noDataLabel
   }

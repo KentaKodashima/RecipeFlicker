@@ -33,7 +33,8 @@ class FavoriteVC: UIViewController {
   let recipeFactory = ReplicaRecipeFactory()
   var favoriteRecipes = [Recipe]()
   var collections = [Collection]()
-  
+  var isAddToMode = false
+  var addToView: UIView!
   
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
@@ -111,6 +112,9 @@ class FavoriteVC: UIViewController {
     // isEditing
     // override func setEditing(_ editing: Bool, animated: Bool)
     toolBar.isHidden = true
+    
+    // CollectionView
+    addToView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
@@ -158,18 +162,29 @@ class FavoriteVC: UIViewController {
       self.editButtonItem.title = "Cancel"
     } else {
       self.toolBar.isHidden = true
+      isAddToMode = false
+      toggleCollectionView()
     }
 
   }
   @IBAction func addTo(_ sender: UIBarButtonItem) {
-    showCollectionsToAdd()
+    isAddToMode = true
+    toggleCollectionView()
   }
   
-  func showCollectionsToAdd() {
-    let collectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-    collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-    collectionView.alpha = 0.7
-    self.view.addSubview(collectionView)
+  func toggleCollectionView() {
+    if isAddToMode {
+      self.view.addSubview(addToView)
+      let addToCollectionView = UICollectionView(frame: addToView.frame, collectionViewLayout: gridLayout)
+      addToCollectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      addToCollectionView.delegate = self
+      addToCollectionView.dataSource = self
+      addToCollectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+      addToView.addSubview(addToCollectionView)
+    } else {
+      self.addToView.removeFromSuperview()
+    }
+
   }
   
   @IBAction func deleteItems(_ sender: UIBarButtonItem) {
@@ -211,23 +226,37 @@ class FavoriteVC: UIViewController {
 extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      if favoriteRecipes.count > 0 {
-        return favoriteRecipes.count
-      } else {
-        return 0
-      }
-    } else {
+    if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
       if collections.count > 0 {
         return collections.count
       } else {
         return 0
       }
+
+    } else {
+      if favoriteRecipes.count > 0 {
+        return favoriteRecipes.count
+      } else {
+        return 0
+      }
+
     }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
+    if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
+      print("Count: \(collections.count)")
+      print("Row: \(indexPath.row)")
+      let collection = collections[indexPath.row]
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
+        for: indexPath)
+        as! CollectionViewCellForGrid
+      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
+      return cell
+    } else
+    //if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
+    {
       let recipe = favoriteRecipes[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
@@ -236,19 +265,35 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       cell.toggleEditMode(isEditing: isEditing)
       return cell
-    } else {
-      let collection = collections[indexPath.row]
-      let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
-        for: indexPath)
-        as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
-      return cell
-    }
+    } //else {
+//      let collection = collections[indexPath.row]
+//      let cell = collectionView.dequeueReusableCell(
+//        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
+//        for: indexPath)
+//        as! CollectionViewCellForGrid
+//      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
+//      return cell
+//    }
   }
   
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if isAddToMode {
+      let collection = collections[indexPath.row]
+      // update model
+      if let indexPaths = collectionView.indexPathsForSelectedItems {
+        let indices = indexPaths.map { $0.item }.sorted().reversed()
+        for index in indices {
+          let recipe = favoriteRecipes[index]
+          if let collectionId = collection.firebaseId {
+            // TODO: Check Hash
+            recipe.whichCollectionToBelong.append(collectionId)
+            recipe.updateWhichCollectionToBelong(userId: userID)
+            // TODO: update firebase -> append recipeCollection
+          }
+        }
+      }
+    }
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if !isEditing {
         let recipe = favoriteRecipes[indexPath.row]
