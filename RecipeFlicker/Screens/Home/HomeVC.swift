@@ -216,11 +216,12 @@ extension HomeVC: KolodaViewDataSource {
   }
   
   func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-    let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height - buttonStack.frame.height))
     let recipe = rlmUser.recipesOfTheDay[index]
     let noImage = UIImage(named: "NoImage")
     let imageUrl = URL(string: recipe.image)!
     
+    card.layoutIfNeeded()
     card.clipsToBounds = true
     card.layer.cornerRadius = card.frame.size.width * 0.1
     card.cardImage.kf.setImage(with: imageUrl, completionHandler: {
