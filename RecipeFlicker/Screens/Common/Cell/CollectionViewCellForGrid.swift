@@ -53,10 +53,15 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   
   private func setupImageConstraints() {
     recipeImage.translatesAutoresizingMaskIntoConstraints = false
-    recipeImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    recipeImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
-    recipeImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+    recipeImage.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    recipeImage.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    recipeImage.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    recipeImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+//    recipeImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//    recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//    recipeImage.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
+//    recipeImage.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
+    
   }
   
   func setupContents(withTitle title: String, andImage image: String) {

@@ -11,17 +11,18 @@ import UIKit
 class GridFlowLayout: UICollectionViewFlowLayout {
 
   func itemWidth() -> CGFloat {
-    return (collectionView!.frame.width - 10) / 2
+    return ((collectionView!.frame.width) - 40) / 2
   }
   
   func setUpLayout() {
-    minimumInteritemSpacing = 1
-    minimumLineSpacing = 1
+    minimumLineSpacing = 40
+    self.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     scrollDirection = .vertical
   }
   
   override init() {
     super.init()
+    setUpLayout()
   }
   
   required init?(coder aDecoder: NSCoder) {
