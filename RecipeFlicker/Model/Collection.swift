@@ -56,7 +56,6 @@ extension Collection {
     let recipeCollectionsRefPath = "recipeCollections/" + self.firebaseId!
     Database.database().reference(withPath: recipeCollectionsRefPath)
       .child(recipe.firebaseId).setValue(recipe.convertToJSON())
-    print("UPDATE -> [\(self.firebaseId)] \(self.name)")
   }
   
   func deleteRecipeFromCollection(recipe: Recipe) {

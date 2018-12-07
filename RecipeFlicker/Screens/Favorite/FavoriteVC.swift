@@ -176,7 +176,6 @@ class FavoriteVC: UIViewController {
   @IBAction func addTo(_ sender: UIBarButtonItem) {
     guard let indexPaths = collectionView.indexPathsForSelectedItems else { return }
     indexPathsOfSelectedItems = indexPaths.map { $0.item }.sorted().reversed()
-    print("indexPaths: \(indexPathsOfSelectedItems)")
     isAddToMode = true
     toggleCollectionView()
   }
@@ -286,27 +285,19 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if isAddToMode {
-      print("Clicked!--- Collection is selected.")
       let collection = filteredCollections[indexPath.row]
-      print("Selected collection is -> \(collection.name)")
       // update model
       if let indices = indexPathsOfSelectedItems {
         for index in indices {
           let recipe = filteredFavoriteRecipes[index]
           if let collectionId = collection.firebaseId {
-            // TODO: Check Hash
-            print("Index(\(index)) - Recipe: \(recipe.title)/\(recipe.whichCollectionToBelong)")
             if !recipe.whichCollectionToBelong.contains(collectionId) {
               recipe.whichCollectionToBelong.append(collectionId)
               for id in recipe.whichCollectionToBelong {
                 recipe.updateRecipeInCollection(collectionId: id)
               }
-              print("This recipe doesn't belong to ID[\(collectionId)] \"\(collection.name)\"")
               recipe.updateWhichCollectionToBelong(userId: userID)
-              print("Update the recipe @favorite ref and @recipeCollections.")
               collection.updateRecipeCollection(recipe: recipe)
-            } else {
-              print("This recipe already belong to ID[\(collectionId)] \"\(collection.name)\"")
             }
           }
         }

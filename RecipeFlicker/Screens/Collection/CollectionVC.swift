@@ -118,13 +118,8 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     let deleteItem = self.collectionRecipes.remove(at: indexPath.row)
-    print(deleteItem)
-    print(collectionId)
-    print(deleteItem.whichCollectionToBelong.index(of: collectionId!))
     if let index = deleteItem.whichCollectionToBelong.index(of: collectionId!) {
       deleteItem.whichCollectionToBelong.remove(at: index)
-      print(deleteItem)
-      print(deleteItem.whichCollectionToBelong)
       deleteItem.updateWhichCollectionToBelong(userId: userId!)
       for id in deleteItem.whichCollectionToBelong {
         deleteItem.updateRecipeInCollection(collectionId: id)
