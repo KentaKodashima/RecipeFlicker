@@ -20,12 +20,22 @@ class CollectionViewCellForList: UICollectionViewCell {
   private var selectedImage = UIImage(named: "checkmark")
   private var deselectedImage = UIImage(named: "defaultCheck")
   
-  lazy var stackView: UIStackView = {
-    let stackView = UIStackView(arrangedSubviews: [checkBoxImage, recipeImage, titleLabel])
+  lazy var parentStackView: UIStackView = {
+    let stackView = UIStackView(arrangedSubviews: [checkBoxImage, childStackView])
     stackView.alignment = .center
-    stackView.distribution = .fillProportionally
+    stackView.distribution = .fill
     stackView.axis = .horizontal
     stackView.spacing = 8
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
+  
+  lazy var childStackView: UIStackView = {
+    let stackView = UIStackView(arrangedSubviews: [recipeImage, titleLabel])
+    stackView.alignment = .center
+    stackView.distribution = .fill
+    stackView.axis = .horizontal
+    stackView.spacing = 16
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -35,7 +45,9 @@ class CollectionViewCellForList: UICollectionViewCell {
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     label.numberOfLines = 3
     label.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+    label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.5
+//    label.setContentHuggingPriority(UILayoutPriority(rawValue: 100), for: .horizontal)
     return label
   }()
   
@@ -66,7 +78,7 @@ class CollectionViewCellForList: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(stackView)
+    addSubview(parentStackView)
     setupStackViewConstraints()
     setupCheckBoxConstraints()
     setupImageConstraints()
@@ -79,11 +91,11 @@ class CollectionViewCellForList: UICollectionViewCell {
   }
   
   private func setupStackViewConstraints() {
-    stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
+    parentStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor,
                                        constant: 8).isActive = true
-    stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor,
-                                        constant: 8).isActive = true
-    stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    parentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                        constant: -16).isActive = true
+    parentStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
   func setupImageConstraints() {
