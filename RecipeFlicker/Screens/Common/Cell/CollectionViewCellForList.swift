@@ -33,9 +33,9 @@ class CollectionViewCellForList: UICollectionViewCell {
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    label.textAlignment = .center
-//    label.numberOfLines = 3
-//    label.minimumScaleFactor = 0.5
+    label.numberOfLines = 3
+    label.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+    label.minimumScaleFactor = 0.5
     return label
   }()
   
