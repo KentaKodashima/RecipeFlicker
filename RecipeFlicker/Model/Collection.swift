@@ -62,5 +62,6 @@ extension Collection {
   func deleteRecipeFromCollection(recipe: Recipe) {
     let ref = Database.database().reference()
     ref.child("recipeCollections/\(self.firebaseId)/\(recipe.firebaseId)").removeValue()
+
   }
 }
