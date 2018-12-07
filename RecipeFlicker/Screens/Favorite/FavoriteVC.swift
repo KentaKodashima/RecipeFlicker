@@ -35,6 +35,7 @@ class FavoriteVC: UIViewController {
   var collections = [Collection]()
   var isAddToMode = false
   var addToView: UIView!
+  var indexPathsOfSelectedItems: [Int]?
   
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
@@ -168,6 +169,9 @@ class FavoriteVC: UIViewController {
 
   }
   @IBAction func addTo(_ sender: UIBarButtonItem) {
+    guard let indexPaths = collectionView.indexPathsForSelectedItems else { return }
+    indexPathsOfSelectedItems = indexPaths.map { $0.item }.sorted().reversed()
+    print("indexPaths: \(indexPathsOfSelectedItems)")
     isAddToMode = true
     toggleCollectionView()
   }
@@ -245,8 +249,6 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
-      print("Count: \(collections.count)")
-      print("Row: \(indexPath.row)")
       let collection = collections[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
@@ -279,20 +281,35 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if isAddToMode {
+      print("Clicked!--- Collection is selected.")
       let collection = collections[indexPath.row]
+      print("Selected collection is -> \(collection.name)")
       // update model
-      if let indexPaths = collectionView.indexPathsForSelectedItems {
-        let indices = indexPaths.map { $0.item }.sorted().reversed()
+      if let indices = indexPathsOfSelectedItems {
         for index in indices {
           let recipe = favoriteRecipes[index]
           if let collectionId = collection.firebaseId {
             // TODO: Check Hash
-            recipe.whichCollectionToBelong.append(collectionId)
-            recipe.updateWhichCollectionToBelong(userId: userID)
-            // TODO: update firebase -> append recipeCollection
+            print("Index(\(index)) - Recipe: \(recipe.title)/\(recipe.whichCollectionToBelong)")
+            if !recipe.whichCollectionToBelong.contains(collectionId) {
+              recipe.whichCollectionToBelong.append(collectionId)
+              for id in recipe.whichCollectionToBelong {
+                recipe.updateRecipeInCollection(collectionId: id)
+              }
+              print("This recipe doesn't belong to ID[\(collectionId)] \"\(collection.name)\"")
+              recipe.updateWhichCollectionToBelong(userId: userID)
+              print("Update the recipe @favorite ref and @recipeCollections.")
+              collection.updateRecipeCollection(recipe: recipe)
+            } else {
+              print("This recipe already belong to ID[\(collectionId)] \"\(collection.name)\"")
+            }
           }
         }
       }
+      isAddToMode = false
+      isEditing = false
+      return
+//      toggleCollectionView()
     }
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if !isEditing {
