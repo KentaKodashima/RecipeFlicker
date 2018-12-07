@@ -38,11 +38,20 @@
                     <connections>
                         <outlet property="editButton" destination="nGp-tD-Y4K" id="5mK-Cn-cYf"/>
                         <outlet property="tableView" destination="RPf-fP-h8g" id="CGk-To-RBY"/>
+                        <segue destination="TFd-1Z-DIH" kind="show" identifier="goToDetail" id="1iQ-Dd-AA4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gO-hT-GDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1084" y="-20.239880059970016"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="aCx-r6-tvE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Detail" id="TFd-1Z-DIH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EvS-Zg-yPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1769" y="8"/>
         </scene>
     </scenes>
 </document>
