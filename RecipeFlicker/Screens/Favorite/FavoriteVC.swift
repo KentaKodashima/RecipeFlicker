@@ -102,6 +102,8 @@ class FavoriteVC: UIViewController {
     searchBar.setSearchBar()
     searchBar.delegate = self
     
+    self.hideKeyBoard()
+    
     ref = Database.database().reference()
     userID = Auth.auth().currentUser?.uid
     
@@ -364,6 +366,21 @@ extension FavoriteVC: UISearchBarDelegate {
 //      pages = realm.objects(Page.self).filter("pageTitle CONTAINS[cd] %@", searchText)
 //      self.tableView.reloadData()
     }
+  }
+}
+
+extension FavoriteVC {
+  func hideKeyBoard() {
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+      target: self,
+      action: #selector(FavoriteVC.dismissKeyBoard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
+    
+  }
+  
+  @objc func dismissKeyBoard() {
+    view.endEditing(true)
   }
 }
 
