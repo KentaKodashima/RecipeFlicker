@@ -113,7 +113,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="ORM-Se-Cbw" id="dUN-QV-gQS"/>
-                        <outlet property="searchBar" destination="Xn8-3a-qvT" id="eXK-yK-8ac"/>
+                        <outlet property="searchBar" destination="Xn8-3a-qvT" id="iJm-Bl-QPD"/>
                         <outlet property="searchDisplayController" destination="lxq-Yj-vf7" id="TfV-n0-trf"/>
                         <outlet property="toolBar" destination="Hef-Av-5nL" id="VUd-ks-zho"/>
                         <outlet property="typeSegmentControll" destination="sti-9O-CDd" id="9Qp-Za-WZt"/>
@@ -125,7 +125,6 @@
                 <searchDisplayController id="lxq-Yj-vf7">
                     <connections>
                         <outlet property="delegate" destination="hhK-yq-OKT" id="Wnb-SH-Ra2"/>
-                        <outlet property="searchBar" destination="Xn8-3a-qvT" id="iz1-D0-Lab"/>
                         <outlet property="searchContentsController" destination="hhK-yq-OKT" id="gik-lh-vjT"/>
                         <outlet property="searchResultsDataSource" destination="hhK-yq-OKT" id="rXX-Dy-K5O"/>
                         <outlet property="searchResultsDelegate" destination="hhK-yq-OKT" id="15n-ZB-HMn"/>
