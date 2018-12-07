@@ -19,7 +19,7 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   private var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    label.font = UIFont.boldSystemFont(ofSize: 24)
+    label.font = UIFont(name: "ChalkboardSE-Regular", size: 21)
     return label
   }()
   
