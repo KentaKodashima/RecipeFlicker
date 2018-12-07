@@ -55,12 +55,11 @@ class CollectionVC: UIViewController {
           let image = recipe["image"] as! String
           let isFavotiteLiteral = recipe["isFavorite"] as! String
           let whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-            for collectionId in whichCollectionToBelong.keys {
-              whichCollectionToBelongList.append(collectionId)
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
             }
           }
-          
           let recipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.collectionRecipes.append(recipe)
         }
@@ -119,6 +118,18 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     let deleteItem = self.collectionRecipes.remove(at: indexPath.row)
+    print(deleteItem)
+    print(collectionId)
+    print(deleteItem.whichCollectionToBelong.index(of: collectionId!))
+    if let index = deleteItem.whichCollectionToBelong.index(of: collectionId!) {
+      deleteItem.whichCollectionToBelong.remove(at: index)
+      print(deleteItem)
+      print(deleteItem.whichCollectionToBelong)
+      deleteItem.updateWhichCollectionToBelong(userId: userId!)
+      for id in deleteItem.whichCollectionToBelong {
+        deleteItem.updateRecipeInCollection(collectionId: id)
+      }
+    }
     self.tableView.deleteRows(at: [indexPath], with: .automatic)
     deleteDataFromFirebase(recipeId: deleteItem.firebaseId)
   }
