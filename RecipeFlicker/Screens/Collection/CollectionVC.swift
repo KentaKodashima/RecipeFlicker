@@ -19,6 +19,7 @@ class CollectionVC: UIViewController {
   var isEditingMode: Bool = false
   var collectionId: String?
   var userId: String?
+  var selectedRecipeId: String?
   
   private var collectionRecipes = [Recipe]()
   
@@ -27,7 +28,7 @@ class CollectionVC: UIViewController {
     
     tableView.delegate = self
     tableView.dataSource = self
-
+    
     registerTableViewCells()
     
     ref = Database.database().reference()
@@ -111,6 +112,9 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    let recipe = collectionRecipes[indexPath.row]
+    selectedRecipeId = recipe.firebaseId
+    self.performSegue(withIdentifier: "goToDetail", sender: self.tableView)
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -119,4 +123,11 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
     deleteDataFromFirebase(recipeId: deleteItem.firebaseId)
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "goToDetail" {
+      let destVC = segue.destination as! DetailVC
+      destVC.recipeId = selectedRecipeId
+    }
+    
+  }
 }
