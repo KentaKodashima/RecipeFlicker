@@ -17,6 +17,7 @@ class AddCollectionVC: UIViewController {
   // MARK: - Properties
   private var nextButton: UIBarButtonItem!
   
+  // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
