@@ -83,6 +83,8 @@ class HomeVC: UIViewController {
         self.userRef = Database.database().reference()
         self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.rlmUser!.userId)
         
+        self.userId = self.rlmUser!.userId
+        
         // Fetch recipes and setKolodaView
         self.fetchRecipesToBind()
       } else {
@@ -214,11 +216,12 @@ extension HomeVC: KolodaViewDataSource {
   }
   
   func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
-    let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    let card = CardView(frame: CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height - buttonStack.frame.height))
     let recipe = rlmUser.recipesOfTheDay[index]
     let noImage = UIImage(named: "NoImage")
     let imageUrl = URL(string: recipe.image)!
     
+    card.layoutIfNeeded()
     card.clipsToBounds = true
     card.layer.cornerRadius = card.frame.size.width * 0.1
     card.cardImage.kf.setImage(with: imageUrl, completionHandler: {
@@ -233,6 +236,10 @@ extension HomeVC: KolodaViewDataSource {
     card.translatesAutoresizingMaskIntoConstraints = false
     
     return card
+  }
+  
+  func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+    return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
   }
 }
 

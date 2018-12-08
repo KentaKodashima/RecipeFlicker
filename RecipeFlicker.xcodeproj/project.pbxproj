@@ -23,6 +23,8 @@
 		ED0AFC152175C739009A2976 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC142175C739009A2976 /* Home.storyboard */; };
 		ED0AFC182175C791009A2976 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED0AFC172175C791009A2976 /* Detail.storyboard */; };
 		ED0AFC1A2175C7A1009A2976 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0AFC192175C7A1009A2976 /* DetailVC.swift */; };
+		ED24C79721B4A291004CE74F /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED24C79621B4A291004CE74F /* CustomOverlayView.xib */; };
+		ED24C79921B4A2AC004CE74F /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED24C79821B4A2AC004CE74F /* CustomOverlayView.swift */; };
 		ED3A4C0521A0CC40003DDF31 /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */; };
 		ED414A84218269F200903FE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED414A83218269F200903FE3 /* GoogleService-Info.plist */; };
 		ED422676218FC807004F92BA /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED422675218FC807004F92BA /* Collection.swift */; };
@@ -98,6 +100,8 @@
 		ED0AFC172175C791009A2976 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		ED0AFC192175C7A1009A2976 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		ED0AFC1B2175CBF5009A2976 /* GUIDELINE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = GUIDELINE.md; sourceTree = "<group>"; };
+		ED24C79621B4A291004CE74F /* CustomOverlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
+		ED24C79821B4A2AC004CE74F /* CustomOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
 		ED3A4C0421A0CC40003DDF31 /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
 		ED414A83218269F200903FE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED422675218FC807004F92BA /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -205,6 +209,17 @@
 				ED0AFC172175C791009A2976 /* Detail.storyboard */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		ED24C79121B4A1F9004CE74F /* KolodaView */ = {
+			isa = PBXGroup;
+			children = (
+				EDC84666217FFD3600C3543A /* CardView.swift */,
+				ED00508921802CDD00038FBA /* CardView.xib */,
+				ED24C79821B4A2AC004CE74F /* CustomOverlayView.swift */,
+				ED24C79621B4A291004CE74F /* CustomOverlayView.xib */,
+			);
+			path = KolodaView;
 			sourceTree = "<group>";
 		};
 		ED599C7E21757B3C0007E929 = {
@@ -363,10 +378,9 @@
 		EDC84662217FFB9600C3543A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ED24C79121B4A1F9004CE74F /* KolodaView */,
 				EDAC6202218E16D000C2DB22 /* CollectionViewLayout */,
 				EDC84663217FFBA400C3543A /* Cell */,
-				EDC84666217FFD3600C3543A /* CardView.swift */,
-				ED00508921802CDD00038FBA /* CardView.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -513,6 +527,7 @@
 				ED00508A21802CDD00038FBA /* CardView.xib in Resources */,
 				ED0AFC132175C618009A2976 /* Favorite.storyboard in Resources */,
 				ED599C9021757B3C0007E929 /* Main.storyboard in Resources */,
+				ED24C79721B4A291004CE74F /* CustomOverlayView.xib in Resources */,
 				ED0AFC182175C791009A2976 /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,6 +732,7 @@
 				ED93C51A219A770E0056F9F3 /* Date+Extensions.swift in Sources */,
 				D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */,
 				EDC8465D217FC4A600C3543A /* Colors.swift in Sources */,
+				ED24C79921B4A2AC004CE74F /* CustomOverlayView.swift in Sources */,
 				D8CF7B0021823C9C00979729 /* GridFlowLayout.swift in Sources */,
 				ED87083C21962A6F008675C5 /* UILabel+Extensions.swift in Sources */,
 				EDC64794218C29980000DF9F /* UItableView+Extensions.swift in Sources */,

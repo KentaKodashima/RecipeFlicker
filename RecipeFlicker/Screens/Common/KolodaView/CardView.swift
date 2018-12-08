@@ -30,12 +30,20 @@ class CardView: UIView {
     let bundle = Bundle(for: type(of: self))
     let nib = UINib(nibName: "CardView", bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    view.frame = self.bounds
     addSubview(view)
     
     view.translatesAutoresizingMaskIntoConstraints = false
-    let bindings = ["view": view]
-    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
-    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+    
+    view.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+    view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
+    view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
+    view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+    
+//
+//    let bindings = ["view": view]
+//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
+//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
   }
   
 }
