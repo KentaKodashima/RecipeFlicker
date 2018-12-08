@@ -21,6 +21,7 @@ class FavoriteVC: UIViewController {
   var userID: String!
   var selectedCollectionId: String!
   var selectedRecipeId: String?
+  var ciContext: CIContext!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
@@ -32,30 +33,36 @@ class FavoriteVC: UIViewController {
   
   let recipeFactory = ReplicaRecipeFactory()
   var favoriteRecipes = [Recipe]()
+  var filteredFavoriteRecipes = [Recipe]()
   var collections = [Collection]()
-  
+  var filteredCollections = [Collection]()
+  var isAddToMode = false
+  var addToView: UIView!
+  var indexPathsOfSelectedItems: [Int]?
   
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String: String],
-          let id = recipe["firebaseId"],
-          let url = recipe["originalRecipeUrl"],
-          let title = recipe["title"],
-          let image = recipe["image"],
-          let isFavotiteLiteral = recipe["isFavorite"]
+        if let recipe = (child as! DataSnapshot).value as? [String: Any]
         {
+          
+          let id = recipe["firebaseId"] as! String
+          let url = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let isFavotiteLiteral = recipe["isFavorite"]  as! String
           let whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-            for collectionId in whichCollectionToBelong.keys {
-              whichCollectionToBelongList.append(collectionId)
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
             }
           }
           let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.favoriteRecipes.append(favoriteRecipe)
         }
       }
+      self.filteredFavoriteRecipes = self.favoriteRecipes
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -79,6 +86,7 @@ class FavoriteVC: UIViewController {
           self.collections.append(collection)
         }
       }
+      self.filteredCollections = self.collections
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue
         && self.collections.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -93,6 +101,11 @@ class FavoriteVC: UIViewController {
     super.viewDidLoad()
     
     searchBar.setSearchBar()
+    searchBar.delegate = self
+    
+    self.ciContext = CIContext(options: nil)
+    
+    self.hideKeyBoard()
     
     ref = Database.database().reference()
     userID = Auth.auth().currentUser?.uid
@@ -110,6 +123,9 @@ class FavoriteVC: UIViewController {
     // isEditing
     // override func setEditing(_ editing: Bool, animated: Bool)
     toolBar.isHidden = true
+    
+    // CollectionView
+    addToView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
   }
   
   @IBAction func onSegmentControlTapped(_ sender: UISegmentedControl) {
@@ -157,16 +173,40 @@ class FavoriteVC: UIViewController {
       self.editButtonItem.title = "Cancel"
     } else {
       self.toolBar.isHidden = true
+      isAddToMode = false
+      toggleCollectionView()
     }
 
   }
+  @IBAction func addTo(_ sender: UIBarButtonItem) {
+    guard let indexPaths = collectionView.indexPathsForSelectedItems else { return }
+    indexPathsOfSelectedItems = indexPaths.map { $0.item }.sorted().reversed()
+    isAddToMode = true
+    toggleCollectionView()
+  }
+  
+  func toggleCollectionView() {
+    if isAddToMode {
+      self.view.addSubview(addToView)
+      let addToCollectionView = UICollectionView(frame: addToView.frame, collectionViewLayout: gridLayout)
+      addToCollectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      addToCollectionView.delegate = self
+      addToCollectionView.dataSource = self
+      addToCollectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
+      addToView.addSubview(addToCollectionView)
+    } else {
+      self.addToView.removeFromSuperview()
+    }
+
+  }
+  
   @IBAction func deleteItems(_ sender: UIBarButtonItem) {
     // update model
     if let indexPaths = collectionView.indexPathsForSelectedItems {
       let indices = indexPaths.map { $0.item }.sorted().reversed()
       for index in indices {
-        deleteItemFromFirebase(recipe: favoriteRecipes[index])
-        favoriteRecipes.remove(at: index)
+        deleteItemFromFirebase(recipe: filteredFavoriteRecipes[index])
+        filteredFavoriteRecipes.remove(at: index)
       }
       // update collectionView
       collectionView.deleteItems(at: indexPaths)
@@ -176,8 +216,22 @@ class FavoriteVC: UIViewController {
   }
   
   func deleteItemFromFirebase(recipe: Recipe) {
+    // Delete items from favorite
     ref.child("favorites").child(userID).child(recipe.firebaseId).removeValue()
-    // TODO: Delete items from collections
+    // Delete items from collections
+    for collectionId in recipe.whichCollectionToBelong {
+      let ref = Database.database().reference()
+      ref.child("recipeCollections/\(collectionId)/\(recipe.firebaseId)").removeValue()
+      checkIfCollectionIsEmpty(collectionId: collectionId)
+    }
+  }
+  
+  func checkIfCollectionIsEmpty(collectionId: String) {
+    ref.child("recipeCollections").child(collectionId).observe(.value) { (snapshot) in
+      if !snapshot.exists() {
+        self.ref.child("userCollections").child(self.userID!).child(collectionId).removeValue()
+      }
+    }
   }
   
 }
@@ -185,24 +239,36 @@ class FavoriteVC: UIViewController {
 extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      if favoriteRecipes.count > 0 {
-        return favoriteRecipes.count
+    if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
+      if filteredCollections.count > 0 {
+        return filteredCollections.count
       } else {
         return 0
       }
+
     } else {
-      if collections.count > 0 {
-        return collections.count
+      if filteredFavoriteRecipes.count > 0 {
+        return filteredFavoriteRecipes.count
       } else {
         return 0
       }
+
     }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
-      let recipe = favoriteRecipes[indexPath.row]
+    if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
+      let collection = filteredCollections[indexPath.row]
+      let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
+        for: indexPath)
+        as! CollectionViewCellForGrid
+      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "", ciContext: ciContext)
+      return cell
+    } else
+    //if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
+    {
+      let recipe = filteredFavoriteRecipes[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
         for: indexPath)
@@ -210,29 +276,52 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       cell.toggleEditMode(isEditing: isEditing)
       return cell
-    } else {
-      let collection = collections[indexPath.row]
-      let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
-        for: indexPath)
-        as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
-      return cell
-    }
+    } //else {
+//      let collection = collections[indexPath.row]
+//      let cell = collectionView.dequeueReusableCell(
+//        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
+//        for: indexPath)
+//        as! CollectionViewCellForGrid
+//      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
+//      return cell
+//    }
   }
   
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if isAddToMode {
+      let collection = filteredCollections[indexPath.row]
+      // update model
+      if let indices = indexPathsOfSelectedItems {
+        for index in indices {
+          let recipe = filteredFavoriteRecipes[index]
+          if let collectionId = collection.firebaseId {
+            if !recipe.whichCollectionToBelong.contains(collectionId) {
+              recipe.whichCollectionToBelong.append(collectionId)
+              for id in recipe.whichCollectionToBelong {
+                recipe.updateRecipeInCollection(collectionId: id)
+              }
+              recipe.updateWhichCollectionToBelong(userId: userID)
+              collection.updateRecipeCollection(recipe: recipe)
+            }
+          }
+        }
+      }
+      isAddToMode = false
+      isEditing = false
+      return
+//      toggleCollectionView()
+    }
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if !isEditing {
-        let recipe = favoriteRecipes[indexPath.row]
+        let recipe = filteredFavoriteRecipes[indexPath.row]
         selectedRecipeId = recipe.firebaseId
         self.performSegue(withIdentifier: "goToDetail", sender: self.collectionView)
       } else {
         self.toolBar.isHidden = false
       }
     } else {
-      let collection = collections[indexPath.row]
+      let collection = filteredCollections[indexPath.row]
       selectedCollectionId = collection.firebaseId
       self.performSegue(withIdentifier: "goToCollection", sender: self.collectionView)
     }
@@ -243,7 +332,6 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
-      print("pass: \(destVC.collectionId)")
     } else if segue.identifier == "goToDetail" {
       let destVC = segue.destination as! DetailVC
       destVC.recipeId = selectedRecipeId
@@ -258,3 +346,45 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
   }
 }
+
+extension FavoriteVC: UISearchBarDelegate {
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+    // Check if the textField in the seachBar is empty
+    if searchText.isEmpty {
+      filteredFavoriteRecipes = favoriteRecipes
+      filteredCollections = collections
+      self.collectionView.reloadData()
+    } else {
+      filteredFavoriteRecipes = favoriteRecipes.filter({ (recipe: Recipe) -> Bool in
+        return recipe.title.lowercased().contains(searchText.lowercased())
+      })
+      filteredCollections = collections.filter({ (collection: Collection) -> Bool in
+        return collection.name.lowercased().contains(searchText.lowercased())
+      })
+      self.collectionView.reloadData()
+      // [c] case insensitive: lowercase & uppercase values are treated the same
+      // [d] diacritic insensitive: special characters treated as the base character
+//      pages = realm.objects(Page.self).filter("pageTitle CONTAINS[cd] %@", searchText)
+//      self.tableView.reloadData()
+    }
+  }
+}
+
+extension FavoriteVC {
+  func hideKeyBoard() {
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+      target: self,
+      action: #selector(FavoriteVC.dismissKeyBoard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
+    
+  }
+  
+  @objc func dismissKeyBoard() {
+    view.endEditing(true)
+  }
+}
+
+
