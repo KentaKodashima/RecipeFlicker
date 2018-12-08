@@ -19,7 +19,11 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   private var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    label.font = UIFont(name: "ChalkboardSE-Regular", size: 21)
+    label.font = UIFont(name: "ChalkboardSE-Bold", size: 22)
+    label.numberOfLines = 3
+    label.adjustsFontSizeToFitWidth = true
+    label.minimumScaleFactor = 0.5
+    label.textAlignment = .center
     return label
   }()
   
@@ -47,7 +51,8 @@ class CollectionViewCellForGrid: UICollectionViewCell {
   
   private func setupTextConstraints() {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+    titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
     titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
   }
   
@@ -64,13 +69,15 @@ class CollectionViewCellForGrid: UICollectionViewCell {
     
   }
   
-  func setupContents(withTitle title: String, andImage image: String) {
+  func setupContents(withTitle title: String, andImage image: String, ciContext: CIContext) {
     titleLabel.text = title
     let imageUrl = URL(string: image)
     recipeImage.kf.setImage(with: imageUrl, completionHandler: {
       (image, error, cacheType, imageUrl) in
       if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+      self.darkenFilter(image: image!, ciContext: ciContext)
+//      self.darken(image: image!)
 //      self.recipeImage.image = self.darken(image: image!)
 //      let blackLayer = UIView()
 //      blackLayer.backgroundColor = UIColor.black
@@ -80,13 +87,29 @@ class CollectionViewCellForGrid: UICollectionViewCell {
     })
   }
   
-  func darken(image: UIImage) -> UIImage {
+  func darkenFilter(image: UIImage, ciContext: CIContext) {
+    let filteredImage = CIImage(image: image)
+    let filter = CIFilter(name: "CIGammaAdjust")
+    filter?.setValue(filteredImage, forKey: "inputImage")
+    filter?.setValue(NSNumber(value: 3), forKey: "inputPower")
+//    filter?.setValue(NSNumber(value: 0), forKey: "inputBrightness")
+//    filter?.setValue(NSNumber(value: 2.0), forKey: "inputContrast")
+//    filter?.setValue(filteredImage, forKey: "inputImage")
+//    filter?.setValue(NSNumber(floatLiteral: 2.0), forKey: "inputPower")
+    let imageRef = ciContext.createCGImage((filter?.outputImage)!, from: ((filter?.outputImage)?.extent)!)
+    let outputImage = UIImage(cgImage: imageRef!)
+//    recipeImage.image = outputImage
+    darken(image: outputImage)
+  }
+  
+  func darken(image: UIImage) {
     // create a black layer
     let blackFrame = CGRect(origin: CGPoint(x: 0, y: 0),
                             size: (image.size))
     let blackView = UIView(frame: blackFrame)
-    blackView.backgroundColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
-    blackView.alpha = 1
+//    blackView.backgroundColor = #colorLiteral(red: 0, green: 0.198442851, blue: 0.2754173801, alpha: 1)
+    blackView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    blackView.alpha = 0.6
     
     // draw the image
     UIGraphicsBeginImageContext(blackFrame.size)
@@ -103,7 +126,7 @@ class CollectionViewCellForGrid: UICollectionViewCell {
     let imageRef = context!.makeImage()
     let renderedImage = UIImage(cgImage: imageRef!)
     UIGraphicsEndImageContext()
-    return renderedImage
+    recipeImage.image = renderedImage
   }
   
 }
