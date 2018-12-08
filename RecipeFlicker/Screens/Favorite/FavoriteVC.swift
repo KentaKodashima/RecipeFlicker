@@ -21,6 +21,7 @@ class FavoriteVC: UIViewController {
   var userID: String!
   var selectedCollectionId: String!
   var selectedRecipeId: String?
+  var ciContext: CIContext!
   
   @IBOutlet weak var typeSegmentControll: UISegmentedControl!
   @IBOutlet weak var collectionView: UICollectionView!
@@ -101,6 +102,8 @@ class FavoriteVC: UIViewController {
     
     searchBar.setSearchBar()
     searchBar.delegate = self
+    
+    self.ciContext = CIContext(options: nil)
     
     self.hideKeyBoard()
     
@@ -260,7 +263,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
         for: indexPath)
         as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
+      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "", ciContext: ciContext)
       return cell
     } else
     //if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
