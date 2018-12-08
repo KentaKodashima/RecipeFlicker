@@ -36,12 +36,12 @@ class HomeVC: UIViewController {
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     // Fetch anonymous user's uid from Firebase
     if let userId = Auth.auth().currentUser?.uid {
       self.userId = userId
     }
-    
+
     currentDate = Date()
     resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSignIn), userInfo: nil, repeats: false)
     
@@ -49,7 +49,7 @@ class HomeVC: UIViewController {
     rlmUser = RLMUser.all().first
 
     createUserIfThereIsNone()
-    
+
     kolodaView.delegate = self
     kolodaView.dataSource = self
   }

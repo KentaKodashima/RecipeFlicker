@@ -19,6 +19,7 @@ class CollectionVC: UIViewController {
   var isEditingMode: Bool = false
   var collectionId: String?
   var userId: String?
+  var selectedRecipeId: String?
   
   private var collectionRecipes = [Recipe]()
   
@@ -27,12 +28,15 @@ class CollectionVC: UIViewController {
     
     tableView.delegate = self
     tableView.dataSource = self
-
+    
     registerTableViewCells()
     
     ref = Database.database().reference()
     userId = Auth.auth().currentUser?.uid
     getCollectionRecipes(collectionId: collectionId)
+    
+    //    remove separator lines from empty cells.
+    tableView.tableFooterView = UIView(frame: .zero)
   }
   
   func registerTableViewCells() {
@@ -44,20 +48,19 @@ class CollectionVC: UIViewController {
     ref.child("recipeCollections").child(collectionId!).observe(.value) { (snapshot) in
       self.collectionRecipes.removeAll()
       for child in snapshot.children {
-        if let recipe = (child as! DataSnapshot).value as? [String:String] {
-          let id = recipe["firebaseId"]
-          let url = recipe["originalRecipeUrl"]
-          let title = recipe["title"]
-          let image = recipe["image"]
-          let isFavotiteLiteral = recipe["isFavorite"]
-          var whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] as? [String:Any] {
-            for collectionId in whichCollectionToBelong.keys {
-              whichCollectionToBelongList.append(collectionId)
+        if let recipe = (child as! DataSnapshot).value as? [String:Any] {
+          let id = recipe["firebaseId"] as! String
+          let url = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let isFavotiteLiteral = recipe["isFavorite"] as! String
+          let whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
             }
           }
-          
-          let recipe = Recipe(firebaseId: id!, originalRecipeUrl: url!, title: title!, image: image!, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
+          let recipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
           self.collectionRecipes.append(recipe)
         }
         
@@ -90,6 +93,10 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
     return collectionRecipes.count
   }
   
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100
+  }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeListTableViewCell") as! RecipeListTableViewCell
     let recipe = collectionRecipes[indexPath.row]
@@ -104,12 +111,29 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    let recipe = collectionRecipes[indexPath.row]
+    selectedRecipeId = recipe.firebaseId
+    self.performSegue(withIdentifier: "goToDetail", sender: self.tableView)
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     let deleteItem = self.collectionRecipes.remove(at: indexPath.row)
+    if let index = deleteItem.whichCollectionToBelong.index(of: collectionId!) {
+      deleteItem.whichCollectionToBelong.remove(at: index)
+      deleteItem.updateWhichCollectionToBelong(userId: userId!)
+      for id in deleteItem.whichCollectionToBelong {
+        deleteItem.updateRecipeInCollection(collectionId: id)
+      }
+    }
     self.tableView.deleteRows(at: [indexPath], with: .automatic)
     deleteDataFromFirebase(recipeId: deleteItem.firebaseId)
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "goToDetail" {
+      let destVC = segue.destination as! DetailVC
+      destVC.recipeId = selectedRecipeId
+    }
+    
+  }
 }
