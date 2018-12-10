@@ -43,6 +43,7 @@ class FavoriteVC: UIViewController {
   fileprivate func getFavoriteRecipesFromFirebase(_ userID: String?) {
     ref.child("favorites").child(userID!).observe(.value) { (snapshot) in
       self.favoriteRecipes.removeAll()
+      // Read data from firebase
       for child in snapshot.children {
         if let recipe = (child as! DataSnapshot).value as? [String: Any]
         {
@@ -63,6 +64,7 @@ class FavoriteVC: UIViewController {
         }
       }
       self.filteredFavoriteRecipes = self.favoriteRecipes
+      // If there is no favorite recipe in the data base, show 'No data label'
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
         && self.favoriteRecipes.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -76,6 +78,7 @@ class FavoriteVC: UIViewController {
   fileprivate func getCollectionsFromFirebase(_ userID: String?) {
     ref.child("userCollections").child(userID!).observe(.value) { (snapshot) in
       self.collections.removeAll()
+      // Read data from firebase
       for child in snapshot.children {
         if let collectionData = (child as! DataSnapshot).value as? [String: String],
         let id = collectionData["firebaseId"],
@@ -87,6 +90,7 @@ class FavoriteVC: UIViewController {
         }
       }
       self.filteredCollections = self.collections
+      // If there is no collection in the data base, show 'No data label'
       if self.typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue
         && self.collections.count <= 0 {
         self.collectionView.setNoDataLabelForCollectionView()
@@ -100,31 +104,38 @@ class FavoriteVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Set up the search bar
     searchBar.setSearchBar()
     searchBar.delegate = self
     
+    // CIContext to darken the image.
     self.ciContext = CIContext(options: nil)
     
+    // Set up a keyboard
     self.hideKeyBoard()
     
+    // Firebase set up
     ref = Database.database().reference()
     userID = Auth.auth().currentUser?.uid
-    
     getFavoriteRecipesFromFirebase(userID)
     getCollectionsFromFirebase(userID)
     
+    // Set up SegmentControll
     typeSegmentControll.tintColor = AppColors.accent.value
+    
+    // Set up the collectionView and the cell.
     collectionView.collectionViewLayout = listLayout
     collectionView.register(CollectionViewCellForList.self,
                             forCellWithReuseIdentifier: CollectionViewCellForList.reuseIdentifier)
     collectionView.register(CollectionViewCellForGrid.self, forCellWithReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier)
     
+    // Edit button
     navigationItem.leftBarButtonItem = editButtonItem
-    // isEditing
-    // override func setEditing(_ editing: Bool, animated: Bool)
+    
+    // Toolbar
     toolBar.isHidden = true
     
-    // CollectionView
+    // AddToView
     addToView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
   }
   
@@ -138,9 +149,9 @@ class FavoriteVC: UIViewController {
       }
       break
     case ViewType.grid.rawValue:
+      navigationItem.leftBarButtonItem = nil
       changeView(flowLayout: gridLayout)
       isEditing = false
-      navigationItem.leftBarButtonItem = nil
       if collections.count <= 0 {
        collectionView.setNoDataLabelForCollectionView()
       }
@@ -265,9 +276,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         as! CollectionViewCellForGrid
       cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "", ciContext: ciContext)
       return cell
-    } else
-    //if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue
-    {
+    } else {
       let recipe = filteredFavoriteRecipes[indexPath.row]
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForList.reuseIdentifier,
@@ -276,28 +285,22 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       cell.setupContents(withTitle: recipe.title, andImage: recipe.image)
       cell.toggleEditMode(isEditing: isEditing)
       return cell
-    } //else {
-//      let collection = collections[indexPath.row]
-//      let cell = collectionView.dequeueReusableCell(
-//        withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
-//        for: indexPath)
-//        as! CollectionViewCellForGrid
-//      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "")
-//      return cell
-//    }
+    }
   }
   
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if isAddToMode {
       let collection = filteredCollections[indexPath.row]
-      // update model
+      // Check if selected items are already belong to the collection.
       if let indices = indexPathsOfSelectedItems {
         for index in indices {
           let recipe = filteredFavoriteRecipes[index]
           if let collectionId = collection.firebaseId {
             if !recipe.whichCollectionToBelong.contains(collectionId) {
+              // Add to the collection.
               recipe.whichCollectionToBelong.append(collectionId)
+              // Update firebase.
               for id in recipe.whichCollectionToBelong {
                 recipe.updateRecipeInCollection(collectionId: id)
               }
@@ -310,8 +313,8 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       isAddToMode = false
       isEditing = false
       return
-//      toggleCollectionView()
     }
+    
     if typeSegmentControll.selectedSegmentIndex == ViewType.list.rawValue {
       if !isEditing {
         let recipe = filteredFavoriteRecipes[indexPath.row]
@@ -320,6 +323,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       } else {
         self.toolBar.isHidden = false
       }
+      
     } else {
       let collection = filteredCollections[indexPath.row]
       selectedCollectionId = collection.firebaseId
@@ -351,7 +355,7 @@ extension FavoriteVC: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     
-    // Check if the textField in the seachBar is empty
+    // Check if the text field in the seachBar is empty
     if searchText.isEmpty {
       filteredFavoriteRecipes = favoriteRecipes
       filteredCollections = collections
@@ -364,10 +368,6 @@ extension FavoriteVC: UISearchBarDelegate {
         return collection.name.lowercased().contains(searchText.lowercased())
       })
       self.collectionView.reloadData()
-      // [c] case insensitive: lowercase & uppercase values are treated the same
-      // [d] diacritic insensitive: special characters treated as the base character
-//      pages = realm.objects(Page.self).filter("pageTitle CONTAINS[cd] %@", searchText)
-//      self.tableView.reloadData()
     }
   }
 }
