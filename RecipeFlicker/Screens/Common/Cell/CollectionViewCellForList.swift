@@ -16,7 +16,6 @@ class CollectionViewCellForList: UICollectionViewCell {
     }
   }
   
-//  private var isChecked: Bool = false
   private var selectedImage = UIImage(named: "checkmark")
   private var deselectedImage = UIImage(named: "defaultCheck")
   
@@ -47,7 +46,6 @@ class CollectionViewCellForList: UICollectionViewCell {
     label.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
     label.adjustsFontSizeToFitWidth = true
     label.minimumScaleFactor = 0.5
-//    label.setContentHuggingPriority(UILayoutPriority(rawValue: 100), for: .horizontal)
     return label
   }()
   
@@ -66,15 +64,6 @@ class CollectionViewCellForList: UICollectionViewCell {
     imageView.image = UIImage(named: "defaultCheck")
     return imageView
   }()
-  
-//  private func toggleCheckBox() {
-//    isChecked = !isChecked
-//    if (isChecked) {
-//      checkBoxImage.image = selectedImage
-//    } else {
-//      checkBoxImage.image = deselectedImage
-//    }
-//  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
