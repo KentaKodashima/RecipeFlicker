@@ -41,10 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITabBar.appearance().clipsToBounds = true
     UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
     
-    // TODO: Delete ----------
-    // Realm file path (Owner: Minami)
-    print(Realm.Configuration.defaultConfiguration.fileURL!)
-    
     return true
   }
   

@@ -29,7 +29,6 @@ struct RecipeAPI {
     Alamofire.request(requestString)
       .validate()
       .responseJSON { response in
-        print(response.result)
         switch response.result {
         case .success(let value):
           let json = JSON(value)
@@ -46,7 +45,6 @@ struct RecipeAPI {
             randomRecipes.append(randomRecipe)
             recipeStore.remove(at: recipeStore.firstIndex(of: randomRecipe)!)
           }
-          print(randomRecipes.count)
           completionHandler(randomRecipes, nil)
         case .failure(let error):
           completionHandler(nil, error)
