@@ -62,11 +62,6 @@ class CollectionViewCellForGrid: UICollectionViewCell {
     recipeImage.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     recipeImage.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     recipeImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-//    recipeImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//    recipeImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//    recipeImage.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
-//    recipeImage.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
-    
   }
   
   func setupContents(withTitle title: String, andImage image: String, ciContext: CIContext) {
@@ -76,38 +71,25 @@ class CollectionViewCellForGrid: UICollectionViewCell {
       (image, error, cacheType, imageUrl) in
       if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
-      self.darkenFilter(image: image!, ciContext: ciContext)
-//      self.darken(image: image!)
-//      self.recipeImage.image = self.darken(image: image!)
-//      let blackLayer = UIView()
-//      blackLayer.backgroundColor = UIColor.black
-//      blackLayer.layer.opacity = 0.9
-//      self.recipeImage.image = image?.withRenderingMode(.automatic)
-//      self.recipeImage.addSubview(blackLayer)
+      self.setDarkenFilter(image: image!, ciContext: ciContext)
     })
   }
   
-  func darkenFilter(image: UIImage, ciContext: CIContext) {
+  func setDarkenFilter(image: UIImage, ciContext: CIContext) {
     let filteredImage = CIImage(image: image)
     let filter = CIFilter(name: "CIGammaAdjust")
     filter?.setValue(filteredImage, forKey: "inputImage")
     filter?.setValue(NSNumber(value: 3), forKey: "inputPower")
-//    filter?.setValue(NSNumber(value: 0), forKey: "inputBrightness")
-//    filter?.setValue(NSNumber(value: 2.0), forKey: "inputContrast")
-//    filter?.setValue(filteredImage, forKey: "inputImage")
-//    filter?.setValue(NSNumber(floatLiteral: 2.0), forKey: "inputPower")
     let imageRef = ciContext.createCGImage((filter?.outputImage)!, from: ((filter?.outputImage)?.extent)!)
     let outputImage = UIImage(cgImage: imageRef!)
-//    recipeImage.image = outputImage
-    darken(image: outputImage)
+    setBlackLayer(image: outputImage)
   }
   
-  func darken(image: UIImage) {
+  func setBlackLayer(image: UIImage) {
     // create a black layer
     let blackFrame = CGRect(origin: CGPoint(x: 0, y: 0),
                             size: (image.size))
     let blackView = UIView(frame: blackFrame)
-//    blackView.backgroundColor = #colorLiteral(red: 0, green: 0.198442851, blue: 0.2754173801, alpha: 1)
     blackView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     blackView.alpha = 0.6
     

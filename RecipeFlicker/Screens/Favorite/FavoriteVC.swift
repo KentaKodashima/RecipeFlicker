@@ -31,7 +31,6 @@ class FavoriteVC: UIViewController {
   let gridLayout = GridFlowLayout()
   let listLayout = ListFlowLayout()
   
-  let recipeFactory = ReplicaRecipeFactory()
   var favoriteRecipes = [Recipe]()
   var filteredFavoriteRecipes = [Recipe]()
   var collections = [Collection]()
