@@ -75,6 +75,12 @@ extension AddCollectionVC: UITextFieldDelegate {
   }
   
   func adjustHeight(show:Bool, notification:NSNotification) {
+    if show {
+      scrollView.isScrollEnabled = true
+    } else {
+      scrollView.isScrollEnabled = false
+    }
+    
     var userInfo = notification.userInfo!
     let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
     let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
