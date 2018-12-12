@@ -54,15 +54,4 @@ class RecipeFlickerUITests: XCTestCase {
       XCTAssert(self.app/*@START_MENU_TOKEN@*/.staticTexts["00:00:01"]/*[[".staticTexts[\"11:44:42\"]",".staticTexts[\"00:00:01\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.exists)
     }
   }
-  
-//  func testIfCountdownViewDissapears() {
-//    let currentDate = Date()
-//    
-//    let countdownTimerText = self.app.staticTexts["00:00:01"]
-//    XCTAssertFalse(countdownTimerText.exists)
-//    let exists = NSPredicate(format: "exists == true")
-//    expectation(for: exists, evaluatedWith: countdownTimerText, handler: nil)
-//    
-//    
-//  }
 }
