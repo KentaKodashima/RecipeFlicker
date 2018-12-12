@@ -54,10 +54,6 @@ class HomeVC: UIViewController {
     kolodaView.dataSource = self
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    print(self.view.frame.origin.y)
-  }
-  
   // MARK: - Actions
   @IBAction func dislikeButtonTapped(_ sender: UIButton) {
     kolodaView.swipe(SwipeResultDirection.left)

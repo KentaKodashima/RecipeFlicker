@@ -39,11 +39,6 @@ class CardView: UIView {
     view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0).isActive = true
     view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0).isActive = true
     view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-    
-//
-//    let bindings = ["view": view]
-//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
-//    addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options:NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: bindings))
   }
   
 }

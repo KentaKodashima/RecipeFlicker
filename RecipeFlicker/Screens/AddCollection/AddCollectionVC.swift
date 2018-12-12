@@ -52,10 +52,6 @@ class AddCollectionVC: UIViewController {
     performSegue(withIdentifier: "goToSelectRecipes", sender: UIBarButtonItem.self)
   }
   
-  @objc fileprivate func printViewFrameOriginY() {
-    print(self.view.frame.origin.y)
-  }
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "goToSelectRecipes" {
       let selectRecipesToAddVC = segue.destination as! SelectReciepsToAddVC
