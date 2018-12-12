@@ -39,15 +39,12 @@ extension Collection {
     ]
     collectionsRef.setValue(collection)
     
-    let recipeCollectionsRefPath = "recipeCollections/" + key
     for recipe in recipes {
       recipe.whichCollectionToBelong.append(key)
       for id in recipe.whichCollectionToBelong {
         recipe.updateRecipeInCollection(collectionId: id)
       }
       recipe.updateWhichCollectionToBelong(userId: userId)
-//      Database.database().reference(withPath: recipeCollectionsRefPath)
-//        .child(recipe.firebaseId).setValue(recipe.convertToJSON())
 
     }
   }
