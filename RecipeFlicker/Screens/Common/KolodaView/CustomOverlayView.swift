@@ -20,6 +20,7 @@ class CustomOverlayView: OverlayView {
     var imageView = UIImageView(frame: self.bounds)
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
+    imageView.layer.cornerRadius = self.frame.size.width * 0.1
     self.addSubview(imageView)
     
     return imageView
