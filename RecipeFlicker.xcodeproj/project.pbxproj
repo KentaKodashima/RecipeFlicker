@@ -49,6 +49,7 @@
 		EDC84660217FDB6200C3543A /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */; };
 		EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */; };
 		EDC84667217FFD3600C3543A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC84666217FFD3600C3543A /* CardView.swift */; };
+		EDCA797421C2E2320098A3F2 /* UIActivityIndicatorView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA797321C2E2320098A3F2 /* UIActivityIndicatorView+Extensions.swift */; };
 		EDD01E0621A32D3700EB9924 /* HomeVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */; };
 		EDE38B1B21765EDC00D088EF /* RecipeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */; };
 		EDFAA31E218FF6E400EF99D1 /* RecipeListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAA31C218FF6E400EF99D1 /* RecipeListTableViewCell.swift */; };
@@ -130,6 +131,7 @@
 		EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		EDC84666217FFD3600C3543A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EDCA797321C2E2320098A3F2 /* UIActivityIndicatorView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Extensions.swift"; sourceTree = "<group>"; };
 		EDCFB53921771A4A00EE7D1B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EDD01E0521A32D3700EB9924 /* HomeVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCTests.swift; sourceTree = "<group>"; };
 		EDE38B1A21765EDC00D088EF /* RecipeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeAPI.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				EDC64792218C29980000DF9F /* UItableView+Extensions.swift */,
 				EDC8465E217FDB6100C3543A /* UITextField+Extensions.swift */,
 				EDC8465F217FDB6200C3543A /* UITextView+Extensions.swift */,
+				EDCA797321C2E2320098A3F2 /* UIActivityIndicatorView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				EDC84661217FDB6200C3543A /* UITextView+Extensions.swift in Sources */,
 				ED98B6E521AA381A00A6B1B9 /* RealmList+Extensions.swift in Sources */,
 				ED3A4C0521A0CC40003DDF31 /* UISearchBar+Extensions.swift in Sources */,
+				EDCA797421C2E2320098A3F2 /* UIActivityIndicatorView+Extensions.swift in Sources */,
 				ED93C51A219A770E0056F9F3 /* Date+Extensions.swift in Sources */,
 				D8376C92218935A400E2404A /* CollectionViewCellForList.swift in Sources */,
 				EDC8465D217FC4A600C3543A /* Colors.swift in Sources */,

@@ -16,8 +16,9 @@ class DetailVC: UIViewController {
   // MARK: - Properties
   private var webKitView: WKWebView!
   private var toolBar: UIToolbar!
-  private var activityIndicatorContainer: UIView!
-  private var activityIndicator: UIActivityIndicatorView!
+  
+  private var activityIndicatorContainer: UIView = UIView()
+  private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
   
   private var userId: String!
   private var recipe: Recipe!
@@ -55,7 +56,7 @@ class DetailVC: UIViewController {
         self.recipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
         self.sendRequest(urlString: self.recipe.originalRecipeUrl)
         self.setToolBar()
-        self.setActivityIndicator()
+        self.activityIndicator.setActivityIndicator(indicatorContainerView: self.activityIndicatorContainer, containerParentView: self.webKitView)
       }
     }
   }
@@ -77,27 +78,6 @@ class DetailVC: UIViewController {
     toolBar.leadingAnchor.constraint(equalTo: webKitView.leadingAnchor, constant: 0).isActive = true
     toolBar.trailingAnchor.constraint(equalTo: webKitView.trailingAnchor, constant: 0).isActive = true
   }
-  
-  fileprivate func setActivityIndicator() {
-    activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-    activityIndicatorContainer.center = webKitView.center
-    activityIndicatorContainer.backgroundColor = UIColor.black
-    activityIndicatorContainer.alpha = 0.8
-    activityIndicatorContainer.layer.cornerRadius = 10
-    
-    activityIndicator = UIActivityIndicatorView()
-    activityIndicator.hidesWhenStopped = true
-    activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
-    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-    
-    activityIndicatorContainer.addSubview(activityIndicator)
-    webKitView.addSubview(activityIndicatorContainer)
-    
-    // Constraints
-    activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
-    activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
-  }
-  
 }
 
 extension DetailVC: WKUIDelegate {
@@ -121,15 +101,15 @@ extension DetailVC: WKUIDelegate {
 
 extension DetailVC: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    showActivityIndicator(false)
+    activityIndicator.showActivityIndicator(show: false, indicatorContainerView: activityIndicatorContainer)
   }
   
   func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-    showActivityIndicator(true)
+    activityIndicator.showActivityIndicator(show: true, indicatorContainerView: activityIndicatorContainer)
   }
   
   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-    showActivityIndicator(false)
+    activityIndicator.showActivityIndicator(show: false, indicatorContainerView: activityIndicatorContainer)
   }
   
   @objc private func goBack() {
@@ -144,14 +124,5 @@ extension DetailVC: WKNavigationDelegate {
   
   @objc private func goForward() {
     webKitView.goForward()
-  }
-  
-  fileprivate func showActivityIndicator(_ show: Bool) {
-    if show {
-      activityIndicator.startAnimating()
-    } else {
-      activityIndicator.stopAnimating()
-      activityIndicatorContainer.removeFromSuperview()
-    }
   }
 }

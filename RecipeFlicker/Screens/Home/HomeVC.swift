@@ -35,6 +35,9 @@ class HomeVC: UIViewController {
   
   private var cardWidth: CGFloat = 0.0
   
+  private var activityIndicatorContainer: UIView = UIView()
+  private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+  
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,6 +71,9 @@ class HomeVC: UIViewController {
   fileprivate func createUserIfThereIsNone() {
     // Create new user in both Core Data and Firebase, if there is none
     Auth.auth().signInAnonymously() { (authResult, error) in
+      self.activityIndicator.setActivityIndicator(indicatorContainerView: self.activityIndicatorContainer, containerParentView: self.view)
+      self.activityIndicator.showActivityIndicator(show: true, indicatorContainerView: self.activityIndicatorContainer)
+      
       if self.rlmUser == nil {
         let user = authResult?.user
         let uid = user?.uid
@@ -140,6 +146,7 @@ class HomeVC: UIViewController {
     
     UIView.animate(withDuration: 0.1, delay: 1, options: [], animations: { () in
       self.kolodaView.alpha = 1.0
+      self.activityIndicator.showActivityIndicator(show: false, indicatorContainerView: self.activityIndicatorContainer)
     })
     
     // Constraints
@@ -150,6 +157,7 @@ class HomeVC: UIViewController {
   }
   
   fileprivate func setCountdownView() {
+    activityIndicator.showActivityIndicator(show: false, indicatorContainerView: self.activityIndicatorContainer)
     let countdownViewWidth = self.view.bounds.width
     let countdownViewHeight = self.view.bounds.height
     countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
