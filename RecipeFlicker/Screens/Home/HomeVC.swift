@@ -33,6 +33,8 @@ class HomeVC: UIViewController {
   private var countdownView = UIView()
   private var currentDate: Date!
   
+  private var cardWidth: CGFloat = 0.0
+  
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -231,11 +233,17 @@ extension HomeVC: KolodaViewDataSource {
     card.recipeTitle.adjustsFontSizeToFitWidth = true
     card.translatesAutoresizingMaskIntoConstraints = false
     
+    cardWidth = card.frame.size.width * 0.1
+    
     return card
   }
   
   func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-    return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
+    let overlayView = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? OverlayView
+    
+    overlayView?.layer.cornerRadius = cardWidth
+    
+    return overlayView
   }
 }
 

@@ -16,12 +16,16 @@ class CustomOverlayView: OverlayView {
   
   @IBOutlet lazy var overlayImageView: UIImageView! = {
     [unowned self] in
+  
+    
+    self.clipsToBounds = true
     
     var imageView = UIImageView(frame: self.bounds)
     imageView.contentMode = .scaleAspectFill
+    imageView.frame = self.bounds
     imageView.clipsToBounds = true
-    self.layer.cornerRadius = self.frame.size.width * 0.1
-    imageView.layer.cornerRadius = self.frame.size.width * 0.085
+    imageView.layer.masksToBounds = true
+    
     self.addSubview(imageView)
     
     return imageView
