@@ -34,6 +34,25 @@ Implement full functionality.
 - Follow / Unfollow people
 - Save someone's recipe to the user's favorite
 
+#### Github Usage
+```
+origin
+  ├ master
+  | 
+  └ develop
+     ├ dev-master
+     ├ developer1
+     └ developer2
+```
+##### origin/master 
+Update app data on the app store.
+##### develop
+Implement new functionalities.
+##### develop/dev-master
+Code which is ready to be merged into origin master.
+##### develop/developer1, develop/developer2
+The place where each developers actually create new features.
+
 ## Implementation Style
 Follow this guideline. [GUIDELINE.md](GUIDELINE.md)
 
