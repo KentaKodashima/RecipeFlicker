@@ -35,13 +35,13 @@ class HomeVC: UIViewController {
   
   private var cardWidth: CGFloat = 0.0
   
-  private var activityIndicatorContainer: UIView = UIView()
-  private var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+  private var activityIndicatorContainer: UIView!
+  private var activityIndicator: UIActivityIndicatorView!
   
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     // Fetch anonymous user's uid from Firebase
     if let userId = Auth.auth().currentUser?.uid {
       self.userId = userId
@@ -71,8 +71,8 @@ class HomeVC: UIViewController {
   fileprivate func createUserIfThereIsNone() {
     // Create new user in both Core Data and Firebase, if there is none
     Auth.auth().signInAnonymously() { (authResult, error) in
-      self.activityIndicator.setActivityIndicator(indicatorContainerView: self.activityIndicatorContainer, containerParentView: self.view)
-      self.activityIndicator.showActivityIndicator(show: true, indicatorContainerView: self.activityIndicatorContainer)
+      self.setActivityIndicator()
+      self.showActivityIndicator(show: true)
       
       if self.rlmUser == nil {
         let user = authResult?.user
@@ -146,7 +146,7 @@ class HomeVC: UIViewController {
     
     UIView.animate(withDuration: 0.1, delay: 1, options: [], animations: { () in
       self.kolodaView.alpha = 1.0
-      self.activityIndicator.showActivityIndicator(show: false, indicatorContainerView: self.activityIndicatorContainer)
+      self.showActivityIndicator(show: false)
     })
     
     // Constraints
@@ -157,7 +157,7 @@ class HomeVC: UIViewController {
   }
   
   fileprivate func setCountdownView() {
-    activityIndicator.showActivityIndicator(show: false, indicatorContainerView: self.activityIndicatorContainer)
+    self.showActivityIndicator(show: false)
     let countdownViewWidth = self.view.bounds.width
     let countdownViewHeight = self.view.bounds.height
     countdownView = UIView(frame: CGRect(x: 0, y: 0, width: countdownViewWidth, height: countdownViewHeight))
@@ -212,6 +212,37 @@ class HomeVC: UIViewController {
       countdownView.removeFromSuperview()
     }
     fetchRecipesToBind()
+  }
+  
+  fileprivate func setActivityIndicator() {
+    let viewBoundWidth = self.view.bounds.size.width / 2
+    let viewBoundHeight = self.view.bounds.size.height / 2
+    
+    activityIndicatorContainer = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    activityIndicatorContainer.backgroundColor = UIColor.black
+    activityIndicatorContainer.alpha = 0.8
+    activityIndicatorContainer.layer.cornerRadius = 10
+    activityIndicatorContainer.center = CGPoint(x: viewBoundWidth, y: viewBoundHeight)
+
+    activityIndicator = UIActivityIndicatorView()
+    activityIndicator.hidesWhenStopped = true
+    activityIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    
+    activityIndicatorContainer.addSubview(activityIndicator)
+    self.view.addSubview(activityIndicatorContainer)
+    
+    activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor).isActive = true
+  }
+  
+  fileprivate func showActivityIndicator(show: Bool) {
+    if show {
+      activityIndicator.startAnimating()
+    } else {
+      activityIndicator.stopAnimating()
+      activityIndicatorContainer.removeFromSuperview()
+    }
   }
 }
 
