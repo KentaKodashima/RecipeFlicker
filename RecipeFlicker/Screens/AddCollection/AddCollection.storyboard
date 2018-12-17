@@ -90,6 +90,7 @@
                     <connections>
                         <outlet property="collectionNameField" destination="lUz-hi-EQ3" id="FBf-Ss-yzS"/>
                         <outlet property="scrollView" destination="mzk-jL-kPk" id="kkv-BR-QUR"/>
+                        <outlet property="stackView" destination="nNs-SL-TLi" id="grX-Qk-aDN"/>
                         <segue destination="fTW-ZP-Akf" kind="show" identifier="goToSelectRecipes" id="0df-Nj-zte"/>
                     </connections>
                 </viewController>

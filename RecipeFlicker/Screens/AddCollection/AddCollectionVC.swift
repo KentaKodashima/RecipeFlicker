@@ -13,6 +13,7 @@ class AddCollectionVC: UIViewController {
   // MARK: - Outlets
   @IBOutlet weak var collectionNameField: UITextField!
   @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var stackView: UIStackView!
   
   // MARK: - Properties
   private var nextButton: UIBarButtonItem!
@@ -24,7 +25,9 @@ class AddCollectionVC: UIViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: AddCollectionVC.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: AddCollectionVC.keyboardWillHideNotification, object: nil)
     
+    collectionNameField.delegate = self
     collectionNameField.setToolbarForKeyboard()
+    
     setRightBarButton()
   }
   
@@ -32,7 +35,7 @@ class AddCollectionVC: UIViewController {
     NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.removeObserver(self, name: AddCollectionVC.keyboardWillHideNotification, object: nil)
   }
-  
+
   // MARK: - Actions
   @IBAction func textFieldEditingDidChanged(_ sender: UITextField) {
     if !(sender.text?.isEmpty)! && sender.text?.first != " " {
@@ -62,31 +65,35 @@ class AddCollectionVC: UIViewController {
 
 extension AddCollectionVC: UITextFieldDelegate {
   @objc func keyboardWillShow(notification: NSNotification) {
-    adjustHeight(show: true, notification: notification)
+    // Get width & height of the screen
+    let screenSize: CGRect = UIScreen.main.bounds
+    let screenWidth = screenSize.width
+    let screenHeight = screenSize.height
+  
+    // Get the keyboard's final size
+    let info = notification.userInfo!
+    let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+    
+    // The bottom position of the stackview
+    let stackBottom = stackView.frame.origin.y + stackView.frame.height + self.view.frame.origin.y
+    // The top position of the keyboard
+    let keyboardTop = screenHeight - keyboardFrame.size.height
+    // How much the keyboard overlaps the stackview
+    let overlap =  stackBottom - keyboardTop
+    
+    if overlap >= 0 {
+      // Move the contents up overlap value + 88.0
+      scrollView.contentOffset.y = overlap + 88.0
+      scrollView.isScrollEnabled = false
+    }
   }
   
   @objc func keyboardWillHide(notification: NSNotification) {
-    adjustHeight(show: false, notification: notification)
+    scrollView.contentOffset.y = 0
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
-  
-  func adjustHeight(show:Bool, notification:NSNotification) {
-    if show {
-      scrollView.isScrollEnabled = true
-    } else {
-      scrollView.isScrollEnabled = false
-    }
-    
-    var userInfo = notification.userInfo!
-    let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-    let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
-    
-    scrollView.contentInset.bottom += changeInHeight
-    scrollView.scrollIndicatorInsets.bottom += changeInHeight
-  }
-
 }
