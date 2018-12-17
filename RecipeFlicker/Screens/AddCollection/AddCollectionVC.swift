@@ -65,40 +65,26 @@ class AddCollectionVC: UIViewController {
 
 extension AddCollectionVC: UITextFieldDelegate {
   @objc func keyboardWillShow(notification: NSNotification) {
-    scrollView.isScrollEnabled = true
+    // Get width & height of the screen
     let screenSize: CGRect = UIScreen.main.bounds
     let screenWidth = screenSize.width
     let screenHeight = screenSize.height
-    
-    print("keyboardWillShow: scrollViewContentInset \(scrollView.contentOffset.y)")
-    print("=============================")
-    
-    print("keyboardWillShow: screenWidth \(screenWidth)")
-    print("keyboardWillShow: screenHeight \(screenHeight)")
-    print("=============================")
-    
+  
+    // Get the keyboard's final size
     let info = notification.userInfo!
     let keyboardFrame = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
     
-    print("keyboardWillShow: keyboardFrame \(keyboardFrame)")
-    print("=============================")
-    
-    // The bottom of the stackview
-    let stackBottom = stackView.frame.origin.y + stackView.frame.height
-    // The top of the keyboard
+    // The bottom position of the stackview
+    let stackBottom = stackView.frame.origin.y + stackView.frame.height + self.view.frame.origin.y
+    // The top position of the keyboard
     let keyboardTop = screenHeight - keyboardFrame.size.height
     // How much the keyboard overlaps the stackview
-    let overlap = stackBottom - keyboardTop
-    
-    print("keyboardWillShow: ovelap \(overlap)")
-    print("=============================")
+    let overlap =  stackBottom - keyboardTop
     
     if overlap >= 0 {
-      // Move the contents up distance + 64.0
-      scrollView.contentOffset.y = overlap + 64.0
+      // Move the contents up overlap value + 88.0
+      scrollView.contentOffset.y = overlap + 88.0
       scrollView.isScrollEnabled = false
-      print("keyboardWillShow: scrollViewContentInset \(scrollView.contentOffset.y)")
-      print("=============================")
     }
   }
   
@@ -110,19 +96,4 @@ extension AddCollectionVC: UITextFieldDelegate {
     textField.resignFirstResponder()
     return true
   }
-  
-  func adjustHeight(show:Bool, notification:NSNotification) {
-    if show {
-      scrollView.isScrollEnabled = true
-    } else {
-      scrollView.isScrollEnabled = false
-    }
-    
-    var userInfo = notification.userInfo!
-    let keyboardFrame: CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-    let changeInHeight = (keyboardFrame.height + 40) * (show ? 1 : -1)
-
-    scrollView.contentOffset.y += changeInHeight
-  }
-
 }

@@ -23,11 +23,14 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Yr-im-SMJ">
                     <rect key="frame" x="16" y="16" width="268" height="268"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="imageView:LKR-XP-FiX:image" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-XP-FiX">
-                            <rect key="frame" x="0.0" y="0.0" width="268" height="170"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="imageView:LKR-XP-FiX:image" translatesAutoresizingMaskIntoConstraints="NO" id="LKR-XP-FiX">
+                            <rect key="frame" x="0.0" y="0.0" width="268" height="214.5"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-0r-fXv">
-                            <rect key="frame" x="0.0" y="178" width="268" height="90"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="eGp-0r-fXv">
+                            <rect key="frame" x="0.0" y="222.5" width="268" height="45.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="pyX-9o-gOr"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="32"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
