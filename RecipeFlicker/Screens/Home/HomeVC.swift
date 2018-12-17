@@ -48,7 +48,7 @@ class HomeVC: UIViewController {
     }
 
     currentDate = Date()
-    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(resetIsFirstSignIn), userInfo: nil, repeats: false)
+    resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(setIsFirstSignIn), userInfo: nil, repeats: false)
     
     // Fetch existing user from Realm
     rlmUser = RLMUser.all().first
@@ -94,14 +94,12 @@ class HomeVC: UIViewController {
       } else {
         if self.rlmUser.isFirstSignIn {
           self.fetchRecipesToBind()
-          try! self.realm.write {
-            self.rlmUser.isFirstSignIn = false
-          }
+          self.setIsFirstSignIn(false)
         } else {
           // Check if this is a the first login in the day
           if (self.currentDate! > self.currentDate.get7am()) && (self.rlmUser.lastFetchTime! < self.currentDate.get7am()) {
-            self.resetIsFirstSignIn()
             self.fetchRecipesToBind()
+            self.setIsFirstSignIn(false)
           } else {
             if self.rlmUser.recipesOfTheDay.count == 0 {
               self.setCountdownView()
@@ -199,15 +197,19 @@ class HomeVC: UIViewController {
     countdownTimer.setCountdownTimerText()
   }
   
-  @objc fileprivate func resetIsFirstSignIn() {
+  @objc fileprivate func setIsFirstSignIn(_ isFirstSignIn: Bool) {
     try! self.realm.write {
-      self.rlmUser.isFirstSignIn = true
+      if isFirstSignIn {
+        self.rlmUser.isFirstSignIn = true
+      } else {
+        self.rlmUser.isFirstSignIn = false
+      }
     }
   }
   
   @objc fileprivate func removeCountdownView() {
     timer.invalidate()
-    resetIsFirstSignIn()
+    setIsFirstSignIn(true)
     if self.view.subviews.count != 0 {
       countdownView.removeFromSuperview()
     }
