@@ -192,6 +192,8 @@ class FavoriteVC: UIViewController {
     guard let indexPaths = collectionView.indexPathsForSelectedItems else { return }
     indexPathsOfSelectedItems = indexPaths.map { $0.item }.sorted().reversed()
     isAddToMode = true
+    self.searchBar.text = ""
+    self.searchBar(searchBar, textDidChange: "")
     toggleCollectionView()
   }
   
