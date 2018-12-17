@@ -96,8 +96,15 @@ class HomeVC: UIViewController {
           self.fetchRecipesToBind()
           self.setIsFirstSignIn(false)
         } else {
+          // Check if lastFetchTime has value
+          guard let lastFetchTime = self.rlmUser.lastFetchTime else {
+            self.fetchRecipesToBind()
+            self.setIsFirstSignIn(false)
+            return
+          }
+          
           // Check if this is a the first login in the day
-          if (self.currentDate! > self.currentDate.get7am()) && (self.rlmUser.lastFetchTime! < self.currentDate.get7am()) {
+          if (self.currentDate! > self.currentDate.get7am()) && (lastFetchTime < self.currentDate.get7am()) {
             self.fetchRecipesToBind()
             self.setIsFirstSignIn(false)
           } else {
