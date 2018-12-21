@@ -34,6 +34,7 @@ class FavoriteVC: UIViewController {
   var favoriteRecipes = [Recipe]()
   var filteredFavoriteRecipes = [Recipe]()
   var collections = [Collection]()
+//  var collectionImageDictionary = [String:[String]]()
   var filteredCollections = [Collection]()
   var isAddToMode = false
   var addToView: UIView!
@@ -234,14 +235,37 @@ class FavoriteVC: UIViewController {
     for collectionId in recipe.whichCollectionToBelong {
       let ref = Database.database().reference()
       ref.child("recipeCollections/\(collectionId)/\(recipe.firebaseId)").removeValue()
-      checkIfCollectionIsEmpty(collectionId: collectionId)
+      deleteCollectionIfIsEmpty(collectionId: collectionId)
+      changeImageIfItemIsDeleted(deleteRecipe: recipe)
     }
   }
   
-  func checkIfCollectionIsEmpty(collectionId: String) {
+  func deleteCollectionIfIsEmpty(collectionId: String) {
     ref.child("recipeCollections").child(collectionId).observe(.value) { (snapshot) in
       if !snapshot.exists() {
         self.ref.child("userCollections").child(self.userID!).child(collectionId).removeValue()
+      }
+    }
+  }
+  
+  func changeImageIfItemIsDeleted(deleteRecipe:Recipe ) {
+    for collection in collections {
+      if deleteRecipe.image == collection.image {
+        if let id = collection.firebaseId {
+          var imageList = [String]()
+          ref.child("recipeCollections").child(id).observe(.value) { (snapshot) in
+            for child in snapshot.children {
+              if let collectionSnapshot = (child as! DataSnapshot).value as? [String:
+                Any] {
+                let image = collectionSnapshot["image"]
+                imageList.append(image as! String)
+              }
+            }
+           
+            let imagePath: String = imageList.randomElement() ?? ""
+        self.ref.child("userCollections").child(self.userID!).child(collection.firebaseId!).child("image").setValue(imagePath)
+          }
+        }
       }
     }
   }
