@@ -71,6 +71,18 @@ class CollectionViewCellForGrid: UICollectionViewCell {
       (image, error, cacheType, imageUrl) in
       if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
       if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+      if let image = image {
+        self.setDarkenFilter(image: image, ciContext: ciContext)
+      }
+    })
+  }
+  
+  func setImage(_ image: String, ciContext: CIContext) {
+    let imageUrl = URL(string: image)
+    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
+      (image, error, cacheType, imageUrl) in
+      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
+      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
       self.setDarkenFilter(image: image!, ciContext: ciContext)
     })
   }
