@@ -249,7 +249,6 @@ class FavoriteVC: UIViewController {
   }
   
   func changeImageIfItemIsDeleted(deleteRecipe:Recipe ) {
-    print("changeImageIfItemIsDeleted")
     for collection in collections {
       if deleteRecipe.image == collection.image {
         if let id = collection.firebaseId {
@@ -265,7 +264,6 @@ class FavoriteVC: UIViewController {
            
             let imagePath: String = imageList.randomElement() ?? ""
         self.ref.child("userCollections").child(self.userID!).child(collection.firebaseId!).child("image").setValue(imagePath)
-            print(imageList)
           }
         }
       }
@@ -297,7 +295,6 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if typeSegmentControll.selectedSegmentIndex == ViewType.grid.rawValue || isAddToMode {
       let collection = filteredCollections[indexPath.row]
-      print("Collection\nTitle: \(collection.name), ID: \(collection.firebaseId)")
       let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
         for: indexPath)
