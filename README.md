@@ -3,6 +3,9 @@
 ## Overview
 RecipeFlicker allows you to make your own favorite recipe lists. Even if you can't come up with anything you want to cook for the night, RecipeFlicker offers random recipes from all around the world.
 
+⚠️NOTE:  
+The GoogleService-Info.plist (Firebase) and API keys for Edamam Recipe Search API are not included for the security reason. Therefore you cannot use this app even if you clone and run it. However, the app is currently under the TestFlight process and published on the App Store very soon.
+
 ## Concepts
 - Keep good recipes
 - Share good recipes with friends
