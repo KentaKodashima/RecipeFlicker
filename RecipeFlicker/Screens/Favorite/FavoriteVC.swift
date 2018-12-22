@@ -300,7 +300,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
         for: indexPath)
         as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "", ciContext: ciContext)
+      cell.setupContents(withTitle: collection.name, andImage: collection.image, ciContext: ciContext)
       return cell
     } else {
       let recipe = filteredFavoriteRecipes[indexPath.row]
@@ -313,6 +313,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       return cell
     }
   }
+  
   
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
