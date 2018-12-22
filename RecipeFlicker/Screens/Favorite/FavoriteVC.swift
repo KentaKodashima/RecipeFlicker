@@ -261,9 +261,10 @@ class FavoriteVC: UIViewController {
                 imageList.append(image as! String)
               }
             }
-           
+            
             let imagePath: String = imageList.randomElement() ?? ""
-        self.ref.child("userCollections").child(self.userID!).child(collection.firebaseId!).child("image").setValue(imagePath)
+            self.ref.child("userCollections").child(self.userID!)
+              .child(collection.firebaseId!).child("image").setValue(imagePath)
           }
         }
       }
@@ -299,7 +300,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
         withReuseIdentifier: CollectionViewCellForGrid.reuseIdentifier,
         for: indexPath)
         as! CollectionViewCellForGrid
-      cell.setupContents(withTitle: collection.name, andImage: collection.image ?? "", ciContext: ciContext)
+      cell.setupContents(withTitle: collection.name, andImage: collection.image, ciContext: ciContext)
       return cell
     } else {
       let recipe = filteredFavoriteRecipes[indexPath.row]
@@ -312,6 +313,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
       return cell
     }
   }
+  
   
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -361,6 +363,7 @@ extension FavoriteVC: UICollectionViewDataSource, UICollectionViewDelegate {
     if segue.identifier == "goToCollection" {
       let destVC = segue.destination as! CollectionVC
       destVC.collectionId = selectedCollectionId
+      destVC.userCollections = collections
     } else if segue.identifier == "goToDetail" {
       let destVC = segue.destination as! DetailVC
       destVC.recipeId = selectedRecipeId

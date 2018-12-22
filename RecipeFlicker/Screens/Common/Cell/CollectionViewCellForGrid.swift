@@ -64,27 +64,25 @@ class CollectionViewCellForGrid: UICollectionViewCell {
     recipeImage.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
   }
   
-  func setupContents(withTitle title: String, andImage image: String, ciContext: CIContext) {
+  func setupContents(withTitle title: String, andImage image: String?, ciContext: CIContext) {
     titleLabel.text = title
-    let imageUrl = URL(string: image)
-    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
-      (image, error, cacheType, imageUrl) in
-      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
-      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
-      if let image = image {
-        self.setDarkenFilter(image: image, ciContext: ciContext)
+    if let image = image, let imageUrl = URL(string: image), let data = try? Data(contentsOf: imageUrl) {
+      recipeImage.image = UIImage(data: data)
+      if let cellImage = recipeImage.image {
+        setDarkenFilter(image: cellImage, ciContext: ciContext)
       }
-    })
-  }
-  
-  func setImage(_ image: String, ciContext: CIContext) {
-    let imageUrl = URL(string: image)
-    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
-      (image, error, cacheType, imageUrl) in
-      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
-      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
-      self.setDarkenFilter(image: image!, ciContext: ciContext)
-    })
+    } else {
+      recipeImage.image = UIImage(named: "NoImage")
+    }
+
+//    recipeImage.kf.setImage(with: imageUrl, completionHandler: {
+//      (image, error, cacheType, imageUrl) in
+//      if image == nil { self.recipeImage.image = UIImage(named: "NoImage") }
+//      if error != nil { self.recipeImage.image = UIImage(named: "NoImage") }
+//      if let image = image {
+//        self.setDarkenFilter(image: image, ciContext: ciContext)
+//      }
+//    })
   }
   
   func setDarkenFilter(image: UIImage, ciContext: CIContext) {
