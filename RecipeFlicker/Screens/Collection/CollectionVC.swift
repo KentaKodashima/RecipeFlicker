@@ -20,6 +20,7 @@ class CollectionVC: UIViewController {
   var collectionId: String?
   var userId: String?
   var selectedRecipeId: String?
+  var userCollections: [Collection]!
   
   private var collectionRecipes = [Recipe]()
   
@@ -79,11 +80,58 @@ class CollectionVC: UIViewController {
     
   }
   
-  func deleteDataFromFirebase(recipeId: String) {
-    ref.child("recipeCollections").child(collectionId!).child(recipeId).removeValue()
+  func deleteDataFromFirebase(recipe: Recipe) {
+    ref.child("recipeCollections").child(collectionId!).child(recipe.firebaseId).removeValue()
     if collectionRecipes.count == 0 {
       ref.child("userCollections").child(userId!).child(collectionId!).removeValue()
+    } else {
+      changeImageIfItemIsDeleted(deleteRecipe: recipe)
     }
+  }
+  
+  func changeImageIfItemIsDeleted(deleteRecipe:Recipe) {
+    ref.child("userCollections").child(userId!).child(collectionId!).observeSingleEvent(of: .value) { (snapshot) in
+      if let collection = snapshot.value as? [String: Any] {
+        print(collection)
+        let image = collection["image"] as! String
+        if image == deleteRecipe.image {
+          print("Same image")
+          let newImage = self.collectionRecipes.randomElement()?.image
+          print("userCollection:\n\(self.userCollections)")
+          print("collectionRecipes:\n\(self.collectionRecipes)")
+          print("new image = \(newImage)")
+          self.ref.child("userCollections").child(self.userId!).child(self.collectionId!)
+            .child("image").setValue(newImage) {
+              (error:Error?, ref:DatabaseReference) in
+              if let error = error {
+                print("Data could not be saved: \(error).")
+              } else {
+                print("Data saved successfully!")
+              }
+          }
+        }
+      }
+    }
+//    for collection in userCollections {
+//      if deleteRecipe.image == collection.image {
+//        if let id = collection.firebaseId {
+//          var imageList = [String]()
+//          ref.child("recipeCollections").child(id).observe(.value) { (snapshot) in
+//            for child in snapshot.children {
+//              if let collectionSnapshot = (child as! DataSnapshot).value as? [String:
+//                Any] {
+//                let image = collectionSnapshot["image"]
+//                imageList.append(image as! String)
+//              }
+//            }
+//
+//            let imagePath: String = imageList.randomElement() ?? ""
+//            self.ref.child("userCollections").child(self.userId!)
+//              .child(collection.firebaseId!).child("image").setValue(imagePath)
+//          }
+//        }
+//      }
+//    }
   }
 }
 
@@ -126,7 +174,7 @@ extension CollectionVC: UITableViewDataSource, UITableViewDelegate {
       }
     }
     self.tableView.deleteRows(at: [indexPath], with: .automatic)
-    deleteDataFromFirebase(recipeId: deleteItem.firebaseId)
+    deleteDataFromFirebase(recipe: deleteItem)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
