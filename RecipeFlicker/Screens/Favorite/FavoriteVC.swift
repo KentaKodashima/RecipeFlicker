@@ -244,6 +244,8 @@ class FavoriteVC: UIViewController {
     ref.child("recipeCollections").child(collectionId).observe(.value) { (snapshot) in
       if !snapshot.exists() {
         self.ref.child("userCollections").child(self.userID!).child(collectionId).removeValue()
+//        self.collections = self.collections.filter({ $0.firebaseId != collectionId })
+//        print("New Collection: \(self.collections)")
       }
     }
   }
@@ -254,17 +256,19 @@ class FavoriteVC: UIViewController {
         if let id = collection.firebaseId {
           var imageList = [String]()
           ref.child("recipeCollections").child(id).observe(.value) { (snapshot) in
-            for child in snapshot.children {
-              if let collectionSnapshot = (child as! DataSnapshot).value as? [String:
-                Any] {
-                let image = collectionSnapshot["image"]
-                imageList.append(image as! String)
+            if snapshot.exists() {
+              for child in snapshot.children {
+                if let collectionSnapshot = (child as! DataSnapshot).value as? [String:
+                  Any] {
+                  let image = collectionSnapshot["image"]
+                  imageList.append(image as! String)
+                }
               }
+              let imagePath: String = imageList.randomElement() ?? ""
+              self.ref.child("userCollections").child(self.userID!)
+                .child(collection.firebaseId!).child("image").setValue(imagePath)
             }
-            
-            let imagePath: String = imageList.randomElement() ?? ""
-            self.ref.child("userCollections").child(self.userID!)
-              .child(collection.firebaseId!).child("image").setValue(imagePath)
+
           }
         }
       }
