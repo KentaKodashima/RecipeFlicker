@@ -26,6 +26,7 @@ class HomeVC: UIViewController {
   
   private let kolodaView = KolodaView()
   private var recipeAPI = RecipeAPI()
+  private var favoriteRecipes = [Recipe]()
   
   private var timer = Timer()
   private var resetTimer: Timer!
@@ -46,6 +47,8 @@ class HomeVC: UIViewController {
     if let userId = Auth.auth().currentUser?.uid {
       self.userId = userId
     }
+    
+    self.userRef = Database.database().reference()
 
     currentDate = Date()
     resetTimer = Timer(fireAt: currentDate.get7am(), interval: 0, target: self, selector: #selector(setIsFirstSignIn), userInfo: nil, repeats: false)
@@ -84,14 +87,19 @@ class HomeVC: UIViewController {
         }
         
         // Create new user in Firebase
-        self.userRef = Database.database().reference()
         self.userRef.child("users").child(self.rlmUser!.userId).child("userId").setValue(self.rlmUser!.userId)
         
         self.userId = self.rlmUser!.userId
         
+        // Get favorite recipes from firebase
+        self.getFavoriteRecipes()
+        
         // Fetch recipes and setKolodaView
         self.fetchRecipesToBind()
       } else {
+        // Get favorite recipes from firebase
+        self.getFavoriteRecipes()
+        
         if self.rlmUser.isFirstSignIn {
           self.fetchRecipesToBind()
           self.setIsFirstSignIn(false)
@@ -123,16 +131,46 @@ class HomeVC: UIViewController {
     // Fetch data from API and bind to KolodaView
     recipeAPI.getRandomRecipes { recipeArray, error in
       try! self.realm.write {
-        if self.rlmUser?.recipesOfTheDay.count != 0 {
-          self.rlmUser?.recipesOfTheDay.removeAll()
+        guard let userRecipesOfTheDay = self.rlmUser?.recipesOfTheDay else { return }
+        guard var recipeStore = recipeArray else { return }
+        if userRecipesOfTheDay.count != 0 {
+          userRecipesOfTheDay.removeAll()
         }
-        for recipe in recipeArray ?? [Recipe]() {
-          self.rlmUser?.recipesOfTheDay.append(recipe)
-          self.rlmUser.lastFetchTime = Date()
+        while userRecipesOfTheDay.count < 15 {
+          let randomRecipe = recipeStore.randomElement()!
+          if !userRecipesOfTheDay.contains(randomRecipe) && !self.favoriteRecipes.contains(randomRecipe) {
+            userRecipesOfTheDay.append(randomRecipe)
+          }
+          recipeStore.remove(at: recipeStore.firstIndex(of: randomRecipe)!)
         }
+        self.rlmUser.lastFetchTime = Date()
       }
       self.setKolodaView()
       self.kolodaView.reloadData()
+    }
+  }
+  
+  fileprivate func getFavoriteRecipes() {
+    let userID = Auth.auth().currentUser?.uid
+    userRef.child("favorites").child(userID!).observe(.value) { (snapshot) in
+      self.favoriteRecipes.removeAll()
+      for child in snapshot.children {
+        if let recipe = (child as! DataSnapshot).value as? [String: Any] {
+          let id = recipe["firebaseId"] as! String
+          let url = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let isFavotiteLiteral = recipe["isFavorite"] as! String
+          let whichCollectionToBelongList = List<String>()
+          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
+            for collectionId in whichCollectionToBelong as! NSArray {
+              whichCollectionToBelongList.append(collectionId as! String)
+            }
+          }
+          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
+          self.favoriteRecipes.append(favoriteRecipe)
+        }
+      }
     }
   }
   

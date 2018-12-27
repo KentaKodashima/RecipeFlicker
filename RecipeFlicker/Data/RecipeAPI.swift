@@ -21,7 +21,7 @@ struct RecipeAPI {
   
   func getRandomRecipes(completionHandler: @escaping ([Recipe]?, Error?) -> ()) {
     var recipeStore = [Recipe]()
-    var randomRecipes = [Recipe]()
+//    var randomRecipes = [Recipe]()
     let toParam = "&to=100"
     let fromParam = "&from=0"
     let requestString = REQUEST_STRING + fromParam + toParam
@@ -40,12 +40,7 @@ struct RecipeAPI {
             let recipeObj = Recipe(originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: false)
             recipeStore.append(recipeObj)
           }
-          while randomRecipes.count < 15 {
-            let randomRecipe = recipeStore.randomElement()!
-            randomRecipes.append(randomRecipe)
-            recipeStore.remove(at: recipeStore.firstIndex(of: randomRecipe)!)
-          }
-          completionHandler(randomRecipes, nil)
+          completionHandler(recipeStore, nil)
         case .failure(let error):
           completionHandler(nil, error)
         }
