@@ -38,6 +38,7 @@ class CollectionVC: UIViewController {
     
     //  remove separator lines from empty cells.
     tableView.tableFooterView = UIView(frame: .zero)
+    
   }
   
   func registerTableViewCells() {
@@ -75,7 +76,15 @@ class CollectionVC: UIViewController {
   
   
   @IBAction func onEditButtonClicked(_ sender: UIBarButtonItem) {
-    isEditingMode = !isEditingMode
+    if isEditingMode {
+      sender.title = "Edit"
+      print("Edit")
+      isEditingMode = false
+    } else {
+      sender.title = "Done"
+      print("Done")
+      isEditingMode = true
+    }
     tableView.setEditing(isEditingMode, animated: true)
     
   }
