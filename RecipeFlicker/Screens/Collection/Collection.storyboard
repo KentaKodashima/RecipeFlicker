@@ -43,7 +43,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="2GD-fe-scH">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="nGp-tD-Y4K">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="nGp-tD-Y4K">
                             <connections>
                                 <action selector="onEditButtonClicked:" destination="nMB-ha-Efy" id="6sq-qE-vtR"/>
                             </connections>
