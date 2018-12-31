@@ -26,7 +26,7 @@ class HomeVC: UIViewController {
   
   private let kolodaView = KolodaView()
   private var recipeAPI = RecipeAPI()
-  private var favoriteRecipes = [Recipe]()
+  private var favoriteRecipeUrls = [String]()
   
   private var timer = Timer()
   private var resetTimer: Timer!
@@ -138,7 +138,7 @@ class HomeVC: UIViewController {
         }
         while userRecipesOfTheDay.count < 15 {
           let randomRecipe = recipeStore.randomElement()!
-          if !userRecipesOfTheDay.contains(randomRecipe) && !self.favoriteRecipes.contains(randomRecipe) {
+          if !self.favoriteRecipeUrls.contains(randomRecipe.originalRecipeUrl) {
             userRecipesOfTheDay.append(randomRecipe)
           }
           recipeStore.remove(at: recipeStore.firstIndex(of: randomRecipe)!)
@@ -153,22 +153,11 @@ class HomeVC: UIViewController {
   fileprivate func getFavoriteRecipes() {
     let userID = Auth.auth().currentUser?.uid
     userRef.child("favorites").child(userID!).observe(.value) { (snapshot) in
-      self.favoriteRecipes.removeAll()
+      self.favoriteRecipeUrls.removeAll()
       for child in snapshot.children {
         if let recipe = (child as! DataSnapshot).value as? [String: Any] {
-          let id = recipe["firebaseId"] as! String
           let url = recipe["originalRecipeUrl"] as! String
-          let title = recipe["title"] as! String
-          let image = recipe["image"] as! String
-          let isFavotiteLiteral = recipe["isFavorite"] as! String
-          let whichCollectionToBelongList = List<String>()
-          if let whichCollectionToBelong = recipe["whichCollectionToBelong"] {
-            for collectionId in whichCollectionToBelong as! NSArray {
-              whichCollectionToBelongList.append(collectionId as! String)
-            }
-          }
-          let favoriteRecipe = Recipe(firebaseId: id, originalRecipeUrl: url, title: title, image: image, isFavorite: (isFavotiteLiteral == "true"), whichCollectionToBelong: whichCollectionToBelongList)
-          self.favoriteRecipes.append(favoriteRecipe)
+          self.favoriteRecipeUrls.append(url)
         }
       }
     }
