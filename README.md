@@ -1,5 +1,8 @@
 # RecipeFlicker
 
+![App Design](https://user-images.githubusercontent.com/18434054/50577690-3c7b6300-0de2-11e9-9980-6ef8b776b789.png)
+Designed by our designer: [Nagisa](https://github.com/beach1208)
+
 ## Overview
 RecipeFlicker allows you to make your own favorite recipe lists. Even if you can't come up with anything you want to cook for the night, RecipeFlicker offers random recipes from all around the world.
 
