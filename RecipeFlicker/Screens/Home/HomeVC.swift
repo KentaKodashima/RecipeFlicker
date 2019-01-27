@@ -197,17 +197,29 @@ class HomeVC: UIViewController {
     
     let countdownLabel = UILabel()
     countdownLabel.translatesAutoresizingMaskIntoConstraints = false
-    countdownLabel.text = "Your next recipes are coming in..."
+    countdownLabel.text = "Time until your next recipe"
     countdownLabel.textAlignment = .center
-    countdownLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 18)
+    countdownLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
     
     countdownTimer.translatesAutoresizingMaskIntoConstraints = false
     countdownTimer.textAlignment = .center
-    countdownTimer.font = UIFont(name: "ChalkboardSE-Bold", size: 24)
+    countdownTimer.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
     countdownTimer.accessibilityIdentifier = "00:00:01"
     countdownTimer.setCountdownTimerText()
     
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountdown), userInfo: nil, repeats: true)
+    
+    let suggestionLabel = UILabel()
+    suggestionLabel.translatesAutoresizingMaskIntoConstraints = false
+    suggestionLabel.text = "Suggestions For You"
+    suggestionLabel.textAlignment = .center
+    suggestionLabel.font = UIFont(name: "ChalkboardSE-Bold", size: 32)
+    suggestionLabel.textColor = AppColors.accent.value
+    
+    // TODO: - Implement collectionview and pagecontrol
+    let recommendationCollectionView = UICollectionView()
+    
+    let pageControl = UIPageControl()
     
     let stack = UIStackView()
     stack.axis = .vertical

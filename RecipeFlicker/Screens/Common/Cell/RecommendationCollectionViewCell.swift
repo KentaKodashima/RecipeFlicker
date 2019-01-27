@@ -9,10 +9,13 @@
 import UIKit
 
 class RecommendationCollectionViewCell: UICollectionViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+  
+  @IBOutlet weak var recipeImage: UIImageView!
+  @IBOutlet weak var recipeTitle: UILabel!
+  @IBOutlet weak var recipeIngredients: UITextView!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  }
+  
 }
