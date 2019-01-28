@@ -23,6 +23,7 @@ import RealmSwift
   @objc dynamic private(set) var image = ""
   @objc dynamic public var isFavorite = false
   public var whichCollectionToBelong = List<String>()
+  public var ingredients = List<String>()
   
   override public static func primaryKey() -> String? {
     return Recipe.Property.realmId.rawValue
@@ -34,6 +35,15 @@ import RealmSwift
     self.title = title
     self.image = image
     self.isFavorite = isFavorite
+  }
+  
+  convenience init(originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, ingredients: List<String>) {
+    self.init()
+    self.originalRecipeUrl = originalRecipeUrl
+    self.title = title
+    self.image = image
+    self.isFavorite = isFavorite
+    self.ingredients = ingredients
   }
   
   convenience init(firebaseId: String, originalRecipeUrl: String, title: String, image: String, isFavorite: Bool, whichCollectionToBelong: List<String>) {

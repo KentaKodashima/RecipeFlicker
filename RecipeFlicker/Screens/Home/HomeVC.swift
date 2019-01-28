@@ -217,9 +217,18 @@ class HomeVC: UIViewController {
     suggestionLabel.textColor = AppColors.accent.value
     
     // TODO: - Implement collectionview and pagecontrol
-    let recommendationCollectionView = UICollectionView()
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    layout.minimumInteritemSpacing = 0
+    layout.minimumLineSpacing = 0
     
-    let pageControl = UIPageControl()
+    let recommendationCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+    let recommendationCollectionViewCell = UINib(nibName: "RecommendationCollectionViewCell", bundle: nil)
+    recommendationCollectionView.register(recommendationCollectionViewCell, forCellWithReuseIdentifier: "RecommendationCollectionViewCell")
+    
+    recommendationCollectionView.delegate = self
+    recommendationCollectionView.dataSource = self
+//    let pageControl = UIPageControl()
     
     let stack = UIStackView()
     stack.axis = .vertical
@@ -230,6 +239,7 @@ class HomeVC: UIViewController {
     
     stack.addArrangedSubview(countdownLabel)
     stack.addArrangedSubview(countdownTimer)
+    stack.addSubview(recommendationCollectionView)
     
     countdownView.addSubview(stack)
     self.view.addSubview(countdownView)
@@ -366,4 +376,20 @@ extension HomeVC: KolodaViewDelegate {
       setCountdownView()
     }
   }
+}
+
+extension HomeVC: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    <#code#>
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendationCollectionViewCell", for: indexPath) as! RecommendationCollectionViewCell
+    
+    return cell
+  }
+}
+
+extension HomeVC: UICollectionViewDelegate {
+  
 }
