@@ -9,6 +9,10 @@ RecipeFlicker allows you to make your own favorite recipe lists. Even if you can
 ⚠️NOTE:  
 The GoogleService-Info.plist (Firebase) and API keys for Edamam Recipe Search API are not included for the security reason. Therefore you cannot use this app even if you clone and run it. However, the app is currently under the TestFlight process and published on the App Store very soon.
 
+## Documentation
+See this document to learn about the implementation details, user story, UML Class Diagram, etc.  
+**Document:** [RecipeFlicker.pdf](RecipeFlicker.pdf)
+
 ## Concepts
 - Keep good recipes
 - Share good recipes with friends
