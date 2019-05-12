@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
   private let kolodaView = KolodaView()
   private var recipeAPI = RecipeAPI()
   private var favoriteRecipeUrls = [String]()
+  private var recommendations = [Recipe]()
   
   private var timer = Timer()
   private var resetTimer: Timer!
@@ -38,6 +39,8 @@ class HomeVC: UIViewController {
   
   private var activityIndicatorContainer: UIView!
   private var activityIndicator: UIActivityIndicatorView!
+  
+  private var recommendationCollectionView: UICollectionView!
   
   // MARK: - View controller life-cycle
   override func viewDidLoad() {
@@ -156,10 +159,16 @@ class HomeVC: UIViewController {
       self.favoriteRecipeUrls.removeAll()
       for child in snapshot.children {
         if let recipe = (child as! DataSnapshot).value as? [String: Any] {
-          let url = recipe["originalRecipeUrl"] as! String
-          self.favoriteRecipeUrls.append(url)
+          let originalRecipeUrl = recipe["originalRecipeUrl"] as! String
+          let title = recipe["title"] as! String
+          let image = recipe["image"] as! String
+          let recipeObj = Recipe(originalRecipeUrl: originalRecipeUrl, title: title, image: image, isFavorite: true)
+          
+          self.favoriteRecipeUrls.append(originalRecipeUrl)
+          self.recommendations.append(recipeObj)
         }
       }
+      self.recommendationCollectionView.reloadData()
     }
   }
   
@@ -222,12 +231,14 @@ class HomeVC: UIViewController {
     layout.minimumInteritemSpacing = 0
     layout.minimumLineSpacing = 0
     
-    let recommendationCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+    recommendationCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+    recommendationCollectionView.translatesAutoresizingMaskIntoConstraints = false
     let recommendationCollectionViewCell = UINib(nibName: "RecommendationCollectionViewCell", bundle: nil)
     recommendationCollectionView.register(recommendationCollectionViewCell, forCellWithReuseIdentifier: "RecommendationCollectionViewCell")
     
     recommendationCollectionView.delegate = self
     recommendationCollectionView.dataSource = self
+    
 //    let pageControl = UIPageControl()
     
     let stack = UIStackView()
@@ -247,6 +258,11 @@ class HomeVC: UIViewController {
     // Constraints
     stack.centerXAnchor.constraint(equalTo: countdownView.centerXAnchor).isActive = true
     stack.centerYAnchor.constraint(equalTo: countdownView.centerYAnchor).isActive = true
+    
+    recommendationCollectionView.topAnchor.constraint(equalTo: countdownTimer.bottomAnchor, constant: 16).isActive = true
+    recommendationCollectionView.leftAnchor.constraint(equalTo: stack.leftAnchor, constant: 16).isActive = true
+    recommendationCollectionView.rightAnchor.constraint(equalTo: stack.rightAnchor, constant: 16).isActive = true
+    recommendationCollectionView.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 16).isActive = true
   }
   
   @objc fileprivate func startCountdown() {
@@ -380,11 +396,15 @@ extension HomeVC: KolodaViewDelegate {
 
 extension HomeVC: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    <#code#>
+    return self.recommendations.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendationCollectionViewCell", for: indexPath) as! RecommendationCollectionViewCell
+    
+    let recipe = recommendations[indexPath.row]
+    
+    cell.recipeTitle.text = recipe.title
     
     return cell
   }
